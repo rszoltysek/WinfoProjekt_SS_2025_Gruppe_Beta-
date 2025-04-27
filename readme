@@ -1,2 +1,36 @@
 Hier stellen wir die gruppenarbeit ergebnisse ein. Es ist nur ein erstelltes GitHub daher noch recht leer. 
 
+allgemeine-verwaltung/  (Thema)
+├── README.md          (Datei mit Projektbeschreibung)
+├── doku/              (Verzeichnis für Dokumentation)
+│   ├── anforderungen.md  (Detaillierte Anforderungen für jeden Anwendungsfall)
+│   ├── design.md       (Designentscheidungen, Architektur, etc.)
+│   ├── planung.md      (Sprintpläne, Aufgabenverteilung)
+│   └── bereitstellung.md (Anleitungen zur Installation/Bereitstellung)
+├── quellcode/          (Verzeichnis für den Programmcode)
+│   ├── mietstationen/
+│   │   ├── verwalte_stationen.py (oder .java, .php, etc.)
+│   │   ├── stations_modell.py
+│   │   ├── stations_ansicht.py
+│   │   └── ...
+│   ├── performance_bericht/
+│   │   ├── erstelle_bericht.py
+│   │   ├── bericht_modell.py
+│   │   ├── bericht_ansicht.py
+│   │   └── ...
+│   ├── personaleinsatz/
+│   │   ├── plane_einsatz.py
+│   │   ├── einsatz_modell.py
+│   │   ├── einsatz_ansicht.py
+│   │   └── ...
+│   └── gemeinsam/       (Gemeinsame Bibliotheken, Hilfsfunktionen)
+├── tests/             (Verzeichnis für Tests)
+│   ├── mietstationen_tests.py
+│   ├── performance_bericht_tests.py
+│   └── personaleinsatz_tests.py
+├── daten/             (Verzeichnis für Daten)
+│   ├── initialdaten.sql  (Beispieldaten für Tests)
+│   └── ...
+├── konfig/            (Verzeichnis für Konfigurationsdateien)
+│   └── db_konfig.py    (Einstellungen für die Datenbankverbindung)
+└── .gitignore         (Datei, um bestimmte Dateien von der Versionskontrolle auszuschließen)
