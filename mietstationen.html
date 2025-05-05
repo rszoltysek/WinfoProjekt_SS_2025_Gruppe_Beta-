@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mietstationen verwalten</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e293b;
+      --bg: #f8fafc;
+      --white: #e2e8f0;
+      --gray: #94a3b8;
+      --light: #e2e8f0;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--secondary);
+      scroll-behavior: smooth;
+    }
+    header {
+      background: var(--white);
+      padding: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .logo img {
+      height: 50px;
+      background-color: #1e293b;
+    }
+    .logo span {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+    }
+    nav a:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    section {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid #cbd5e1;
+      margin-top: 0.5rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>Autovermietung</span>
+    </div>
+    <nav>
+      <a href="index.html">Startseite</a>
+      <a href="mietstationen.html">Mietstationen</a>
+      <a href="performance.html">Performance</a>
+      <a href="personal.html">Personaleinsatz</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Neue Mietstation anlegen</h2>
+      <form>
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <label for="address">Adresse</label>
+        <input type="text" id="address" required>
+        <label for="phone">Telefon</label>
+        <input type="tel" id="phone" required>
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" required>
+        <label for="capacity">Kapazität</label>
+        <input type="number" id="capacity" required>
+        <label for="aufbereitung">Fahrzeugaufbereitung</label>
+        <select id="aufbereitung">
+          <option>Nein</option>
+          <option>Ja - intern</option>
+          <option>Ja - extern</option>
+        </select>
+        <label for="schadensregulierung">Schadensregulierung</label>
+        <select id="schadensregulierung">
+          <option>Nein</option>
+          <option>Ja</option>
+        </select>
+        <button type="submit">Speichern</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

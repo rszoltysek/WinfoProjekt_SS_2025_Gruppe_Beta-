@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autovermietung Verwaltung</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e293b;
+      --bg: #f1f5f9;
+      --white: #ffffff;
+      --gray: #94a3b8;
+      --light: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--secondary);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: var(--white);
+      padding: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .logo span {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: var(--white);
+      margin-top: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: auto;
+      color: var(--gray);
+    }
+
+    .image-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 2rem;
+    }
+
+    .image-row img {
+      width: 300px;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .image-row img:hover {
+      transform: scale(1.05);
+    }
+
+    .section-links {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .section-links a {
+      display: inline-block;
+      margin: 1rem;
+      padding: 1rem 2rem;
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 600;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .section-links a:hover {
+      background: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>Autovermietung</span>
+    </div>
+    <nav>
+      <a href="mietstationen.html">Mietstationen</a>
+      <a href="performance.html">Performance</a>
+      <a href="personal.html">Personaleinsatz</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Willkommen bei unserer Autoverwaltung</h1>
+    <p>Unsere Plattform ermöglicht es Ihnen, Mietstationen effizient zu verwalten, Fahrzeugüberführungen zu planen und die Leistung aller Stationen zentral zu überwachen. Erleben Sie modernes Fuhrparkmanagement.</p>
+  </section>
+
+  <section class="image-row">
+    <img src="carrental.png" alt="Car Rental">
+    <img src="fleet.png" alt="Fleet">
+    <img src="management.png" alt="Management">
+  </section>
+
+  <section class="section-links">
+    <a href="mietstationen.html">Zu Mietstationen</a>
+    <a href="performance.html">Zu Performance</a>
+    <a href="personal.html">Zu Personaleinsatz</a>
+  </section>
+</body>
+</html>
