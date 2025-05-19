@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "marke": "Volkswagen",
+    "modell": "Golf",
+    "baujahr": 2021,
+    "farbe": "Blau",
+    "kilometerstand": 35000,
+    "kraftstoffart": "Benzin",
+    "sitze": 5,
+    "verfuegbar": true,
+    "preis_pro_tag": 45.00,
+    "standortId": 1
+  },
+  {
+    "id": 2,
+    "marke": "BMW",
+    "modell": "3er",
+    "baujahr": 2022,
+    "farbe": "Schwarz",
+    "kilometerstand": 20000,
+    "kraftstoffart": "Diesel",
+    "sitze": 5,
+    "verfuegbar": true,
+    "preis_pro_tag": 70.00,
+    "standortId": 2
+  },
+  {
+    "id": 3,
+    "marke": "Ford",
+    "modell": "Focus",
+    "baujahr": 2020,
+    "farbe": "Rot",
+    "kilometerstand": 50000,
+    "kraftstoffart": "Benzin",
+    "sitze": 5,
+    "verfuegbar": false,
+    "preis_pro_tag": 40.00,
+    "standortId": 1
+  },
+  {
+    "id": 4,
+    "marke": "Mercedes-Benz",
+    "modell": "C-Klasse",
+    "baujahr": 2023,
+    "farbe": "Silber",
+    "kilometerstand": 10000,
+    "kraftstoffart": "Hybrid",
+    "sitze": 5,
+    "verfuegbar": true,
+    "preis_pro_tag": 85.00,
+    "standortId": 3
+  },
+  {
+    "id": 5,
+    "marke": "Audi",
+    "modell": "A3",
+    "baujahr": 2021,
+    "farbe": "Grau",
+    "kilometerstand": 40000,
+    "kraftstoffart": "Benzin",
+    "sitze": 5,
+    "verfuegbar": true,
+    "preis_pro_tag": 60.00,
+    "standortId": 2
+  }
+]

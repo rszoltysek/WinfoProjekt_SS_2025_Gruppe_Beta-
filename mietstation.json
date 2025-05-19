@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Hauptstelle Musterstadt",
+    "adresse": {
+      "strasse": "Zentrale 20",
+      "plz": "12345",
+      "ort": "Musterstadt"
+    },
+    "kontakt_telefon": "0123-987654"
+  },
+  {
+    "id": 2,
+    "name": "Filiale Beispielort",
+    "adresse": {
+      "strasse": "Nebenstraße 5",
+      "plz": "54321",
+      "ort": "Beispielort"
+    },
+    "kontakt_telefon": "0987-123456"
+  },
+  {
+    "id": 3,
+    "name": "Flughafen Neustadt",
+    "adresse": {
+      "strasse": "Terminal A",
+      "plz": "98765",
+      "ort": "Neustadt"
+    },
+    "kontakt_telefon": "0111-555777"
+  }
+]
