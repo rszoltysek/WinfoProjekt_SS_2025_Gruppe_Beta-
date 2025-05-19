@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autovermietung Verwaltung</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+  }
+
+  /* Animationen */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+ header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3); /* halbtransparent schwarz */
+  backdrop-filter: blur(8px); /* weicher Glas-Effekt */
+  animation: fadeIn 1s ease-out forwards;
+}
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+
+  .logo span {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #facc15;
+  }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+  }
+
+  nav a:hover {
+    color: #facc15;
+    transform: scale(1.05);
+  }
+
+  .hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('background.png') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 5rem 3rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1.2s ease-out forwards;
+  }
+
+  .hero h4 {
+    font-size: 1rem;
+    color: #facc15;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: slideInLeft 1s ease-out 0.4s forwards;
+  }
+
+  .hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: slideInLeft 1s ease-out 0.6s forwards;
+  }
+
+  .hero p {
+    max-width: 600px;
+    font-size: 1.2rem;
+    color: #d4d4d4;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.8s forwards;
+  }
+
+  /* Optional für spätere Bilder */
+  img:hover {
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>Autovermietung</span>
+    </div>
+    <nav>
+      <a href="main.html">Home</a>
+      <a href="mietstationen.html">Mietstationen</a>
+      <a href="performance.html">Performance</a>
+      <a href="personal.html">Personaleinsatz</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h4>Verwaltung</h4>
+    <h1>Autopro</h1>
+    <p>Unsere Plattform hilft Ihnen, Mietstationen zentral zu steuern, Fahrzeuge effizient zu verwalten und die gesamte Performance im Blick zu behalten.</p>
+  </section>
+</body>
+</html>

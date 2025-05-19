@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mietstationen verwalten</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('background.png') center/cover no-repeat;
+      color: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .logo span {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #facc15;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav a:hover {
+      color: #facc15;
+      transform: scale(1.05);
+    }
+
+    main {
+      padding: 7rem 2rem 3rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section {
+      
+  background: rgba(17, 17, 17, 0.6); 
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    h2 {
+      color: #facc15;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: none;
+      background: #2a2a2a;
+      color: #f5f5f5;
+      margin-top: 0.5rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #facc15;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #eab308;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo" />
+      <span>Autovermietung</span>
+    </div>
+    <nav>
+      <a href="main.html">Home</a>
+      <a href="mietstationen.html">Mietstationen</a>
+      <a href="performance.html">Performance</a>
+      <a href="personal.html">Personaleinsatz</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Neue Mietstation anlegen</h2>
+      <form>
+        <label for="name">Name</label>
+        <input type="text" id="name" required />
+
+        <label for="address">Adresse</label>
+        <input type="text" id="address" required />
+
+        <label for="phone">Telefon</label>
+        <input type="tel" id="phone" required />
+
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" required />
+
+        <label for="capacity">Kapazität</label>
+        <input type="number" id="capacity" required />
+
+        <label for="aufbereitung">Fahrzeugaufbereitung</label>
+        <select id="aufbereitung">
+          <option>Nein</option>
+          <option>Ja - intern</option>
+          <option>Ja - extern</option>
+        </select>
+
+        <label for="schadensregulierung">Schadensregulierung</label>
+        <select id="schadensregulierung">
+          <option>Nein</option>
+          <option>Ja</option>
+        </select>
+
+        <button type="submit">Speichern</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
