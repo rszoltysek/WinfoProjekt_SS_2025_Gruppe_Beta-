@@ -1,5 +1,16 @@
 {
-  "mietstationen": [],
+  "mietstationen": [
+    {
+      "name": "Berlin",
+      "adresse": "BerlinerStraße 77",
+      "telefon": "0101010101011",
+      "email": "Berliner@gmail.com",
+      "kapazitaet": 50,
+      "aufbereitung": "Ja - extern",
+      "schadensregulierung": true,
+      "id": 1748180682350
+    }
+  ],
   "fahrzeuge": [],
   "ueberfuehrungen": []
 }

@@ -73,8 +73,7 @@
     }
 
     section {
-      
-  background: rgba(17, 17, 17, 0.6); 
+      background: rgba(17, 17, 17, 0.6); 
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
@@ -123,39 +122,6 @@
     }
   </style>
 </head>
-<script>
-  document.getElementById('mietstationForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevent form from reloading the page
-
-    const newStation = {
-      name: document.getElementById('name').value,
-      adresse: document.getElementById('address').value,
-      telefon: document.getElementById('phone').value,
-      email: document.getElementById('email').value,
-      kapazitaet: parseInt(document.getElementById('capacity').value),
-      aufbereitung: document.getElementById('aufbereitung').value,
-      schadensregulierung: document.getElementById('schadensregulierung').value === 'Ja'
-    };
-
-    fetch('http://localhost:3000/api/mietstationen', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newStation)
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('Fehler beim Speichern');
-      return res.json();
-    })
-    .then(data => {
-      alert('Mietstation erfolgreich gespeichert!');
-      document.getElementById('mietstationForm').reset();
-    })
-    .catch(err => {
-      alert('Fehler: ' + err.message);
-    });
-  });
-</script>
-
 <body>
   <header>
     <div class="logo">
@@ -170,7 +136,9 @@
     </nav>
   </header>
   <main>
-ection>
+    <section>
+      <h2 style="margin-top: 3rem;">Bestehende Mietstationen</h2>
+<div id="stationList"></div>
       <h2>Neue Mietstation anlegen</h2>
       <form id="mietstationForm">
         <label for="name">Name</label>
@@ -205,5 +173,144 @@ ection>
       </form>
     </section>
   </main>
+ <script>
+  let editingId = null;
+  const form = document.getElementById('mietstationForm');
+  const stationList = document.getElementById('stationList');
+
+  // Bearbeiten abbrechen Button
+  const cancelButton = document.createElement('button');
+  cancelButton.textContent = '❌ Bearbeiten abbrechen';
+  cancelButton.style.marginLeft = '1rem';
+  cancelButton.style.background = '#dc2626';
+  cancelButton.style.color = 'white';
+  cancelButton.style.display = 'none'; // Nur sichtbar beim Bearbeiten
+  cancelButton.onclick = () => {
+    editingId = null;
+    form.reset();
+    cancelButton.style.display = 'none';
+  };
+  form.appendChild(cancelButton);
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const newStation = {
+      name: document.getElementById('name').value,
+      adresse: document.getElementById('address').value,
+      telefon: document.getElementById('phone').value,
+      email: document.getElementById('email').value,
+      kapazitaet: parseInt(document.getElementById('capacity').value),
+      aufbereitung: document.getElementById('aufbereitung').value,
+      schadensregulierung: document.getElementById('schadensregulierung').value === 'Ja'
+    };
+
+    const url = editingId
+      ? `http://localhost:3000/api/mietstationen/${editingId}`
+      : 'http://localhost:3000/api/mietstationen';
+
+    const method = editingId ? 'PUT' : 'POST';
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newStation)
+      });
+
+      if (!res.ok) {
+        throw new Error(editingId ? 'Fehler beim Bearbeiten' : 'Fehler beim Speichern');
+      }
+
+      if (editingId) {
+        alert('✅ Mietstation erfolgreich bearbeitet!');
+        editingId = null;
+        cancelButton.style.display = 'none';
+      } else {
+        alert('✅ Mietstation gespeichert!');
+      }
+
+      form.reset();
+      loadStations();
+    } catch (err) {
+      alert('❌ ' + err.message);
+    }
+  });
+
+  function loadStations() {
+    fetch('http://localhost:3000/api/mietstationen')
+      .then(res => res.json())
+      .then(stationen => {
+        stationList.innerHTML = '';
+
+        if (!stationen.length) {
+          stationList.innerHTML = '<p>Keine Mietstationen vorhanden.</p>';
+          return;
+        }
+
+        stationen.forEach(station => {
+          const div = document.createElement('div');
+          div.style.border = '1px solid #444';
+          div.style.padding = '1rem';
+          div.style.marginTop = '1rem';
+          div.style.borderRadius = '0.5rem';
+          div.style.backgroundColor = '#2a2a2a';
+
+          div.innerHTML = `
+            <strong>${station.name}</strong><br/>
+            ${station.adresse}<br/>
+            Tel: ${station.telefon}<br/>
+            E-Mail: ${station.email}<br/>
+            Kapazität: ${station.kapazitaet}<br/>
+            Aufbereitung: ${station.aufbereitung}<br/>
+            Schadensregulierung: ${station.schadensregulierung ? 'Ja' : 'Nein'}<br/>
+            <button onclick="editStation(${station.id})" style="margin-top: 0.5rem; margin-right: 0.5rem;">✏️ Bearbeiten</button>
+            <button onclick="deleteStation(${station.id})" style="margin-top: 0.5rem;">🗑️ Löschen</button>
+          `;
+
+          stationList.appendChild(div);
+        });
+      })
+      .catch(err => {
+        stationList.innerHTML = '<p style="color:red;">Fehler beim Laden der Stationen.</p>';
+        console.error(err);
+      });
+  }
+
+  function deleteStation(id) {
+    fetch(`http://localhost:3000/api/mietstationen/${id}`, {
+      method: 'DELETE'
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Fehler beim Löschen');
+        loadStations();
+      })
+      .catch(err => alert('❌ ' + err.message));
+  }
+
+  function editStation(id) {
+    fetch('http://localhost:3000/api/mietstationen')
+      .then(res => res.json())
+      .then(stationen => {
+        const station = stationen.find(s => s.id === parseInt(id));
+        if (!station) return alert('❌ Station nicht gefunden');
+
+        document.getElementById('name').value = station.name;
+        document.getElementById('address').value = station.adresse;
+        document.getElementById('phone').value = station.telefon;
+        document.getElementById('email').value = station.email;
+        document.getElementById('capacity').value = station.kapazitaet;
+        document.getElementById('aufbereitung').value = station.aufbereitung;
+        document.getElementById('schadensregulierung').value = station.schadensregulierung ? 'Ja' : 'Nein';
+
+        editingId = station.id;
+        cancelButton.style.display = 'inline-block';
+      });
+  }
+
+  // Seite starten → sofort laden
+  loadStations();
+</script>
+
 </body>
 </html>
