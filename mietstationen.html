@@ -123,6 +123,39 @@
     }
   </style>
 </head>
+<script>
+  document.getElementById('mietstationForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent form from reloading the page
+
+    const newStation = {
+      name: document.getElementById('name').value,
+      adresse: document.getElementById('address').value,
+      telefon: document.getElementById('phone').value,
+      email: document.getElementById('email').value,
+      kapazitaet: parseInt(document.getElementById('capacity').value),
+      aufbereitung: document.getElementById('aufbereitung').value,
+      schadensregulierung: document.getElementById('schadensregulierung').value === 'Ja'
+    };
+
+    fetch('http://localhost:3000/api/mietstationen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newStation)
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Fehler beim Speichern');
+      return res.json();
+    })
+    .then(data => {
+      alert('Mietstation erfolgreich gespeichert!');
+      document.getElementById('mietstationForm').reset();
+    })
+    .catch(err => {
+      alert('Fehler: ' + err.message);
+    });
+  });
+</script>
+
 <body>
   <header>
     <div class="logo">
@@ -137,9 +170,9 @@
     </nav>
   </header>
   <main>
-    <section>
+ection>
       <h2>Neue Mietstation anlegen</h2>
-      <form>
+      <form id="mietstationForm">
         <label for="name">Name</label>
         <input type="text" id="name" required />
 
