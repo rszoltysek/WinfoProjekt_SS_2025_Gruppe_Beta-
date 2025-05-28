@@ -20,7 +20,7 @@
     }
 
     header {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -67,22 +67,29 @@
     }
 
     main {
-      padding: 7rem 2rem 3rem;
-      max-width: 800px;
+      display: flex;
+      gap: 2rem;
+      padding: 9rem 2rem 3rem;
+      max-width: 1200px;
       margin: auto;
     }
 
-    section {
-      background: rgba(17, 17, 17, 0.6); 
+    .stationen-section, .form-section {
+      flex: 1;
+      background: rgba(17, 17, 17, 0.6);
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      animation: fadeIn 1s ease-out forwards;
+      overflow-y: auto;
+      max-height: 80vh;
     }
 
-    h2 {
-      color: #facc15;
-      margin-bottom: 1rem;
+    .station-card {
+      border: 1px solid #444;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 0.5rem;
+      background-color: #2a2a2a;
     }
 
     label {
@@ -116,10 +123,18 @@
       background: #eab308;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+     #fahrzeugModal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+</style>
   </style>
 </head>
 <body>
@@ -135,66 +150,72 @@
       <a href="personal.html">Personaleinsatz</a>
     </nav>
   </header>
+
   <main>
-    <section>
-      <h2 style="margin-top: 3rem;">Bestehende Mietstationen</h2>
-<div id="stationList"></div>
+    <section class="stationen-section fadeIn">
+      <h2>Bestehende Mietstationen</h2>
+      <div id="stationList"></div>
+    </section>
+
+    <section class="form-section fadeIn">
       <h2>Neue Mietstation anlegen</h2>
       <form id="mietstationForm">
         <label for="name">Name</label>
         <input type="text" id="name" required />
-
         <label for="address">Adresse</label>
         <input type="text" id="address" required />
-
         <label for="phone">Telefon</label>
         <input type="tel" id="phone" required />
-
         <label for="email">E-Mail</label>
         <input type="email" id="email" required />
-
         <label for="capacity">Kapazität</label>
         <input type="number" id="capacity" required />
-
         <label for="aufbereitung">Fahrzeugaufbereitung</label>
         <select id="aufbereitung">
           <option>Nein</option>
           <option>Ja - intern</option>
           <option>Ja - extern</option>
         </select>
-
         <label for="schadensregulierung">Schadensregulierung</label>
         <select id="schadensregulierung">
           <option>Nein</option>
           <option>Ja</option>
         </select>
-
+        <label for="lage">Lage</label>
+        <select id="lage">
+          <option>Innenstadt</option>
+          <option>Flughafen</option>
+          <option>Tourismuszentrum</option>
+          <option>Bahnhof</option>
+        </select>
         <button type="submit">Speichern</button>
+        <button type="button" id="cancelEdit" style="margin-left: 1rem; background: #dc2626; color: white; display: none;">❌ Bearbeiten abbrechen</button>
       </form>
     </section>
   </main>
- <script>
+
+ <!-- Fahrzeug-Modal -->
+<div id="fahrzeugModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center; z-index:1000;">
+  <div style="background:#1e1e1e; padding:2rem; border-radius:1rem; max-width:500px; width:90%; color:#fff; position:relative;">
+    <button onclick="closeVehicleModal()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; color:#fff; cursor:pointer;">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+  <script>
   let editingId = null;
   const form = document.getElementById('mietstationForm');
   const stationList = document.getElementById('stationList');
+  const cancelButton = document.getElementById('cancelEdit');
 
-  // Bearbeiten abbrechen Button
-  const cancelButton = document.createElement('button');
-  cancelButton.textContent = '❌ Bearbeiten abbrechen';
-  cancelButton.style.marginLeft = '1rem';
-  cancelButton.style.background = '#dc2626';
-  cancelButton.style.color = 'white';
-  cancelButton.style.display = 'none'; // Nur sichtbar beim Bearbeiten
   cancelButton.onclick = () => {
     editingId = null;
     form.reset();
     cancelButton.style.display = 'none';
   };
-  form.appendChild(cancelButton);
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
-
     const newStation = {
       name: document.getElementById('name').value,
       adresse: document.getElementById('address').value,
@@ -202,13 +223,13 @@
       email: document.getElementById('email').value,
       kapazitaet: parseInt(document.getElementById('capacity').value),
       aufbereitung: document.getElementById('aufbereitung').value,
-      schadensregulierung: document.getElementById('schadensregulierung').value === 'Ja'
+      schadensregulierung: document.getElementById('schadensregulierung').value === 'Ja',
+      lage: document.getElementById('lage').value
     };
 
     const url = editingId
       ? `http://localhost:3000/api/mietstationen/${editingId}`
       : 'http://localhost:3000/api/mietstationen';
-
     const method = editingId ? 'PUT' : 'POST';
 
     try {
@@ -218,75 +239,16 @@
         body: JSON.stringify(newStation)
       });
 
-      if (!res.ok) {
-        throw new Error(editingId ? 'Fehler beim Bearbeiten' : 'Fehler beim Speichern');
-      }
-
-      if (editingId) {
-        alert('✅ Mietstation erfolgreich bearbeitet!');
-        editingId = null;
-        cancelButton.style.display = 'none';
-      } else {
-        alert('✅ Mietstation gespeichert!');
-      }
-
+      if (!res.ok) throw new Error(editingId ? 'Fehler beim Bearbeiten' : 'Fehler beim Speichern');
+      alert(`✅ Mietstation ${editingId ? 'bearbeitet' : 'gespeichert'}!`);
+      editingId = null;
+      cancelButton.style.display = 'none';
       form.reset();
       loadStations();
     } catch (err) {
       alert('❌ ' + err.message);
     }
   });
-
-  function loadStations() {
-    fetch('http://localhost:3000/api/mietstationen')
-      .then(res => res.json())
-      .then(stationen => {
-        stationList.innerHTML = '';
-
-        if (!stationen.length) {
-          stationList.innerHTML = '<p>Keine Mietstationen vorhanden.</p>';
-          return;
-        }
-
-        stationen.forEach(station => {
-          const div = document.createElement('div');
-          div.style.border = '1px solid #444';
-          div.style.padding = '1rem';
-          div.style.marginTop = '1rem';
-          div.style.borderRadius = '0.5rem';
-          div.style.backgroundColor = '#2a2a2a';
-
-          div.innerHTML = `
-            <strong>${station.name}</strong><br/>
-            ${station.adresse}<br/>
-            Tel: ${station.telefon}<br/>
-            E-Mail: ${station.email}<br/>
-            Kapazität: ${station.kapazitaet}<br/>
-            Aufbereitung: ${station.aufbereitung}<br/>
-            Schadensregulierung: ${station.schadensregulierung ? 'Ja' : 'Nein'}<br/>
-            <button onclick="editStation(${station.id})" style="margin-top: 0.5rem; margin-right: 0.5rem;">✏️ Bearbeiten</button>
-            <button onclick="deleteStation(${station.id})" style="margin-top: 0.5rem;">🗑️ Löschen</button>
-          `;
-
-          stationList.appendChild(div);
-        });
-      })
-      .catch(err => {
-        stationList.innerHTML = '<p style="color:red;">Fehler beim Laden der Stationen.</p>';
-        console.error(err);
-      });
-  }
-
-  function deleteStation(id) {
-    fetch(`http://localhost:3000/api/mietstationen/${id}`, {
-      method: 'DELETE'
-    })
-      .then(res => {
-        if (!res.ok) throw new Error('Fehler beim Löschen');
-        loadStations();
-      })
-      .catch(err => alert('❌ ' + err.message));
-  }
 
   function editStation(id) {
     fetch('http://localhost:3000/api/mietstationen')
@@ -302,15 +264,173 @@
         document.getElementById('capacity').value = station.kapazitaet;
         document.getElementById('aufbereitung').value = station.aufbereitung;
         document.getElementById('schadensregulierung').value = station.schadensregulierung ? 'Ja' : 'Nein';
+        document.getElementById('lage').value = station.lage;
 
         editingId = station.id;
         cancelButton.style.display = 'inline-block';
       });
   }
 
-  // Seite starten → sofort laden
+  function deleteStation(id) {
+    fetch(`http://localhost:3000/api/mietstationen/${id}`, { method: 'DELETE' })
+      .then(res => {
+        if (!res.ok) throw new Error('Fehler beim Löschen');
+        loadStations();
+      })
+      .catch(err => alert('❌ ' + err.message));
+  }
+
+  function showVehicleDetails(f) {
+    const modal = document.getElementById("fahrzeugModal");
+    const content = document.getElementById("modalContent");
+
+    content.innerHTML = `
+      <img src="/autos/${f.bild}" alt="${f.marke}" style="width:100%; border-radius:0.5rem; margin-bottom:1rem;" />
+      <h3>${f.marke}</h3>
+      <p><strong>Typ:</strong> ${f.typ}</p>
+      <p><strong>Kraftstoff:</strong> ${f.kraftstoff}</p>
+      <p><strong>Kilometerstand:</strong> ${f.kilometer.toLocaleString()} km</p>
+      <p><strong>Preis pro Tag:</strong> ${f.preisProTag} €</p>
+      <p><strong>Verfügbar:</strong> ${f.verfuegbar ? '✅ Ja' : '❌ Nein'}</p>
+    `;
+    modal.style.display = 'flex';
+  }
+
+  function closeVehicleModal() {
+    document.getElementById("fahrzeugModal").style.display = 'none';
+  }
+
+  function loadStations() {
+    fetch('http://localhost:3000/api/mietstationen')
+      .then(res => res.json())
+      .then(stationen => {
+        stationList.innerHTML = '';
+        stationen.forEach(station => {
+          const div = document.createElement('div');
+          div.className = 'station-card';
+
+          div.innerHTML = `
+            <strong>${station.name}</strong><br/>
+            ${station.adresse}<br/>
+            Tel: ${station.telefon}<br/>
+            E-Mail: ${station.email}<br/>
+            Kapazität: ${station.kapazitaet}<br/>
+            Aufbereitung: ${station.aufbereitung}<br/>
+            Schadensregulierung: ${station.schadensregulierung ? 'Ja' : 'Nein'}<br/>
+            Lage: ${station.lage}<br/>
+            <button onclick="editStation(${station.id})">✏️ Bearbeiten</button>
+            <button onclick="deleteStation(${station.id})">🗑️ Löschen</button>
+            <button onclick="toggleVehicleForm(${station.id})">➕ Fahrzeug hinzufügen</button>
+            <div id="fahrzeuge-${station.id}" style="margin-top: 1rem;"></div>
+            <div id="vehicle-form-${station.id}" style="margin-top:1rem;"></div>
+          `;
+          stationList.appendChild(div);
+
+          fetch(`http://localhost:3000/api/stationen/${station.id}/fahrzeuge`)
+            .then(res => res.json())
+            .then(fahrzeuge => {
+              const fahrzeugDiv = document.getElementById(`fahrzeuge-${station.id}`);
+              if (!fahrzeuge.length) {
+                fahrzeugDiv.innerHTML = '<p style="color:#999;">Keine Fahrzeuge vorhanden.</p>';
+                return;
+              }
+
+              const html = fahrzeuge.map(f => `
+                <div onclick='showVehicleDetails(${JSON.stringify(f)})' style="cursor:pointer; margin-top:1rem;">
+                  <img src="/autos/${f.bild}" alt="${f.marke}" style="width: 150px; border-radius: 0.5rem;" />
+                </div>
+              `).join('');
+
+              fahrzeugDiv.innerHTML = `<h4>Fahrzeuge:</h4>${html}`;
+            });
+        });
+      });
+  }
+
+  async function toggleVehicleForm(stationId) {
+    const container = document.getElementById(`vehicle-form-${stationId}`);
+    container.innerHTML = '';
+    container.style.display = 'block';
+
+    const res = await fetch('http://localhost:3000/api/fahrzeugtypen');
+    const typen = await res.json();
+
+    const grid = document.createElement('div');
+    grid.style.display = 'flex';
+    grid.style.flexWrap = 'wrap';
+    grid.style.gap = '1rem';
+
+    let selectedTyp = null;
+
+    typen.forEach(t => {
+      const img = document.createElement('img');
+      img.src = `/autos/${t.bild}`;
+      img.alt = t.bezeichnung;
+      img.title = `${t.marke} (${t.typ}) – ${t.kraftstoff}`;
+      img.style.width = '100px';
+      img.style.borderRadius = '0.5rem';
+      img.style.cursor = 'pointer';
+      img.onclick = () => {
+        selectedTyp = t;
+        document.getElementById(`km-${stationId}`).style.display = 'block';
+        document.getElementById(`verfuegbar-wrap-${stationId}`).style.display = 'block';
+        document.getElementById(`save-${stationId}`).style.display = 'inline-block';
+        [...grid.children].forEach(i => i.style.border = 'none');
+        img.style.border = '3px solid #facc15';
+      };
+      grid.appendChild(img);
+    });
+
+    const kmField = `<input type="number" id="km-${stationId}" placeholder="Kilometerstand z.B. 42000" style="display:none; width:100%; margin-top:1rem;" />`;
+    const checkbox = `<div id="verfuegbar-wrap-${stationId}" style="display:none; margin-top:1rem;"><label><input type="checkbox" id="verfuegbar-${stationId}" checked /> Verfügbar</label></div>`;
+    const saveBtn = `<button id="save-${stationId}" onclick="submitVehicleForm(${stationId})" style="display:none; margin-top:1rem;">🚗 Speichern</button>`;
+
+    container.appendChild(grid);
+    container.insertAdjacentHTML('beforeend', kmField + checkbox + saveBtn);
+  }
+
+  async function submitVehicleForm(stationId) {
+    const km = parseInt(document.getElementById(`km-${stationId}`).value);
+    const verfuegbar = document.getElementById(`verfuegbar-${stationId}`).checked;
+    const img = document.querySelector(`#vehicle-form-${stationId} img[style*="3px solid"]`);
+    if (!img) return alert('❗ Bitte ein Fahrzeug wählen');
+
+    const alt = img.getAttribute('alt');
+    const res = await fetch('http://localhost:3000/api/fahrzeugtypen');
+    const typen = await res.json();
+    const typ = typen.find(t => t.bezeichnung === alt);
+
+    if (!typ || isNaN(km)) {
+      return alert('❗ Bitte gültigen Kilometerstand angeben.');
+    }
+
+    const newVehicle = {
+      stationId,
+      marke: typ.marke,
+      typ: typ.typ,
+      kraftstoff: typ.kraftstoff,
+      kilometer: km,
+      preisProTag: typ.preisProTag,
+      bild: typ.bild,
+      verfuegbar
+    };
+
+    const save = await fetch('http://localhost:3000/api/fahrzeuge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newVehicle)
+    });
+
+    if (!save.ok) return alert('❌ Fahrzeug konnte nicht gespeichert werden.');
+    alert('✅ Fahrzeug gespeichert!');
+    loadStations();
+  }
+
   loadStations();
 </script>
+
+
+
 
 </body>
 </html>

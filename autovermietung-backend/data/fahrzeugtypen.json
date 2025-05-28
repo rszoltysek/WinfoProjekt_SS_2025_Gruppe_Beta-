@@ -1,0 +1,166 @@
+{
+  "typen": [
+    {
+      "id": 1,
+      "bezeichnung": "Volkswagen Polo",
+      "marke": "Volkswagen",
+      "typ": "Kleinwagen",
+      "kraftstoff": "Benzin",
+      "preisProTag": 35,
+      "bild": "volkswagen_polo.jpg"
+    },
+    {
+      "id": 2,
+      "bezeichnung": "Volkswagen Golf",
+      "marke": "Volkswagen",
+      "typ": "Kompakt",
+      "kraftstoff": "Diesel",
+      "preisProTag": 42,
+      "bild": "volkswagen_golf.jpg"
+    },
+    {
+      "id": 3,
+      "bezeichnung": "Volkswagen Passat",
+      "marke": "Volkswagen",
+      "typ": "Kombi",
+      "kraftstoff": "Diesel",
+      "preisProTag": 48,
+      "bild": "volkswagen_passat.jpg"
+    },
+    {
+      "id": 4,
+      "bezeichnung": "BMW 1er",
+      "marke": "BMW",
+      "typ": "Kompakt",
+      "kraftstoff": "Benzin",
+      "preisProTag": 44,
+      "bild": "bmw_1er.jpg"
+    },
+    {
+      "id": 5,
+      "bezeichnung": "BMW X3",
+      "marke": "BMW",
+      "typ": "SUV",
+      "kraftstoff": "Diesel",
+      "preisProTag": 55,
+      "bild": "bmw_x3.jpg"
+    },
+    {
+      "id": 6,
+      "bezeichnung": "BMW 5er",
+      "marke": "BMW",
+      "typ": "Limousine",
+      "kraftstoff": "Benzin",
+      "preisProTag": 62,
+      "bild": "bmw_5er.jpg"
+    },
+    {
+      "id": 7,
+      "bezeichnung": "Mercedes A-Klasse",
+      "marke": "Mercedes",
+      "typ": "Kleinwagen",
+      "kraftstoff": "Diesel",
+      "preisProTag": 43,
+      "bild": "mercedes_a-klasse.jpg"
+    },
+    {
+      "id": 8,
+      "bezeichnung": "Mercedes C-Klasse",
+      "marke": "Mercedes",
+      "typ": "Limousine",
+      "kraftstoff": "Benzin",
+      "preisProTag": 60,
+      "bild": "mercedes_c-klasse.jpg"
+    },
+    {
+      "id": 9,
+      "bezeichnung": "Mercedes Sprinter",
+      "marke": "Mercedes",
+      "typ": "Transporter",
+      "kraftstoff": "Diesel",
+      "preisProTag": 72,
+      "bild": "mercedes_sprinter.jpg"
+    },
+    {
+      "id": 10,
+      "bezeichnung": "Audi A3",
+      "marke": "Audi",
+      "typ": "Kompakt",
+      "kraftstoff": "Benzin",
+      "preisProTag": 48,
+      "bild": "audi_a3.jpg"
+    },
+    {
+      "id": 11,
+      "bezeichnung": "Audi Q5",
+      "marke": "Audi",
+      "typ": "SUV",
+      "kraftstoff": "Diesel",
+      "preisProTag": 65,
+      "bild": "audi_q5.jpg"
+    },
+    {
+      "id": 12,
+      "bezeichnung": "Audi A6",
+      "marke": "Audi",
+      "typ": "Limousine",
+      "kraftstoff": "Diesel",
+      "preisProTag": 69,
+      "bild": "audi_a6.jpg"
+    },
+    {
+      "id": 13,
+      "bezeichnung": "Opel Corsa",
+      "marke": "Opel",
+      "typ": "Kleinwagen",
+      "kraftstoff": "Benzin",
+      "preisProTag": 33,
+      "bild": "opel_corsa.jpg"
+    },
+    {
+      "id": 14,
+      "bezeichnung": "Opel Insignia",
+      "marke": "Opel",
+      "typ": "Kompakt",
+      "kraftstoff": "Diesel",
+      "preisProTag": 39,
+      "bild": "opel_insignia.jpg"
+    },
+    {
+      "id": 15,
+      "bezeichnung": "Opel Zafira",
+      "marke": "Opel",
+      "typ": "Van",
+      "kraftstoff": "Benzin",
+      "preisProTag": 46,
+      "bild": "opel_zafira.jpg"
+    },
+    {
+      "id": 16,
+      "bezeichnung": "Ford Fiesta",
+      "marke": "Ford",
+      "typ": "Kleinwagen",
+      "kraftstoff": "Benzin",
+      "preisProTag": 31,
+      "bild": "ford_fiesta.jpg"
+    },
+    {
+      "id": 17,
+      "bezeichnung": "Ford Focus",
+      "marke": "Ford",
+      "typ": "Kombi",
+      "kraftstoff": "Diesel",
+      "preisProTag": 45,
+      "bild": "ford_focus.jpg"
+    },
+    {
+      "id": 18,
+      "bezeichnung": "Ford Transit",
+      "marke": "Ford",
+      "typ": "Transporter",
+      "kraftstoff": "Diesel",
+      "preisProTag": 68,
+      "bild": "ford_transit.jpg"
+    }
+  ]
+}

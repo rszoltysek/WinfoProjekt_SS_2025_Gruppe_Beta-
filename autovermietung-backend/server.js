@@ -6,71 +6,70 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-// Pfad zur Datenbank-Datei
+// JSON-Dateipfade
 const DATA_PATH = path.join(__dirname, 'data', 'data.json');
+const VEHICLE_PATH = path.join(__dirname, 'data', 'fahrzeuge.json');
+const VEHICLE_TYPES_PATH = path.join(__dirname, 'data', 'fahrzeugtypen.json');
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public')); // für /images usw.
+app.use('/autos', express.static(path.join(__dirname, 'autos'))); // für Fahrzeugbilder
 
-// Helfer: Daten lesen (mit Fallback bei leerer Datei)
+// Hilfsfunktionen
 function readData() {
-  try {
-    const jsonData = fs.readFileSync(DATA_PATH, 'utf-8');
-    return JSON.parse(jsonData);
-  } catch (err) {
-    return { mietstationen: [] };
-  }
+  return JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
 }
 
-// Helfer: Daten schreiben
 function writeData(data) {
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
 }
 
-// GET: Alle Mietstationen abrufen
+function readVehicles() {
+  return JSON.parse(fs.readFileSync(VEHICLE_PATH, 'utf8'));
+}
+
+function writeVehicles(data) {
+  fs.writeFileSync(VEHICLE_PATH, JSON.stringify(data, null, 2));
+}
+
+function readVehicleTypes() {
+  return JSON.parse(fs.readFileSync(VEHICLE_TYPES_PATH, 'utf8'));
+}
+
+// ────────────── Mietstationen ──────────────
 app.get('/api/mietstationen', (req, res) => {
-  const data = readData();
-  res.json(data.mietstationen);
+  res.json(readData().mietstationen);
 });
 
-// POST: Neue Mietstation erstellen
 app.post('/api/mietstationen', (req, res) => {
   const data = readData();
-  const newStation = req.body;
-  newStation.id = Date.now(); // Einzigartige ID generieren
+  const newStation = { id: Date.now(), ...req.body };
   data.mietstationen.push(newStation);
   writeData(data);
   res.status(201).json(newStation);
 });
 
-// PUT: Bestehende Mietstation bearbeiten
 app.put('/api/mietstationen/:id', (req, res) => {
   const data = readData();
-  const stationId = parseInt(req.params.id);
-  const index = data.mietstationen.findIndex(s => s.id === stationId);
-
-  if (index === -1) {
-    return res.status(404).json({ message: 'Nicht gefunden' });
-  }
-
-  const updatedStation = {
-    ...req.body,
-    id: stationId // ID bleibt gleich
-  };
-
-  data.mietstationen[index] = updatedStation;
+  const id = parseInt(req.params.id);
+  const index = data.mietstationen.findIndex(s => s.id === id);
+  if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+  data.mietstationen[index] = { id, ...req.body };
   writeData(data);
-  res.json(updatedStation);
+  res.json(data.mietstationen[index]);
 });
 
-// DELETE: Mietstation löschen
 app.delete('/api/mietstationen/:id', (req, res) => {
   const data = readData();
-  const stationId = parseInt(req.params.id);
-  const index = data.mietstationen.findIndex(s => s.id === stationId);
+  const id = parseInt(req.params.id);
+  const index = data.mietstationen.findIndex(s => s.id === id);
+  if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
 
-  if (index === -1) {
-    return res.status(404).json({ message: 'Nicht gefunden' });
+  const fahrzeuge = readVehicles().fahrzeuge;
+  if (fahrzeuge.some(v => v.stationId === id)) {
+    return res.status(400).json({ message: 'Station enthält noch Fahrzeuge' });
   }
 
   data.mietstationen.splice(index, 1);
@@ -78,12 +77,61 @@ app.delete('/api/mietstationen/:id', (req, res) => {
   res.status(204).end();
 });
 
-// Standardroute
+// ────────────── Fahrzeugtypen ──────────────
+app.get('/api/fahrzeugtypen', (req, res) => {
+  try {
+    const data = readVehicleTypes();
+    if (!data.typen || !Array.isArray(data.typen)) {
+      return res.status(500).json({ message: '🚫 Datei enthält keine gültigen Fahrzeugtypen.' });
+    }
+    res.json(data.typen);
+  } catch (err) {
+    console.error('Fehler beim Lesen von fahrzeugtypen.json:', err.message);
+    res.status(500).json({ message: '❌ Fahrzeugtypen konnten nicht geladen werden.' });
+  }
+});
+
+// ────────────── Fahrzeuge ──────────────
+app.get('/api/stationen/:id/fahrzeuge', (req, res) => {
+  const id = parseInt(req.params.id);
+  const data = readVehicles();
+  res.json(data.fahrzeuge.filter(v => v.stationId === id));
+});
+
+app.post('/api/fahrzeuge', (req, res) => {
+  const data = readVehicles();
+  const newVehicle = { id: Date.now(), ...req.body };
+  data.fahrzeuge.push(newVehicle);
+  writeVehicles(data);
+  res.status(201).json(newVehicle);
+});
+
+app.put('/api/fahrzeuge/:id', (req, res) => {
+  const data = readVehicles();
+  const id = parseInt(req.params.id);
+  const index = data.fahrzeuge.findIndex(v => v.id === id);
+  if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+  data.fahrzeuge[index] = { id, ...req.body };
+  writeVehicles(data);
+  res.json(data.fahrzeuge[index]);
+});
+
+app.delete('/api/fahrzeuge/:id', (req, res) => {
+  const data = readVehicles();
+  const id = parseInt(req.params.id);
+  const index = data.fahrzeuge.findIndex(v => v.id === id);
+  if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+  data.fahrzeuge.splice(index, 1);
+  writeVehicles(data);
+  res.status(204).end();
+});
+
+// ────────────── Root ──────────────
 app.get('/', (req, res) => {
   res.send('🚗 Autovermietung Backend läuft!');
 });
 
-// Server starten
+// Serverstart
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`✅ Server läuft auf http://localhost:${PORT}`);
 });
