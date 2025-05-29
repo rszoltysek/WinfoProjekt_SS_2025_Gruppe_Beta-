@@ -10,71 +10,95 @@ const PORT = 3000;
 const DATA_PATH = path.join(__dirname, 'data', 'data.json');
 const VEHICLE_PATH = path.join(__dirname, 'data', 'fahrzeuge.json');
 const VEHICLE_TYPES_PATH = path.join(__dirname, 'data', 'fahrzeugtypen.json');
+const UEberfuehrungen_PATH = path.join(__dirname, 'data', 'ueberfuehrungen.json');
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // für /images usw.
-app.use('/autos', express.static(path.join(__dirname, 'autos'))); // für Fahrzeugbilder
+app.use(express.static(__dirname));
+app.use(express.static('autos'));
+app.use('/autos', express.static(path.join(__dirname, 'autos')));
 
 // Hilfsfunktionen
 function readData() {
   return JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
 }
-
 function writeData(data) {
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
 }
-
 function readVehicles() {
   return JSON.parse(fs.readFileSync(VEHICLE_PATH, 'utf8'));
 }
-
 function writeVehicles(data) {
   fs.writeFileSync(VEHICLE_PATH, JSON.stringify(data, null, 2));
 }
-
 function readVehicleTypes() {
   return JSON.parse(fs.readFileSync(VEHICLE_TYPES_PATH, 'utf8'));
+}
+function readUeberfuehrungen() {
+  if (!fs.existsSync(UEberfuehrungen_PATH)) {
+    fs.writeFileSync(UEberfuehrungen_PATH, JSON.stringify({ ueberfuehrungen: [] }, null, 2));
+  }
+  return JSON.parse(fs.readFileSync(UEberfuehrungen_PATH, 'utf8'));
+}
+function writeUeberfuehrungen(data) {
+  fs.writeFileSync(UEberfuehrungen_PATH, JSON.stringify(data, null, 2));
 }
 
 // ────────────── Mietstationen ──────────────
 app.get('/api/mietstationen', (req, res) => {
-  res.json(readData().mietstationen);
+  try {
+    res.json(readData().mietstationen);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Fehler beim Laden der Mietstationen" });
+  }
 });
 
 app.post('/api/mietstationen', (req, res) => {
-  const data = readData();
-  const newStation = { id: Date.now(), ...req.body };
-  data.mietstationen.push(newStation);
-  writeData(data);
-  res.status(201).json(newStation);
+  try {
+    const data = readData();
+    const newStation = { id: Date.now(), ...req.body };
+    data.mietstationen.push(newStation);
+    writeData(data);
+    res.status(201).json(newStation);
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Speichern der Mietstation" });
+  }
 });
 
 app.put('/api/mietstationen/:id', (req, res) => {
-  const data = readData();
-  const id = parseInt(req.params.id);
-  const index = data.mietstationen.findIndex(s => s.id === id);
-  if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
-  data.mietstationen[index] = { id, ...req.body };
-  writeData(data);
-  res.json(data.mietstationen[index]);
+  try {
+    const data = readData();
+    const id = parseInt(req.params.id);
+    const index = data.mietstationen.findIndex(s => s.id === id);
+    if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+    data.mietstationen[index] = { id, ...req.body };
+    writeData(data);
+    res.json(data.mietstationen[index]);
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Bearbeiten der Mietstation" });
+  }
 });
 
 app.delete('/api/mietstationen/:id', (req, res) => {
-  const data = readData();
-  const id = parseInt(req.params.id);
-  const index = data.mietstationen.findIndex(s => s.id === id);
-  if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+  try {
+    const data = readData();
+    const id = parseInt(req.params.id);
+    const index = data.mietstationen.findIndex(s => s.id === id);
+    if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
 
-  const fahrzeuge = readVehicles().fahrzeuge;
-  if (fahrzeuge.some(v => v.stationId === id)) {
-    return res.status(400).json({ message: 'Station enthält noch Fahrzeuge' });
+    const fahrzeuge = readVehicles().fahrzeuge;
+    if (fahrzeuge.some(v => v.stationId === id)) {
+      return res.status(400).json({ message: 'Station enthält noch Fahrzeuge' });
+    }
+
+    data.mietstationen.splice(index, 1);
+    writeData(data);
+    res.status(204).end();
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Löschen der Mietstation" });
   }
-
-  data.mietstationen.splice(index, 1);
-  writeData(data);
-  res.status(204).end();
 });
 
 // ────────────── Fahrzeugtypen ──────────────
@@ -91,39 +115,148 @@ app.get('/api/fahrzeugtypen', (req, res) => {
   }
 });
 
-// ────────────── Fahrzeuge ──────────────
+// ────────────── Fahrzeuge (Alle Fahrzeuge für Historie und andere Zwecke) ──────────────
+app.get('/api/fahrzeuge', (req, res) => {
+  try {
+    const data = readVehicles();
+    if (!data.fahrzeuge || !Array.isArray(data.fahrzeuge)) {
+      return res.json([]);
+    }
+    res.json(data.fahrzeuge);
+  } catch (err) {
+    console.error('Fehler bei /api/fahrzeuge:', err);
+    res.status(500).json({ error: 'Serverfehler beim Laden der Fahrzeuge' });
+  }
+});
+
+// ────────────── Fahrzeuge für Mietstation ──────────────
 app.get('/api/stationen/:id/fahrzeuge', (req, res) => {
-  const id = parseInt(req.params.id);
-  const data = readVehicles();
-  res.json(data.fahrzeuge.filter(v => v.stationId === id));
+  try {
+    const id = parseInt(req.params.id);
+    const data = readVehicles();
+    if (!data.fahrzeuge || !Array.isArray(data.fahrzeuge)) {
+      return res.json([]);
+    }
+    const vehicles = data.fahrzeuge.filter(v => v.stationId === id);
+    res.json(vehicles);
+  } catch (err) {
+    console.error('Fehler bei /api/stationen/:id/fahrzeuge:', err);
+    res.status(500).json({ error: 'Serverfehler beim Laden der Fahrzeuge' });
+  }
 });
 
 app.post('/api/fahrzeuge', (req, res) => {
-  const data = readVehicles();
-  const newVehicle = { id: Date.now(), ...req.body };
-  data.fahrzeuge.push(newVehicle);
-  writeVehicles(data);
-  res.status(201).json(newVehicle);
+  try {
+    const data = readVehicles();
+    const allStations = readData().mietstationen;
+    const { stationId } = req.body;
+
+    // Kapazitätsprüfung
+    const station = allStations.find(s => s.id === stationId);
+    if (!station) return res.status(400).json({ message: 'Station nicht gefunden' });
+    const anzahlFahrzeuge = data.fahrzeuge.filter(f => f.stationId === stationId).length;
+    if (anzahlFahrzeuge >= station.kapazitaet) {
+      return res.status(400).json({ message: 'Kapazität dieser Station erreicht!' });
+    }
+
+    const newVehicle = { id: Date.now(), ...req.body };
+    data.fahrzeuge.push(newVehicle);
+    writeVehicles(data);
+    res.status(201).json(newVehicle);
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Hinzufügen des Fahrzeugs" });
+  }
 });
 
 app.put('/api/fahrzeuge/:id', (req, res) => {
-  const data = readVehicles();
-  const id = parseInt(req.params.id);
-  const index = data.fahrzeuge.findIndex(v => v.id === id);
-  if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
-  data.fahrzeuge[index] = { id, ...req.body };
-  writeVehicles(data);
-  res.json(data.fahrzeuge[index]);
+  try {
+    const data = readVehicles();
+    const id = parseInt(req.params.id);
+    const index = data.fahrzeuge.findIndex(v => v.id === id);
+    if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+    data.fahrzeuge[index] = { id, ...req.body };
+    writeVehicles(data);
+    res.json(data.fahrzeuge[index]);
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Bearbeiten des Fahrzeugs" });
+  }
 });
 
 app.delete('/api/fahrzeuge/:id', (req, res) => {
-  const data = readVehicles();
-  const id = parseInt(req.params.id);
-  const index = data.fahrzeuge.findIndex(v => v.id === id);
-  if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
-  data.fahrzeuge.splice(index, 1);
-  writeVehicles(data);
-  res.status(204).end();
+  try {
+    const data = readVehicles();
+    const id = parseInt(req.params.id);
+    const index = data.fahrzeuge.findIndex(v => v.id === id);
+    if (index === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+    data.fahrzeuge.splice(index, 1);
+    writeVehicles(data);
+    res.status(204).end();
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Löschen des Fahrzeugs" });
+  }
+});
+
+// ────────────── NEU: Fahrzeugüberführung ──────────────
+app.post('/api/fahrzeuge/:id/ueberfuehrung', (req, res) => {
+  try {
+    const fahrzeugId = parseInt(req.params.id);
+    const { zielStationId, kommentar } = req.body;
+    const zielId = parseInt(zielStationId);
+
+    // Daten laden
+    const fahrzeugData = readVehicles();
+    const stationsData = readData();
+    const ueberfuehrungData = readUeberfuehrungen();
+
+    // Existenzprüfungen
+    const fahrzeugIndex = fahrzeugData.fahrzeuge.findIndex(f => f.id === fahrzeugId);
+    if (fahrzeugIndex === -1) {
+      return res.status(404).json({ message: 'Fahrzeug nicht gefunden' });
+    }
+    const fahrzeug = fahrzeugData.fahrzeuge[fahrzeugIndex];
+
+    const zielStation = stationsData.mietstationen.find(s => s.id === zielId);
+    if (!zielStation) {
+      return res.status(400).json({ message: 'Zielstation nicht gefunden' });
+    }
+
+    // Kapazitätsprüfung
+    const anzahlFahrzeugeZiel = fahrzeugData.fahrzeuge.filter(f => f.stationId === zielId).length;
+    if (anzahlFahrzeugeZiel >= zielStation.kapazitaet) {
+      return res.status(400).json({ message: 'Kapazität der Zielstation erreicht!' });
+    }
+
+    // Überführung durchführen
+    const alteStationId = fahrzeug.stationId;
+    fahrzeugData.fahrzeuge[fahrzeugIndex].stationId = zielId;
+    writeVehicles(fahrzeugData);
+
+    // Überführungshistorie speichern
+    const ueberfuehrung = {
+      id: Date.now(),
+      fahrzeugId,
+      vonStationId: alteStationId,
+      nachStationId: zielId,
+      datum: new Date().toISOString(),
+      kommentar: kommentar || ""
+    };
+    ueberfuehrungData.ueberfuehrungen.push(ueberfuehrung);
+    writeUeberfuehrungen(ueberfuehrungData);
+
+    res.json({ message: 'Fahrzeug erfolgreich überführt!', ueberfuehrung });
+  } catch (err) {
+    res.status(500).json({ message: "Fehler bei der Fahrzeugüberführung" });
+  }
+});
+
+// ────────────── Überführungshistorie ──────────────
+app.get('/api/ueberfuehrungen', (req, res) => {
+  try {
+    const ueberfuehrungData = readUeberfuehrungen();
+    res.json(ueberfuehrungData.ueberfuehrungen);
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Laden der Überführungshistorie" });
+  }
 });
 
 // ────────────── Root ──────────────

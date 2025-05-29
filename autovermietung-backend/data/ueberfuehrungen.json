@@ -1,0 +1,20 @@
+{
+  "ueberfuehrungen": [
+    {
+      "id": 1748532801614,
+      "fahrzeugId": 1748532628764,
+      "vonStationId": 1748180682350,
+      "nachStationId": 1716900000001,
+      "datum": "2025-05-29T15:33:21.614Z",
+      "kommentar": "Eine Kunde wollte das Auto unbedingt mieten"
+    },
+    {
+      "id": 1748536179945,
+      "fahrzeugId": 100008,
+      "vonStationId": 1716900000001,
+      "nachStationId": 1716900000002,
+      "datum": "2025-05-29T16:29:39.945Z",
+      "kommentar": "test"
+    }
+  ]
+}
