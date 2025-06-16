@@ -7,10 +7,12 @@ const app = express();
 const PORT = 3000;
 
 // JSON-Dateipfade
-const DATA_PATH = path.join(__dirname, 'data', 'data.json');
-const VEHICLE_PATH = path.join(__dirname, 'data', 'fahrzeuge.json');
-const VEHICLE_TYPES_PATH = path.join(__dirname, 'data', 'fahrzeugtypen.json');
-const UEberfuehrungen_PATH = path.join(__dirname, 'data', 'ueberfuehrungen.json');
+const DATA_PATH = path.join(__dirname, 'data', 'data.json'); // Für Mietstationen
+const VEHICLE_PATH = path.join(__dirname, 'data', 'fahrzeuge.json'); // Für Fahrzeuge
+const VEHICLE_TYPES_PATH = path.join(__dirname, 'data', 'fahrzeugtypen.json'); // Für Fahrzeugtypen
+const UEberfuehrungen_PATH = path.join(__dirname, 'data', 'ueberfueberungen.json'); // Für Überführungen
+const VERMIETUNGEN_PATH = path.join(__dirname, 'vermietungen.json'); // NEU: Pfad zu vermietungen.json
+const KOSTEN_PATH = path.join(__dirname, 'kosten.json'); // NEU: Pfad zu kosten.json
 
 // Middleware
 app.use(cors());
@@ -21,19 +23,19 @@ app.use('/autos', express.static(path.join(__dirname, 'autos')));
 
 // Hilfsfunktionen
 function readData() {
-  return JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
+  return JSON.parse(fs.readFileSync(DATA_PATH, 'utf8')); //
 }
 function writeData(data) {
-  fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
+  fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2)); //
 }
 function readVehicles() {
-  return JSON.parse(fs.readFileSync(VEHICLE_PATH, 'utf8'));
+  return JSON.parse(fs.readFileSync(VEHICLE_PATH, 'utf8')); //
 }
 function writeVehicles(data) {
-  fs.writeFileSync(VEHICLE_PATH, JSON.stringify(data, null, 2));
+  fs.writeFileSync(VEHICLE_PATH, JSON.stringify(data, null, 2)); //
 }
 function readVehicleTypes() {
-  return JSON.parse(fs.readFileSync(VEHICLE_TYPES_PATH, 'utf8'));
+  return JSON.parse(fs.readFileSync(VEHICLE_TYPES_PATH, 'utf8')); //
 }
 function readUeberfuehrungen() {
   if (!fs.existsSync(UEberfuehrungen_PATH)) {
@@ -44,6 +46,26 @@ function readUeberfuehrungen() {
 function writeUeberfuehrungen(data) {
   fs.writeFileSync(UEberfuehrungen_PATH, JSON.stringify(data, null, 2));
 }
+
+// NEUE Hilfsfunktionen für Kosten und Vermietungen
+function readVermietungen() {
+  // Überprüfen, ob die Datei existiert, sonst leeres Array zurückgeben
+  if (!fs.existsSync(VERMIETUNGEN_PATH)) {
+    console.warn(`WARNUNG: ${VERMIETUNGEN_PATH} nicht gefunden. Erstelle leeres Array.`);
+    return [];
+  }
+  return JSON.parse(fs.readFileSync(VERMIETUNGEN_PATH, 'utf8'));
+}
+
+function readKosten() {
+  // Überprüfen, ob die Datei existiert, sonst leeres Array zurückgeben
+  if (!fs.existsSync(KOSTEN_PATH)) {
+    console.warn(`WARNUNG: ${KOSTEN_PATH} nicht gefunden. Erstelle leeres Array.`);
+    return [];
+  }
+  return JSON.parse(fs.readFileSync(KOSTEN_PATH, 'utf8'));
+}
+
 
 // ────────────── Mietstationen ──────────────
 app.get('/api/mietstationen', (req, res) => {
@@ -240,7 +262,7 @@ app.post('/api/fahrzeuge/:id/ueberfuehrung', (req, res) => {
       datum: new Date().toISOString(),
       kommentar: kommentar || ""
     };
-    ueberfuehrungData.ueberfuehrungen.push(ueberfuehrung);
+    ueberfuehrungData.ueberfueferungen.push(ueberfuehrung);
     writeUeberfuehrungen(ueberfuehrungData);
 
     res.json({ message: 'Fahrzeug erfolgreich überführt!', ueberfuehrung });
@@ -258,6 +280,27 @@ app.get('/api/ueberfuehrungen', (req, res) => {
     res.status(500).json({ message: "Fehler beim Laden der Überführungshistorie" });
   }
 });
+
+// ────────────── NEU: Vermietungen ──────────────
+app.get('/api/vermietungen', (req, res) => {
+  try {
+    res.json(readVermietungen());
+  } catch (err) {
+    console.error('Fehler bei /api/vermietungen:', err);
+    res.status(500).json({ error: 'Serverfehler beim Laden der Vermietungen' });
+  }
+});
+
+// ────────────── NEU: Kosten ──────────────
+app.get('/api/kosten', (req, res) => {
+  try {
+    res.json(readKosten());
+  } catch (err) {
+    console.error('Fehler bei /api/kosten:', err);
+    res.status(500).json({ error: 'Serverfehler beim Laden der Kosten' });
+  }
+});
+
 
 // ────────────── Root ──────────────
 app.get('/', (req, res) => {
