@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "typ": "Ferien",
+    "beschreibung": "Sommerferien NRW",
+    "start": "2025-07-14",
+    "ende": "2025-08-25",
+    "betroffeneStationen": [10001, 10002]
+  },
+  {
+    "id": 2,
+    "typ": "Event",
+    "beschreibung": "Messe Frankfurt",
+    "start": "2025-09-10",
+    "ende": "2025-09-13",
+    "betroffeneStationen": [10002]
+  },
+  {
+    "id": 3,
+    "typ": "Wetter",
+    "beschreibung": "Starker Schneefall",
+    "start": "2025-12-01",
+    "ende": "2025-12-03",
+    "betroffeneStationen": [10001]
+  }
+]

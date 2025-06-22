@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "typ": "Grippewelle",
+    "beschreibung": "Viele Krankmeldungen erwartet (Region Mitte)",
+    "start": "2025-06-27",
+    "ende": "2025-07-04",
+    "betroffeneStationen": [10001, 10002]
+  },
+  {
+    "id": 2,
+    "typ": "Streik",
+    "beschreibung": "ÖPNV-Streik im Stadtgebiet",
+    "start": "2025-06-28",
+    "ende": "2025-06-28",
+    "betroffeneStationen": [10003]
+  }
+]

@@ -5,101 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Personaleinsatz</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="personal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('background.png') center/cover no-repeat;
-      color: #f5f5f5;
-      min-height: 100vh;
-    }
-
-    header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      padding: 2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(8px);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .logo img {
-      height: 50px;
-    }
-
-    .logo span {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #facc15;
-    }
-
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: #f5f5f5;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    nav a:hover {
-      color: #facc15;
-      transform: scale(1.05);
-    }
-
-    main {
-      padding: 7rem 2rem 3rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .card {
-      background: rgba(17, 17, 17, 0.6);
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      margin-bottom: 2rem;
-      animation: fadeIn 1s ease-out forwards;
-    }
-
-    h2 {
-      color: #facc15;
-      margin-bottom: 1rem;
-    }
-
-    canvas {
-      width: 100% !important;
-      height: auto !important;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
 </head>
 <body>
-  <header>
+  <!-- HEADER: Navbar at top, styled just like main.html -->
+ <header>
     <div class="logo">
       <img src="logo.png" alt="Logo" />
       <span>Autovermietung</span>
@@ -112,57 +24,176 @@
     </nav>
   </header>
 
-  <main>
-    <section class="card">
-      <h2>Personaleinsatz – Übersicht</h2>
-      <p>Personalverteilung und Kapazitätsnutzung in den Mietstationen:</p>
-      <canvas id="kpiChart"></canvas>
-    </section>
-  </main>
-
-  <script>
-    const ctx = document.getElementById('kpiChart').getContext('2d');
-    const kpiChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Station A', 'Station B', 'Station C'],
-        datasets: [
-          {
-            label: 'Eingesetzte Mitarbeiter',
-            data: [10, 7, 12],
-            backgroundColor: '#facc15',
-            borderRadius: 8
-          },
-          {
-            label: 'Verfügbare Stunden',
-            data: [400, 300, 500],
-            backgroundColor: '#f5f5f5',
-            borderRadius: 8
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            labels: {
-              color: '#f5f5f5'
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: { color: '#f5f5f5' },
-            grid: { color: '#444' }
-          },
-          x: {
-            ticks: { color: '#f5f5f5' },
-            grid: { color: '#444' }
-          }
-        }
-      }
-    });
-  </script>
+  <div class="container">
+    <!-- SIDEBAR: Only task buttons, no logo -->
+    <aside class="sidebar">
+      <nav>
+        <button class="sidebar-btn active" data-target="kpi"><i class="fa-solid fa-chart-simple"></i> <span>Kennzahlen</span></button>
+        <button class="sidebar-btn" data-target="einsatz-uebersicht"><i class="fa-solid fa-users-viewfinder"></i> <span>Personaleinsatz</span></button>
+        <button class="sidebar-btn" data-target="einsatz"><i class="fa-solid fa-calendar-days"></i> <span>Geplante Einsätze</span></button>
+        <button class="sidebar-btn" data-target="abwesenheiten"><i class="fa-solid fa-user-clock"></i> <span>Abwesenheiten</span></button>
+        <button class="sidebar-btn" data-target="saisonalitaet"><i class="fa-solid fa-snowflake"></i> <span>Saisonalität & Events</span></button>
+        <button class="sidebar-btn" data-target="ereignisse"><i class="fa-solid fa-bolt"></i> <span>Kurzfristige Ereignisse</span></button>
+        <button class="sidebar-btn" data-target="skills"><i class="fa-solid fa-brain"></i> <span>Skill-Matrix</span></button>
+        <button class="sidebar-btn" data-target="reserven"><i class="fa-solid fa-user-shield"></i> <span>Reserven</span></button>
+        <button class="sidebar-btn" data-target="ueberstunden"><i class="fa-solid fa-business-time"></i> <span>Überstunden & Externe</span></button>
+        <button class="sidebar-btn" data-target="bedarf"><i class="fa-solid fa-layer-group"></i> <span>Personalbedarf</span></button>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <!-- KPI Section -->
+      <section id="kpi" class="tab-section active">
+        <div class="card">
+          <h2>Personal-Kennzahlen (KPI)</h2>
+          <canvas id="kpiChart"></canvas>
+          <div id="kpiDetails"></div>
+        </div>
+      </section>
+      <!-- Personalübersicht -->
+      <section id="einsatz-uebersicht" class="tab-section">
+        <div class="card">
+          <h2>Alle Mitarbeitenden</h2>
+          <table id="personalTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rolle</th>
+                <th>Arbeitszeitmodell</th>
+                <th>Station-ID</th>
+                <th>Telefon</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamisch mit JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <!-- Geplante Einsätze -->
+      <section id="einsatz" class="tab-section">
+        <div class="card">
+          <h2>Geplante Personaleinsätze</h2>
+          <table id="einsatzTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rolle</th>
+                <th>Station-ID</th>
+                <th>Von</th>
+                <th>Bis</th>
+                <th>Warnung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamisch mit JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <!-- Abwesenheiten -->
+      <section id="abwesenheiten" class="tab-section">
+        <div class="card">
+          <h2>Abwesenheiten</h2>
+          <table id="abwesenheitenTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rolle</th>
+                <th>Typ</th>
+                <th>Von</th>
+                <th>Bis</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamisch mit JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <!-- Saisonalität -->
+      <section id="saisonalitaet" class="tab-section">
+        <div class="card">
+          <h2>Saisonalität & Events</h2>
+          <div id="saisonalitaetContent"></div>
+        </div>
+      </section>
+      <!-- Kurzfristige Ereignisse -->
+      <section id="ereignisse" class="tab-section">
+        <div class="card">
+          <h2>Kurzfristige Ereignisse</h2>
+          <div id="ereignisseContent"></div>
+        </div>
+      </section>
+      <!-- Skill-Matrix -->
+      <section id="skills" class="tab-section">
+        <div class="card">
+          <h2>Skill-Matrix</h2>
+          <table id="skillMatrixTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rolle(n)</th>
+                <th>Skills</th>
+                <th>Vertretung möglich?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamisch mit JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <!-- Reserven -->
+      <section id="reserven" class="tab-section">
+        <div class="card">
+          <h2>Reserven</h2>
+          <div id="reservenContent"></div>
+        </div>
+      </section>
+      <!-- Überstunden & Externe -->
+      <section id="ueberstunden" class="tab-section">
+        <div class="card">
+          <h2>Überstunden & Externe Aushilfen</h2>
+          <table id="ueberstundenTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rolle</th>
+                <th>Überstunden</th>
+                <th>Externer Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamisch mit JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <!-- Personal-Bedarfsanalyse -->
+      <section id="bedarf" class="tab-section">
+        <div class="card">
+          <h2>Personal-Bedarfsanalyse</h2>
+          <table id="bedarfTable">
+            <thead>
+              <tr>
+                <th>Station</th>
+                <th>Schicht</th>
+                <th>Wochentag</th>
+                <th>Soll</th>
+                <th>Ist</th>
+                <th>Abweichung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamisch mit JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="personal.js"></script>
 </body>
 </html>

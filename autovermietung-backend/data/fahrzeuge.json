@@ -13,7 +13,7 @@
     },
     {
       "id": 100002,
-      "stationId": 1716900000001,
+      "stationId": 1748180682350,
       "marke": "BMW",
       "typ": "SUV",
       "kraftstoff": "Diesel",
@@ -25398,6 +25398,17 @@
       "preisProTag": 48,
       "bild": "volkswagen_passat.jpg",
       "verfuegbar": false
+    },
+    {
+      "id": 1750180556547,
+      "stationId": 1716900000001,
+      "marke": "Ford",
+      "typ": "Kleinwagen",
+      "kraftstoff": "Benzin",
+      "kilometer": 80000,
+      "preisProTag": 31,
+      "bild": "ford_fiesta.jpg",
+      "verfuegbar": true
     }
   ]
 }

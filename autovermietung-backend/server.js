@@ -14,6 +14,11 @@ const UEberfuehrungen_PATH = path.join(__dirname, 'data', 'ueberfueberungen.json
 const VERMIETUNGEN_PATH = path.join(__dirname, 'vermietungen.json'); // NEU: Pfad zu vermietungen.json
 const KOSTEN_PATH = path.join(__dirname, 'kosten.json'); // NEU: Pfad zu kosten.json
 
+// *** NEU für E3: ***
+const PERSONAL_PATH = path.join(__dirname, 'data', 'personal.json');
+const EINSAETZE_PATH = path.join(__dirname, 'data', 'personaleinsaetze.json');
+const ABWESENHEITEN_PATH = path.join(__dirname, 'data', 'abwesenheiten.json');
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -49,16 +54,13 @@ function writeUeberfuehrungen(data) {
 
 // NEUE Hilfsfunktionen für Kosten und Vermietungen
 function readVermietungen() {
-  // Überprüfen, ob die Datei existiert, sonst leeres Array zurückgeben
   if (!fs.existsSync(VERMIETUNGEN_PATH)) {
     console.warn(`WARNUNG: ${VERMIETUNGEN_PATH} nicht gefunden. Erstelle leeres Array.`);
     return [];
   }
   return JSON.parse(fs.readFileSync(VERMIETUNGEN_PATH, 'utf8'));
 }
-
 function readKosten() {
-  // Überprüfen, ob die Datei existiert, sonst leeres Array zurückgeben
   if (!fs.existsSync(KOSTEN_PATH)) {
     console.warn(`WARNUNG: ${KOSTEN_PATH} nicht gefunden. Erstelle leeres Array.`);
     return [];
@@ -66,6 +68,15 @@ function readKosten() {
   return JSON.parse(fs.readFileSync(KOSTEN_PATH, 'utf8'));
 }
 
+// *** NEU für E3: ***
+function readJson(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+  const data = fs.readFileSync(filePath, 'utf8');
+  return data.trim() ? JSON.parse(data) : [];
+}
+function writeJson(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
 
 // ────────────── Mietstationen ──────────────
 app.get('/api/mietstationen', (req, res) => {
@@ -262,7 +273,8 @@ app.post('/api/fahrzeuge/:id/ueberfuehrung', (req, res) => {
       datum: new Date().toISOString(),
       kommentar: kommentar || ""
     };
-    ueberfuehrungData.ueberfueferungen.push(ueberfuehrung);
+    if (!ueberfuehrungData.ueberfuehrungen) ueberfuehrungData.ueberfuehrungen = [];
+    ueberfuehrungData.ueberfuehrungen.push(ueberfuehrung);
     writeUeberfuehrungen(ueberfuehrungData);
 
     res.json({ message: 'Fahrzeug erfolgreich überführt!', ueberfuehrung });
@@ -301,6 +313,92 @@ app.get('/api/kosten', (req, res) => {
   }
 });
 
+// ────────────── E3: Personal ──────────────
+app.get('/api/personal', (req, res) => {
+  res.json(readJson(PERSONAL_PATH));
+});
+app.post('/api/personal', (req, res) => {
+  const data = readJson(PERSONAL_PATH);
+  const newId = Date.now();
+  const newEntry = { id: newId, ...req.body };
+  data.push(newEntry);
+  writeJson(PERSONAL_PATH, data);
+  res.status(201).json(newEntry);
+});
+app.put('/api/personal/:id', (req, res) => {
+  const data = readJson(PERSONAL_PATH);
+  const id = parseInt(req.params.id);
+  const idx = data.findIndex(e => e.id === id);
+  if (idx === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+  data[idx] = { id, ...req.body };
+  writeJson(PERSONAL_PATH, data);
+  res.json(data[idx]);
+});
+app.delete('/api/personal/:id', (req, res) => {
+  let data = readJson(PERSONAL_PATH);
+  const id = parseInt(req.params.id);
+  data = data.filter(e => e.id !== id);
+  writeJson(PERSONAL_PATH, data);
+  res.status(204).end();
+});
+
+// ────────────── E3: Personaleinsaetze ──────────────
+app.get('/api/personaleinsaetze', (req, res) => {
+  res.json(readJson(EINSAETZE_PATH));
+});
+app.post('/api/personaleinsaetze', (req, res) => {
+  const data = readJson(EINSAETZE_PATH);
+  const newId = Date.now();
+  const newEntry = { id: newId, ...req.body };
+  data.push(newEntry);
+  writeJson(EINSAETZE_PATH, data);
+  res.status(201).json(newEntry);
+});
+app.put('/api/personaleinsaetze/:id', (req, res) => {
+  const data = readJson(EINSAETZE_PATH);
+  const id = parseInt(req.params.id);
+  const idx = data.findIndex(e => e.id === id);
+  if (idx === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+  data[idx] = { id, ...req.body };
+  writeJson(EINSAETZE_PATH, data);
+  res.json(data[idx]);
+});
+app.delete('/api/personaleinsaetze/:id', (req, res) => {
+  let data = readJson(EINSAETZE_PATH);
+  const id = parseInt(req.params.id);
+  data = data.filter(e => e.id !== id);
+  writeJson(EINSAETZE_PATH, data);
+  res.status(204).end();
+});
+
+// ────────────── E3: Abwesenheiten ──────────────
+app.get('/api/abwesenheiten', (req, res) => {
+  res.json(readJson(ABWESENHEITEN_PATH));
+});
+app.post('/api/abwesenheiten', (req, res) => {
+  const data = readJson(ABWESENHEITEN_PATH);
+  const newId = Date.now();
+  const newEntry = { id: newId, ...req.body };
+  data.push(newEntry);
+  writeJson(ABWESENHEITEN_PATH, data);
+  res.status(201).json(newEntry);
+});
+app.put('/api/abwesenheiten/:id', (req, res) => {
+  const data = readJson(ABWESENHEITEN_PATH);
+  const id = parseInt(req.params.id);
+  const idx = data.findIndex(e => e.id === id);
+  if (idx === -1) return res.status(404).json({ message: 'Nicht gefunden' });
+  data[idx] = { id, ...req.body };
+  writeJson(ABWESENHEITEN_PATH, data);
+  res.json(data[idx]);
+});
+app.delete('/api/abwesenheiten/:id', (req, res) => {
+  let data = readJson(ABWESENHEITEN_PATH);
+  const id = parseInt(req.params.id);
+  data = data.filter(e => e.id !== id);
+  writeJson(ABWESENHEITEN_PATH, data);
+  res.status(204).end();
+});
 
 // ────────────── Root ──────────────
 app.get('/', (req, res) => {
@@ -310,4 +408,56 @@ app.get('/', (req, res) => {
 // Serverstart
 app.listen(PORT, () => {
   console.log(`✅ Server läuft auf http://localhost:${PORT}`);
+});
+
+const SAISON_PATH = path.join(__dirname, 'data', 'saisonalitaet.json');
+
+function readSaisonalitaet() {
+  if (!fs.existsSync(SAISON_PATH)) {
+    fs.writeFileSync(SAISON_PATH, JSON.stringify([], null, 2));
+  }
+  return JSON.parse(fs.readFileSync(SAISON_PATH, 'utf8'));
+}
+
+// GET: Alle Saisonalitäten
+app.get('/api/saisonalitaet', (req, res) => {
+  try {
+    res.json(readSaisonalitaet());
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Laden der Saisonalität" });
+  }
+});
+
+const EREIGNISSE_PATH = path.join(__dirname, 'data', 'ereignisse.json');
+
+function readEreignisse() {
+  if (!fs.existsSync(EREIGNISSE_PATH)) {
+    fs.writeFileSync(EREIGNISSE_PATH, JSON.stringify([], null, 2));
+  }
+  return JSON.parse(fs.readFileSync(EREIGNISSE_PATH, 'utf8'));
+}
+
+// GET: Alle kurzfristigen Ereignisse
+app.get('/api/ereignisse', (req, res) => {
+  try {
+    res.json(readEreignisse());
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Laden der Ereignisse" });
+  }
+});
+
+const PERSONALBEDARF_PATH = path.join(__dirname, 'data', 'personalbedarf.json');
+function readPersonalbedarf() {
+  if (!fs.existsSync(PERSONALBEDARF_PATH)) {
+    fs.writeFileSync(PERSONALBEDARF_PATH, JSON.stringify([], null, 2));
+  }
+  return JSON.parse(fs.readFileSync(PERSONALBEDARF_PATH, 'utf8'));
+}
+
+app.get('/api/personalbedarf', (req, res) => {
+  try {
+    res.json(readPersonalbedarf());
+  } catch (err) {
+    res.status(500).json({ message: "Fehler beim Laden des Personalbedarfs" });
+  }
 });

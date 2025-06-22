@@ -9,7 +9,49 @@
       "kapazitaet": 48,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "-",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000001,
@@ -20,7 +62,49 @@
       "kapazitaet": 35,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10001 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000002,
@@ -31,7 +115,49 @@
       "kapazitaet": 44,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10002 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000003,
@@ -42,7 +168,49 @@
       "kapazitaet": 49,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10003 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000004,
@@ -53,7 +221,49 @@
       "kapazitaet": 47,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10004 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000005,
@@ -64,7 +274,49 @@
       "kapazitaet": 42,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10005 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000006,
@@ -75,7 +327,49 @@
       "kapazitaet": 56,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10006 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000007,
@@ -86,7 +380,49 @@
       "kapazitaet": 25,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10007 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000008,
@@ -97,7 +433,49 @@
       "kapazitaet": 53,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10008 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000009,
@@ -108,7 +486,49 @@
       "kapazitaet": 19,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10009 Köln",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000010,
@@ -119,7 +539,49 @@
       "kapazitaet": 30,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10010 Düsseldorf",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000011,
@@ -130,7 +592,49 @@
       "kapazitaet": 13,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10011 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000012,
@@ -141,7 +645,49 @@
       "kapazitaet": 48,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10012 Düsseldorf",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000013,
@@ -152,7 +698,49 @@
       "kapazitaet": 20,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10013 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000014,
@@ -163,7 +751,49 @@
       "kapazitaet": 53,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10014 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000015,
@@ -174,7 +804,49 @@
       "kapazitaet": 38,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10015 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000016,
@@ -185,7 +857,49 @@
       "kapazitaet": 41,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10016 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000017,
@@ -196,7 +910,49 @@
       "kapazitaet": 49,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10017 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000018,
@@ -207,7 +963,49 @@
       "kapazitaet": 37,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10018 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000019,
@@ -218,7 +1016,49 @@
       "kapazitaet": 34,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10019 Düsseldorf",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000020,
@@ -229,7 +1069,49 @@
       "kapazitaet": 18,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10020 Berlin",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000021,
@@ -240,7 +1122,49 @@
       "kapazitaet": 32,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10021 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000022,
@@ -251,7 +1175,49 @@
       "kapazitaet": 59,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10022 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000023,
@@ -262,7 +1228,49 @@
       "kapazitaet": 33,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10023 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000024,
@@ -273,7 +1281,49 @@
       "kapazitaet": 57,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10024 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000025,
@@ -284,7 +1334,49 @@
       "kapazitaet": 17,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10025 Düsseldorf",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000026,
@@ -295,7 +1387,49 @@
       "kapazitaet": 32,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10026 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000027,
@@ -306,7 +1440,49 @@
       "kapazitaet": 41,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10027 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000028,
@@ -317,7 +1493,49 @@
       "kapazitaet": 37,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10028 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000029,
@@ -328,7 +1546,49 @@
       "kapazitaet": 13,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10029 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000030,
@@ -339,7 +1599,49 @@
       "kapazitaet": 59,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10030 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000031,
@@ -350,7 +1652,49 @@
       "kapazitaet": 11,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10031 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000032,
@@ -361,7 +1705,49 @@
       "kapazitaet": 60,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10032 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000033,
@@ -372,7 +1758,49 @@
       "kapazitaet": 43,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10033 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000034,
@@ -383,7 +1811,49 @@
       "kapazitaet": 35,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10034 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000035,
@@ -394,7 +1864,49 @@
       "kapazitaet": 18,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10035 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000036,
@@ -405,7 +1917,49 @@
       "kapazitaet": 13,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10036 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000037,
@@ -416,7 +1970,49 @@
       "kapazitaet": 52,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10037 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000038,
@@ -427,7 +2023,49 @@
       "kapazitaet": 49,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10038 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000039,
@@ -438,7 +2076,49 @@
       "kapazitaet": 11,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10039 Köln",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000040,
@@ -449,7 +2129,49 @@
       "kapazitaet": 38,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10040 Berlin",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000041,
@@ -460,7 +2182,49 @@
       "kapazitaet": 22,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10041 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000042,
@@ -471,7 +2235,49 @@
       "kapazitaet": 32,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10042 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000043,
@@ -482,7 +2288,49 @@
       "kapazitaet": 45,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10043 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000044,
@@ -493,7 +2341,49 @@
       "kapazitaet": 51,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10044 Berlin",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000045,
@@ -504,7 +2394,49 @@
       "kapazitaet": 54,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10045 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000046,
@@ -515,7 +2447,49 @@
       "kapazitaet": 12,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10046 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000047,
@@ -526,7 +2500,49 @@
       "kapazitaet": 28,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10047 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000048,
@@ -537,7 +2553,49 @@
       "kapazitaet": 37,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10048 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000049,
@@ -548,7 +2606,49 @@
       "kapazitaet": 31,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10049 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000050,
@@ -559,7 +2659,49 @@
       "kapazitaet": 18,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10050 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000051,
@@ -570,7 +2712,49 @@
       "kapazitaet": 37,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10051 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000052,
@@ -581,7 +2765,49 @@
       "kapazitaet": 44,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10052 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000053,
@@ -592,7 +2818,49 @@
       "kapazitaet": 48,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10053 Düsseldorf",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000054,
@@ -603,7 +2871,49 @@
       "kapazitaet": 28,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10054 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000055,
@@ -614,7 +2924,49 @@
       "kapazitaet": 42,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10055 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000056,
@@ -625,7 +2977,49 @@
       "kapazitaet": 55,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10056 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000057,
@@ -636,7 +3030,49 @@
       "kapazitaet": 21,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10057 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000058,
@@ -647,7 +3083,49 @@
       "kapazitaet": 38,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10058 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000059,
@@ -658,7 +3136,49 @@
       "kapazitaet": 36,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10059 Düsseldorf",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000060,
@@ -669,7 +3189,49 @@
       "kapazitaet": 13,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10060 Düsseldorf",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000061,
@@ -680,7 +3242,49 @@
       "kapazitaet": 52,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10061 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000062,
@@ -691,7 +3295,49 @@
       "kapazitaet": 32,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10062 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000063,
@@ -702,7 +3348,49 @@
       "kapazitaet": 31,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10063 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000064,
@@ -713,7 +3401,49 @@
       "kapazitaet": 54,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10064 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000065,
@@ -724,7 +3454,49 @@
       "kapazitaet": 17,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10065 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000066,
@@ -735,7 +3507,49 @@
       "kapazitaet": 10,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10066 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000067,
@@ -746,7 +3560,49 @@
       "kapazitaet": 32,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10067 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000068,
@@ -757,7 +3613,49 @@
       "kapazitaet": 40,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10068 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000069,
@@ -768,7 +3666,49 @@
       "kapazitaet": 18,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10069 Köln",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000070,
@@ -779,7 +3719,49 @@
       "kapazitaet": 54,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10070 Berlin",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000071,
@@ -790,7 +3772,49 @@
       "kapazitaet": 57,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10071 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000072,
@@ -801,7 +3825,49 @@
       "kapazitaet": 12,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10072 Köln",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000073,
@@ -812,7 +3878,49 @@
       "kapazitaet": 33,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10073 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000074,
@@ -823,7 +3931,49 @@
       "kapazitaet": 21,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10074 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000075,
@@ -834,7 +3984,49 @@
       "kapazitaet": 16,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10075 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000076,
@@ -845,7 +4037,49 @@
       "kapazitaet": 44,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10076 Berlin",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000077,
@@ -856,7 +4090,49 @@
       "kapazitaet": 51,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10077 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000078,
@@ -867,7 +4143,49 @@
       "kapazitaet": 44,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10078 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000079,
@@ -878,7 +4196,49 @@
       "kapazitaet": 47,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10079 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000080,
@@ -889,7 +4249,49 @@
       "kapazitaet": 58,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10080 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000081,
@@ -900,7 +4302,49 @@
       "kapazitaet": 23,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10081 Frankfurt",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000082,
@@ -911,7 +4355,49 @@
       "kapazitaet": 53,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10082 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000083,
@@ -922,7 +4408,49 @@
       "kapazitaet": 43,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10083 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000084,
@@ -933,7 +4461,49 @@
       "kapazitaet": 37,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10084 Köln",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000085,
@@ -944,7 +4514,49 @@
       "kapazitaet": 34,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10085 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000086,
@@ -955,7 +4567,49 @@
       "kapazitaet": 34,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10086 Düsseldorf",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000087,
@@ -966,7 +4620,49 @@
       "kapazitaet": 46,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10087 Hamburg",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000088,
@@ -977,7 +4673,49 @@
       "kapazitaet": 12,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10088 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000089,
@@ -988,7 +4726,49 @@
       "kapazitaet": 36,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10089 Köln",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000090,
@@ -999,7 +4779,49 @@
       "kapazitaet": 25,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10090 Hannover",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000091,
@@ -1010,7 +4832,49 @@
       "kapazitaet": 30,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": false,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10091 Köln",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000092,
@@ -1021,7 +4885,49 @@
       "kapazitaet": 60,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10092 Köln",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000093,
@@ -1032,7 +4938,49 @@
       "kapazitaet": 40,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": false,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10093 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000094,
@@ -1043,7 +4991,49 @@
       "kapazitaet": 51,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Bahnhof"
+      "lage": "Bahnhof",
+      "stadt": "10094 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000095,
@@ -1054,7 +5044,49 @@
       "kapazitaet": 13,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Innenstadt"
+      "lage": "Innenstadt",
+      "stadt": "10095 Dresden",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000096,
@@ -1065,7 +5097,49 @@
       "kapazitaet": 10,
       "aufbereitung": "Ja - intern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10096 Stuttgart",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000097,
@@ -1076,7 +5150,49 @@
       "kapazitaet": 55,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10097 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000098,
@@ -1087,7 +5203,49 @@
       "kapazitaet": 25,
       "aufbereitung": "Ja - extern",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10098 Berlin",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000099,
@@ -1098,7 +5256,49 @@
       "kapazitaet": 18,
       "aufbereitung": "Nein",
       "schadensregulierung": false,
-      "lage": "Tourismuszentrum"
+      "lage": "Tourismuszentrum",
+      "stadt": "10099 München",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     },
     {
       "id": 1716900000100,
@@ -1109,7 +5309,49 @@
       "kapazitaet": 33,
       "aufbereitung": "Nein",
       "schadensregulierung": true,
-      "lage": "Flughafen"
+      "lage": "Flughafen",
+      "stadt": "10100 Leipzig",
+      "koordinaten": {
+        "lat": 51.16,
+        "lng": 10.45
+      },
+      "oeffnungszeiten": [
+        {
+          "wochentag": "Montag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Dienstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Mittwoch",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Donnerstag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Freitag",
+          "von": "08:00",
+          "bis": "18:00"
+        },
+        {
+          "wochentag": "Samstag",
+          "von": "10:00",
+          "bis": "16:00"
+        },
+        {
+          "wochentag": "Sonntag",
+          "von": null,
+          "bis": null
+        }
+      ]
     }
   ]
 }
