@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -7,13 +6,15 @@
   <title>Performance-Bericht</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <!-- jsPDF für die PDF-Generierung -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <!-- jsPDF AutoTable Plugin für Tabellen im PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <!-- SheetJS für die Excel-Generierung -->
   <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-  <style>
+ <Script src="E2.js"></Script>
+ <style>
     /* Allgemeine Styles */
     * {
       margin: 0;
@@ -41,6 +42,7 @@
       align-items: center;
       background-color: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(8px);
+
     }
 
     .logo {
@@ -180,8 +182,8 @@
       <canvas id="kpiChart"></canvas>
       <div class="button-container">
         <button id="refreshButton">Aktualisieren</button>
-        <button id="exportPdfButton">PDF Export</button>
-        <button id="exportExcelButton">Excel Export</button>
+        <button id="downloadPdf">PDF Export</button>
+        <button id="downloadExcel">Excel Export</button>
       </div>
     </section>
   </main>
@@ -191,8 +193,15 @@
       <p id="messageText"></p>
       <button onclick="document.getElementById('messageBox').style.display='none'">OK</button>
   </div>
+      <div id="chart-containers" style="position: absolute; left: -9999px;">
+        <canvas id="rentalsPerStationChart"></canvas>
+        <canvas id="revenuePerStationChart"></canvas>
+        <canvas id="revenueByMonth2025Chart"></canvas>
+        <canvas id="revenueByVehicleTypeChart"></canvas>
+        <canvas id="damageReportedRateChart"></canvas>
+    </div>
 
-  <script>
+  <script >
     let kpiChart; // Globale Variable für das Chart-Objekt
     let currentKpiData = {}; // Speichert die aktuellen Daten für den Export
 
@@ -228,9 +237,9 @@
     async function fetchKpiData() {
       try {
         // Daten von den JSON-Dateien laden
-        const mietstationenData = await loadJson('data.json');
-        const fahrzeugeData = await loadJson('fahrzeuge.json');
-        const vermietungenData = await loadJson('vermietungen.json');
+        const mietstationenData = await loadJson('data/data.json');
+        const fahrzeugeData = await loadJson('data/fahrzeuge.json');
+        const vermietungenData = await loadJson('data/vermietungen.json');
 
         const stationsMap = new Map();
 
@@ -374,97 +383,21 @@
       }
     }
 
-    /**
-     * Exportiert die aktuellen KPI-Daten als PDF-Datei.
-     */
-    async function exportPdf() {
-      // Prüfen, ob Daten zum Exportieren vorhanden sind
-      if (!currentKpiData.labels || currentKpiData.labels.length === 0) {
-        showMessageBox('Keine Daten zum Exportieren vorhanden. Bitte aktualisieren Sie zuerst die Daten.');
-        return;
-      }
-
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-
-      doc.setFontSize(18);
-      doc.text("Leistungskennziffern (KPIs) - Autovermietung", 14, 22);
-      doc.setFontSize(12);
-      doc.text("Bericht vom: " + new Date().toLocaleDateString('de-DE'), 14, 30); // Datum im deutschen Format
-
-      // Diagramm als Bild hinzufügen
-      const canvas = document.getElementById('kpiChart');
-      // Skalierung des Canvas-Images anpassen, falls das Diagramm zu klein im PDF ist
-      // Eine höhere DPI beim toDataURL könnte die Qualität verbessern, erhöht aber die Dateigröße
-      const imgData = canvas.toDataURL('image/png', 1.0); // 1.0 = höchste Qualität
-      const imgWidth = 180; // Breite des Bildes im PDF
-      const imgHeight = (canvas.height * imgWidth) / canvas.width; // Proportionale Höhe berechnen
-      doc.addImage(imgData, 'PNG', 14, 40, imgWidth, imgHeight);
-
-      // Daten als Tabelle hinzufügen
-      const tableColumn = ["Station", currentKpiData.datasets[0].label, currentKpiData.datasets[1].label];
-      const tableRows = [];
-
-      currentKpiData.labels.forEach((label, index) => {
-        const row = [
-          label,
-          currentKpiData.datasets[0].data[index] + '%', // Auslastung mit %
-          currentKpiData.datasets[1].data[index] + ' €'  // Umsatz mit €
-        ];
-        tableRows.push(row);
-      });
-
-      doc.autoTable({
-        head: [tableColumn],
-        body: tableRows,
-        startY: 40 + imgHeight + 10, // Tabelle unterhalb des Diagramms positionieren, mit etwas Abstand
-        theme: 'striped',
-        headStyles: { fillColor: '#facc15', textColor: '#1a1a1a' },
-        styles: { textColor: '#333' }
-      });
-
-      doc.save("KPI_Bericht.pdf");
-    }
-
-    /**
-     * Exportiert die aktuellen KPI-Daten als Excel-Datei.
-     */
-    async function exportExcel() {
-      // Prüfen, ob Daten zum Exportieren vorhanden sind
-      if (!currentKpiData.labels || currentKpiData.labels.length === 0) {
-        showMessageBox('Keine Daten zum Exportieren vorhanden. Bitte aktualisieren Sie zuerst die Daten.');
-        return;
-      }
-
-      const worksheetData = [];
-      // Header hinzufügen
-      worksheetData.push(["Station", currentKpiData.datasets[0].label, currentKpiData.datasets[1].label]);
-
-      // Datenzeilen hinzufügen
-      currentKpiData.labels.forEach((label, index) => {
-        worksheetData.push([
-          label,
-          currentKpiData.datasets[0].data[index],
-          currentKpiData.datasets[1].data[index]
-        ]);
-      });
-
-      const ws = XLSX.utils.aoa_to_sheet(worksheetData); // Erstellt ein Worksheet aus einem Array von Arrays
-      const wb = XLSX.utils.book_new(); // Erstellt eine neue Workbook-Instanz
-      XLSX.utils.book_append_sheet(wb, ws, "KPIs"); // Fügt das Worksheet zur Workbook hinzu
-      XLSX.writeFile(wb, "KPI_Bericht.xlsx"); // Speichert die Workbook als Excel-Datei
-    }
-
-    // Event Listener für DOM-Geladen
+  
     document.addEventListener('DOMContentLoaded', () => {
-      updateChart(); // Initiales Laden des Charts
-      // Event Listener für den Aktualisierungs-Button
+      updateChart(); 
+    
       document.getElementById('refreshButton').addEventListener('click', updateChart);
-      // Event Listener für den PDF Export-Button
-      document.getElementById('exportPdfButton').addEventListener('click', exportPdf);
-      // Event Listener für den Excel Export-Button
-      document.getElementById('exportExcelButton').addEventListener('click', exportExcel);
+      
     });
+
+
+  
+    
   </script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="E2.js"></script>
+
 </body>
 </html>
