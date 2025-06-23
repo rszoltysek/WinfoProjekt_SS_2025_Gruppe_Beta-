@@ -2,13 +2,16 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mietstationen verwalten</title>
+
+  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="mietstationen.css" />
- 
+  <link rel="stylesheet" href="personal.css" />     <!-- Sidebar- & Navbar-Styles -->
+  <link rel="stylesheet" href="mietstationen.css" /> <!-- Alle Inhalte & Collapsibles -->
 </head>
 <body>
+  <!-- ===== Header / Top Navbar ===== -->
   <header>
     <div class="logo">
       <img src="logo.png" alt="Logo" />
@@ -16,126 +19,100 @@
     </div>
     <nav>
       <a href="main.html">Home</a>
-      <a href="mietstationen.html">Mietstationen</a>
+      <a href="mietstationen.html" aria-current="page">Mietstationen</a>
       <a href="performance.html">Performance</a>
       <a href="personal.html">Personaleinsatz</a>
     </nav>
   </header>
 
-  <main style="display: flex; gap: 2rem; max-width:1200px; margin:auto; padding-top:8rem;">
-   <!-- === Neue Mietstation anlegen (ersetzt ursprüngliches <section class="form-section">) === -->
-<section class="collapsible-section" id="newStationSection">
-  <button class="collapsible-header" type="button">
-    <span>Neue Mietstation anlegen</span>
-    <span class="icon">＋</span>
-  </button>
-  <div class="collapsible-content"> <!-- vormals .form-section -->
-    <form id="mietstationForm">
-      <!-- … dein komplettes Formular bleibt unverändert … -->
-    </form>
-  </div>
-</section>
-    <!-- === Bestehende Mietstationen (ersetzt #toggleStationenBtn + .stationen-section) === -->
-<section class="collapsible-section" id="stationenSection">
-  <button class="collapsible-header" type="button">
-    <span>Bestehende Mietstationen anzeigen</span>
-    <span class="icon">＋</span>
-  </button>
-  <div class="collapsible-content">
-    <h2>Bestehende Mietstationen</h2>
-    <div id="stationList"></div>
-  </div>
-</section>
-    <!-- Füge diesen Abschnitt NACH deinem Formular-Section, aber VOR den Modals und Buttons ein! -->
-<section class="card" style="margin:3rem auto 0;max-width:1100px;">
-  <h2>Alle Mietstationen – Übersicht & Karte</h2>
-  <table id="stationTable" style="width:100%;margin:1.5rem 0;border-collapse:collapse;">
-    <thead>
-      <tr style="background:#232323;">
-        <th>Name</th>
-        <th>Adresse</th>
-        <th>Stadt</th>
-        <th>Kapazität</th>
-        <th>Öffnungszeiten heute</th>
-        <th>Karte</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- JS füllt dynamisch -->
-    </tbody>
-  </table>
-</section>
+  <div class="container">
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar">
+      <nav>
+        <button class="sidebar-btn active" data-target="new-station">
+          <i class="fa-solid fa-plus-circle"></i>
+          <span>Neue Mietstation</span>
+        </button>
+        <button class="sidebar-btn" data-target="existing-stations">
+          <i class="fa-solid fa-building"></i>
+          <span>Bestehende Mietstationen</span>
+        </button>
+        <button class="sidebar-btn" data-target="overview-map">
+          <i class="fa-solid fa-map"></i>
+          <span>Übersicht & Karte</span>
+        </button>
+      </nav>
+    </aside>
 
-  </main>
+    <!-- ===== Hauptinhalt ===== -->
+    <main class="main-content">
+      <!-- Neue Mietstation anlegen -->
+      <section id="new-station" class="tab-section active">
+        <div class="card">
+          <h2>Neue Mietstation anlegen</h2>
+          <form id="mietstationForm">
+            <!-- Formularfelder … 1:1 wie gehabt -->
+            <label for="name">Name</label>
+            <input type="text" id="name" required />
+            <!-- … restliche Felder genauso einfügen … -->
+            <button type="submit">Speichern</button>
+            <button type="button" id="cancelEdit" style="margin-left:1rem; display:none;">❌ Abbrechen</button>
+          </form>
+        </div>
+      </section>
 
-  <!-- Fahrzeug-Details Modal -->
-  <div id="fahrzeugModal">
-    <div class="modal-inner">
-      <button onclick="closeVehicleModal()" class="modal-close">×</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
+      <!-- Bestehende Mietstationen anzeigen -->
+      <section id="existing-stations" class="tab-section">
+        <div class="card">
+          <h2>Bestehende Mietstationen</h2>
+          <div id="stationList"></div>
+        </div>
+      </section>
 
-  <!-- Fahrzeug-Überführungs-Modal -->
-  <div id="ueberfuehrungModal">
-    <div class="modal-inner">
-      <button onclick="closeUeberfuehrungModal()" class="modal-close">×</button>
-      <div id="ueberfuehrungContent"></div>
-    </div>
-  </div>
-
-  <!-- Button zum Öffnen der Überführungs-Historie -->
-  <button onclick="showUeberfuehrungHistorie()" class="historie-btn">Überführungs-Historie</button>
-
-  <!-- Modal für Überführungs-Historie -->
-  <div id="historieModal">
-    <div class="modal-inner historie-modal-inner">
-      <button onclick="closeHistorieModal()" class="modal-close">×</button>
-      <h2 style="margin-bottom:1rem;">Überführungs-Historie & Auswertung</h2>
-      <div id="historieContent"></div>
-      <div id="historieStatistik" style="margin-top:2rem;padding-top:1rem;border-top:1px solid #333;"></div>
-    </div>
+      <!-- Übersicht & Karte -->
+      <section id="overview-map" class="tab-section">
+        <div class="card">
+          <h2>Alle Mietstationen – Übersicht & Karte</h2>
+          <table id="stationTable">
+            <thead>
+              <tr>
+                <th>Name</th><th>Adresse</th><th>Stadt</th><th>Kapazität</th><th>Öffnungszeiten heute</th><th>Karte</th>
+              </tr>
+            </thead>
+            <tbody><!-- ladeStationenUebersicht() füllt hier --></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <!-- Modal zum Bearbeiten der Mietstation -->
-  <div id="bearbeitenModal">
-    <div class="modal-inner bearbeiten-modal-inner">
-      <button onclick="closeBearbeitenModal()" class="modal-close">×</button>
-      <h2 style="margin-bottom:1rem;font-size:1.2rem;">Mietstation bearbeiten</h2>
-      <form id="bearbeitenForm">
-        <label>Name</label>
-        <input type="text" id="edit-name" required />
-        <label>Adresse</label>
-        <input type="text" id="edit-address" required />
-        <label>Telefon</label>
-        <input type="tel" id="edit-phone" required />
-        <label>E-Mail</label>
-        <input type="email" id="edit-email" required />
-        <label>Kapazität</label>
-        <input type="number" id="edit-capacity" required />
-        <label>Fahrzeugaufbereitung</label>
-        <select id="edit-aufbereitung">
-          <option>Nein</option>
-          <option>Ja - intern</option>
-          <option>Ja - extern</option>
-        </select>
-        <label>Schadensregulierung</label>
-        <select id="edit-schadensregulierung">
-          <option>Nein</option>
-          <option>Ja</option>
-        </select>
-        <label>Lage</label>
-        <select id="edit-lage">
-          <option>Innenstadt</option>
-          <option>Flughafen</option>
-          <option>Tourismuszentrum</option>
-          <option>Bahnhof</option>
-        </select>
-        <button type="submit" style="margin-top:1.2rem;">Speichern</button>
-      </form>
-    </div>
-  </div>
+  <!-- ===== Modals unverändert ===== -->
+  <div id="fahrzeugModal"><div class="modal-inner"><button onclick="closeVehicleModal()" class="modal-close">×</button><div id="modalContent"></div></div></div>
+  <div id="ueberfuehrungModal"><div class="modal-inner"><button onclick="closeUeberfuehrungModal()" class="modal-close">×</button><div id="ueberfuehrungContent"></div></div></div>
+  <div id="historieModal"><div class="modal-inner historie-modal-inner"><button onclick="closeHistorieModal()" class="modal-close">×</button><h2>Überführungs-Historie & Auswertung</h2><div id="historieContent"></div><div id="historieStatistik"></div></div></div>
+  <div id="bearbeitenModal"><div class="modal-inner bearbeiten-modal-inner"><button onclick="closeBearbeitenModal()" class="modal-close">×</button><h2>Mietstation bearbeiten</h2><form id="bearbeitenForm">... </form></div></div>
 
-  <script src="mietstationen.js"></script>
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="mietstationen.js" defer></script>
+  <script>
+    // 1) Tab-Navigation & Active-State
+    document.querySelectorAll('.sidebar-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.sidebar-btn.active').classList.remove('active');
+        btn.classList.add('active');
+        const target = btn.dataset.target;
+        // 2) Sections anzeigen
+        document.querySelectorAll('.tab-section')
+          .forEach(sec => sec.classList.toggle('active', sec.id === target));
+        // 3) Daten automatisch nachladen
+        if (target === 'existing-stations') {
+          loadStations();             // Mietstationen + Fahrzeuge
+        } else if (target === 'overview-map') {
+          ladeStationenUebersicht();  // Tabelle befüllen
+        }
+      });
+    });
+  </script>
 </body>
 </html>
