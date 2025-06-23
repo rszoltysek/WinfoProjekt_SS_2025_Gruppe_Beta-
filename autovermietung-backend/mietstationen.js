@@ -95,7 +95,7 @@ function closeVehicleModal() {
 }
 
 // Button Bestehende Mietstationen anzeigen/ausblenden
-const toggleBtn = document.getElementById('toggleStationenBtn');
+/*const toggleBtn = document.getElementById('toggleStationenBtn');
 const stationenSection = document.getElementById('stationenSection');
 toggleBtn.addEventListener('click', () => {
   if (stationenSection.style.display === 'none' || stationenSection.style.display === '') {
@@ -105,7 +105,7 @@ toggleBtn.addEventListener('click', () => {
     stationenSection.style.display = 'none';
     toggleBtn.textContent = 'Bestehende Mietstationen anzeigen';
   }
-});
+}); */
 
 // ** NEUE LOADSTATIONS FUNKTION **
 function loadStations() {
@@ -519,5 +519,23 @@ async function ladeStationenUebersicht() {
   });
 }
 ladeStationenUebersicht();
+
+// ============ Collapsible Toggle ============
+function initCollapsibles() {
+  document.querySelectorAll('.collapsible-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = btn.parentElement;
+      section.classList.toggle('open');
+    });
+  });
+}
+// Auf zwei Arten aufrufen → funktioniert egal, wo das Script geladen wird
+if (document.readyState !== 'loading') {
+  // DOM ist schon bereit (Script am Ende des <body>)
+  initCollapsibles();
+} else {
+  // Fallback für <head>- oder "defer"-Einbindung
+  document.addEventListener('DOMContentLoaded', initCollapsibles);
+}
 
 

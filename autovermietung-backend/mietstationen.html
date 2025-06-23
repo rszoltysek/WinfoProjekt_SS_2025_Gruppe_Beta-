@@ -23,50 +23,29 @@
   </header>
 
   <main style="display: flex; gap: 2rem; max-width:1200px; margin:auto; padding-top:8rem;">
-    <section class="form-section fadeIn">
-      <h2>Neue Mietstation anlegen</h2>
-      <form id="mietstationForm">
-        <label for="name">Name</label>
-        <input type="text" id="name" required />
-        <label for="address">Adresse</label>
-        <input type="text" id="address" required />
-        <label for="phone">Telefon</label>
-        <input type="tel" id="phone" required />
-        <label for="email">E-Mail</label>
-        <input type="email" id="email" required />
-        <label for="capacity">Kapazität</label>
-        <input type="number" id="capacity" required />
-        <label for="aufbereitung">Fahrzeugaufbereitung</label>
-        <select id="aufbereitung">
-          <option>Nein</option>
-          <option>Ja - intern</option>
-          <option>Ja - extern</option>
-        </select>
-        <label for="schadensregulierung">Schadensregulierung</label>
-        <select id="schadensregulierung">
-          <option>Nein</option>
-          <option>Ja</option>
-        </select>
-        <label for="lage">Lage</label>
-        <select id="lage">
-          <option>Innenstadt</option>
-          <option>Flughafen</option>
-          <option>Tourismuszentrum</option>
-          <option>Bahnhof</option>
-        </select>
-        <button type="submit">Speichern</button>
-        <button type="button" id="cancelEdit" style="margin-left: 1rem; background: #dc2626; color: white; display: none;">❌ Bearbeiten abbrechen</button>
-      </form>
-    </section>
-    <div class="stationen-container">
-      <button id="toggleStationenBtn" class="toggle-stationen-btn">
-        Bestehende Mietstationen anzeigen
-      </button>
-      <section class="stationen-section fadeIn" id="stationenSection" style="display:none;">
-        <h2>Bestehende Mietstationen</h2>
-        <div id="stationList"></div>
-      </section>
-    </div>
+   <!-- === Neue Mietstation anlegen (ersetzt ursprüngliches <section class="form-section">) === -->
+<section class="collapsible-section" id="newStationSection">
+  <button class="collapsible-header" type="button">
+    <span>Neue Mietstation anlegen</span>
+    <span class="icon">＋</span>
+  </button>
+  <div class="collapsible-content"> <!-- vormals .form-section -->
+    <form id="mietstationForm">
+      <!-- … dein komplettes Formular bleibt unverändert … -->
+    </form>
+  </div>
+</section>
+    <!-- === Bestehende Mietstationen (ersetzt #toggleStationenBtn + .stationen-section) === -->
+<section class="collapsible-section" id="stationenSection">
+  <button class="collapsible-header" type="button">
+    <span>Bestehende Mietstationen anzeigen</span>
+    <span class="icon">＋</span>
+  </button>
+  <div class="collapsible-content">
+    <h2>Bestehende Mietstationen</h2>
+    <div id="stationList"></div>
+  </div>
+</section>
     <!-- Füge diesen Abschnitt NACH deinem Formular-Section, aber VOR den Modals und Buttons ein! -->
 <section class="card" style="margin:3rem auto 0;max-width:1100px;">
   <h2>Alle Mietstationen – Übersicht & Karte</h2>
