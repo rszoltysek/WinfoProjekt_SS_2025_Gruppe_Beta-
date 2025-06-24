@@ -10,8 +10,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <!-- HEADER: Navbar at top, styled just like main.html -->
- <header>
+  <!-- HEADER: Navbar at top -->
+  <header>
     <div class="logo">
       <img src="logo.png" alt="Logo" />
       <span>Autovermietung</span>
@@ -25,7 +25,7 @@
   </header>
 
   <div class="container">
-    <!-- SIDEBAR: Only task buttons, no logo -->
+    <!-- SIDEBAR -->
     <aside class="sidebar">
       <nav>
         <button class="sidebar-btn active" data-target="kpi"><i class="fa-solid fa-chart-simple"></i> <span>Kennzahlen</span></button>
@@ -40,6 +40,7 @@
         <button class="sidebar-btn" data-target="bedarf"><i class="fa-solid fa-layer-group"></i> <span>Personalbedarf</span></button>
       </nav>
     </aside>
+
     <main class="main-content">
       <!-- KPI Section -->
       <section id="kpi" class="tab-section active">
@@ -49,10 +50,21 @@
           <div id="kpiDetails"></div>
         </div>
       </section>
-      <!-- Personalübersicht -->
+
+      <!-- Personalübersicht mit Suche -->
       <section id="einsatz-uebersicht" class="tab-section">
         <div class="card">
           <h2>Alle Mitarbeitenden</h2>
+
+          <!-- Suchformular -->
+          <div style="margin-bottom:1rem;">
+            <label for="searchInput">Mitarbeiter suchen:</label>
+            <input type="text" id="searchInput" placeholder="Name eingeben…" style="margin:0 0.5rem;"/>
+            <button id="searchBtn">Suchen</button>
+            <button id="clearBtn">Zurücksetzen</button>
+          </div>
+
+          <!-- Tabelle -->
           <table id="personalTable">
             <thead>
               <tr>
@@ -70,6 +82,7 @@
           </table>
         </div>
       </section>
+
       <!-- Geplante Einsätze -->
       <section id="einsatz" class="tab-section">
         <div class="card">
@@ -91,6 +104,7 @@
           </table>
         </div>
       </section>
+
       <!-- Abwesenheiten -->
       <section id="abwesenheiten" class="tab-section">
         <div class="card">
@@ -112,13 +126,15 @@
           </table>
         </div>
       </section>
-      <!-- Saisonalität -->
+
+      <!-- Saisonalität & Events -->
       <section id="saisonalitaet" class="tab-section">
         <div class="card">
           <h2>Saisonalität & Events</h2>
           <div id="saisonalitaetContent"></div>
         </div>
       </section>
+
       <!-- Kurzfristige Ereignisse -->
       <section id="ereignisse" class="tab-section">
         <div class="card">
@@ -126,6 +142,7 @@
           <div id="ereignisseContent"></div>
         </div>
       </section>
+
       <!-- Skill-Matrix -->
       <section id="skills" class="tab-section">
         <div class="card">
@@ -145,6 +162,7 @@
           </table>
         </div>
       </section>
+
       <!-- Reserven -->
       <section id="reserven" class="tab-section">
         <div class="card">
@@ -152,6 +170,7 @@
           <div id="reservenContent"></div>
         </div>
       </section>
+
       <!-- Überstunden & Externe -->
       <section id="ueberstunden" class="tab-section">
         <div class="card">
@@ -171,6 +190,7 @@
           </table>
         </div>
       </section>
+
       <!-- Personal-Bedarfsanalyse -->
       <section id="bedarf" class="tab-section">
         <div class="card">
@@ -192,8 +212,10 @@
           </table>
         </div>
       </section>
+
     </main>
   </div>
+
   <script src="personal.js"></script>
 </body>
 </html>

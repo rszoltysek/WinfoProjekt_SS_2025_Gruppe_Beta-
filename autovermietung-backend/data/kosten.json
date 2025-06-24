@@ -1,5 +1,0 @@
-[
-  { "id": "C1", "type": "fixed", "description": "Büromiete", "amount": 12000, "period": "yearly" },
-  { "id": "C2", "type": "fixed", "description": "Versicherung Gesamtflotte", "amount": 8000, "period": "yearly" },
-  { "id": "C3", "type": "variable_general", "description": "Marketingkosten", "amount": 5000, "period": "yearly" }
-]

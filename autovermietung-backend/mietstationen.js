@@ -1,26 +1,24 @@
-/* =========================================================
-   Mietstationen – Verwaltungs‑Frontend (überarbeitet)
-   Fokus: ladeStationenUebersicht URL korrigiert, DOMContentLoaded-Init
-   Stand: aktuell
-   ========================================================= */
+// ==========================
+// Mietstationen Frontend (Supabase-Backend)
+// ==========================
 
-// ---------------- DOM-Referenzen ----------------
+// DOM-Referenzen
 const form = document.getElementById('mietstationForm');
 const stationList = document.getElementById('stationList');
 const cancelButton = document.getElementById('cancelEdit');
 
-// ---------------- Utility: Basis-URL ----------------
+// Basis-URL je nach Umgebung
 const API_BASE = window.location.hostname === 'localhost'
   ? 'http://localhost:3000/api'
   : '/api';
 
-// ---------------- Edit abbrechen ----------------
+// Edit abbrechen
 cancelButton.onclick = () => {
   form.reset();
   cancelButton.style.display = 'none';
 };
 
-// ---------------- Mietstation speichern -------------
+// Mietstation speichern (neu oder bearbeiten)
 form.addEventListener('submit', async e => {
   e.preventDefault();
   const payload = {
@@ -49,7 +47,7 @@ form.addEventListener('submit', async e => {
   }
 });
 
-// ---------------- Stationen laden + Accordion --------
+// Stationen laden + Accordion
 async function loadStations() {
   try {
     const res = await fetch(`${API_BASE}/mietstationen`);
@@ -78,7 +76,7 @@ function toggleAccordion(el) {
   card.classList.toggle('open');
 }
 
-// ---------------- Übersicht laden ------------------
+// Übersicht laden (Tabelle)
 async function ladeStationenUebersicht() {
   try {
     const res = await fetch(`${API_BASE}/mietstationen`);
@@ -86,7 +84,7 @@ async function ladeStationenUebersicht() {
     const tbody = document.querySelector('#stationTable tbody');
     const heute = new Date().toLocaleDateString('de-DE', { weekday: 'long' });
     tbody.innerHTML = daten.map(s => {
-      // Öffnungszeiten heute
+      // Öffnungszeiten heute (optional)
       let oeffnung = '-';
       if (Array.isArray(s.oeffnungszeiten)) {
         const ot = s.oeffnungszeiten.find(o => o.wochentag === heute);
@@ -110,7 +108,7 @@ async function ladeStationenUebersicht() {
   }
 }
 
-// ---------------- DOM-Init -------------------------
+// Beim Laden der Seite Übersicht befüllen
 document.addEventListener('DOMContentLoaded', () => {
-  ladeStationenUebersicht(); // sofort Übersicht befüllen
+  ladeStationenUebersicht();
 });
