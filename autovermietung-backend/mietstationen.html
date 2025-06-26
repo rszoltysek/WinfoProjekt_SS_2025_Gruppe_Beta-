@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mietstationen verwalten</title>
-  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="personal.css" />
   <link rel="stylesheet" href="mietstationen.css" />
@@ -24,9 +23,7 @@
     </nav>
   </header>
 
-  <!-- Container mit Sidebar + Content -->
   <div class="container">
-    <!-- Sidebar -->
     <aside class="sidebar">
       <nav>
         <button class="sidebar-btn active" data-target="overview-map">
@@ -44,7 +41,6 @@
       </nav>
     </aside>
 
-    <!-- Hauptinhalt -->
     <main class="main-content">
       <!-- Übersicht & Karte -->
       <section id="overview-map" class="tab-section active">
@@ -123,11 +119,89 @@
     </main>
   </div>
 
-  <!-- Modals bleiben unverändert -->
+  <!-- Fahrzeug-Modal -->
+  <div id="fahrzeugModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <button id="closeModal" class="modal-close">&times;</button>
+      <img id="modalBild" src="" style="max-width:300px; margin-bottom:1rem;">
+      <div id="modalInfo"></div>
+    </div>
+  </div>
 
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <!-- Überführung Modal -->
+  <div id="ueberfuehrungModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <!-- Schließen-Button -->
+      <button id="closeTransferModal" class="modal-close" title="Schließen">&times;</button>
+      <!-- Titel -->
+      <h2 style="margin-bottom: 0.5rem;">Fahrzeug überführen</h2>
+      <!-- Fahrzeugname + Info -->
+      <p><strong id="ueberfuehrungFahrzeugName">Fahrzeugname</strong></p>
+      <p id="ueberfuehrungFahrzeugInfo" style="margin-bottom: 1rem; font-size: 0.95rem; color: #ccc;"></p>
+      <!-- Zielstation Auswahl -->
+      <label for="zielStation"><strong>Zielstation wählen:</strong></label>
+      <select id="zielStation" style="margin-bottom: 1rem;"></select>
+      <!-- Optionaler Kommentar -->
+      <label for="ueberfuehrungKommentar"><strong>Kommentar (optional):</strong></label>
+      <input type="text" id="ueberfuehrungKommentar" placeholder="Optionaler Kommentar zur Überführung..." />
+      <!-- Button -->
+      <button id="confirmTransfer" class="modal-action" style="margin-top: 1.5rem;">
+        🚚 Überführung starten
+      </button>
+    </div>
+  </div>
+
+  <!-- Bearbeiten-Modal -->
+  <div id="editStationModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <button id="closeEditModal" class="modal-close">&times;</button>
+      <h2>Mietstation bearbeiten</h2>
+      <form id="editStationForm">
+        <label for="editName">Name</label>
+        <input type="text" id="editName" required />
+
+        <label for="editAddress">Adresse</label>
+        <input type="text" id="editAddress" required />
+
+        <label for="editPhone">Telefon</label>
+        <input type="tel" id="editPhone" required />
+
+        <label for="editEmail">E-Mail</label>
+        <input type="email" id="editEmail" required />
+
+        <label for="editCapacity">Kapazität</label>
+        <input type="number" id="editCapacity" required min="1" />
+
+        <label for="editAufbereitung">Fahrzeugaufbereitung</label>
+        <select id="editAufbereitung" required>
+          <option value="Nein">Nein</option>
+          <option value="Ja - intern">Ja - intern</option>
+          <option value="Ja - extern">Ja - extern</option>
+        </select>
+
+        <label for="editSchadensregulierung">Schadensregulierung</label>
+        <select id="editSchadensregulierung" required>
+          <option value="Nein">Nein</option>
+          <option value="Ja">Ja</option>
+        </select>
+
+        <label for="editLage">Lage</label>
+        <select id="editLage" required>
+          <option value="Innenstadt">Innenstadt</option>
+          <option value="Flughafen">Flughafen</option>
+          <option value="Tourismuszentrum">Tourismuszentrum</option>
+          <option value="Bahnhof">Bahnhof</option>
+        </select>
+
+        <input type="hidden" id="editId" />
+        <button type="submit" style="margin-top:1.5rem;">Speichern</button>
+        <button type="button" id="cancelEditModal" style="margin-left:1rem;">Abbrechen</button>
+      </form>
+    </div>
+  </div>
+
   <script src="mietstationen.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   <script>
     // Tab-Navigation & Data-Load
     document.querySelectorAll('.sidebar-btn').forEach(btn => {
@@ -138,8 +212,8 @@
         document.querySelectorAll('.tab-section').forEach(sec => {
           sec.classList.toggle('active', sec.id === target);
         });
-        if (target === 'existing-stations') ladeStationenUebersicht();
-        if (target === 'new-station') loadStations();
+        if (target === 'existing-stations') loadStations();
+        if (target === 'overview-map') ladeStationenUebersicht();
       });
     });
     document.addEventListener('DOMContentLoaded', () => {

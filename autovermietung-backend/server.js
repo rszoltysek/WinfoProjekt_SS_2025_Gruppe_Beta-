@@ -1,4 +1,4 @@
-
+const path = require('path');
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -7,8 +7,8 @@ const { createClient } = require('@supabase/supabase-js');
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(express.static(__dirname)); // Das aktuelle Verzeichnis, in dem main.html usw. liegt
-
+app.use(express.static(__dirname)); // Hauptverzeichnis
+app.use('/autos', express.static(path.join(__dirname, 'autos')));
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 const PORT = process.env.PORT || 3000;
@@ -35,21 +35,14 @@ app.put('/api/mietstationen/:id', async (req, res) => {
   res.json(data[0]);
 });
 app.delete('/api/mietstationen/:id', async (req, res) => {
-  // Vorher: Prüfe, ob es noch Fahrzeuge an dieser Station gibt!
-  const { data: fahrzeuge } = await supabase.from('fahrzeuge').select('id').eq('station_id', req.params.id);
+  // Prüfe, ob es noch Fahrzeuge gibt
+  const { data: fahrzeuge } = await supabase.from('fahrzeuge').select('id').eq('stationid', req.params.id);
   if (fahrzeuge && fahrzeuge.length > 0) {
     return res.status(400).json({ message: 'Station enthält noch Fahrzeuge' });
   }
   const { error } = await supabase.from('station').delete().eq('id', req.params.id);
   if (error) return res.status(400).json({ error: error.message });
   res.status(204).end();
-});
-
-// ────────────── Fahrzeugtypen ──────────────
-app.get('/api/fahrzeugtypen', async (req, res) => {
-  const { data, error } = await supabase.from('fahrzeugtypen').select('*');
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
 });
 
 // ────────────── Fahrzeuge ──────────────
@@ -59,10 +52,9 @@ app.get('/api/fahrzeuge', async (req, res) => {
   res.json(data);
 });
 app.post('/api/fahrzeuge', async (req, res) => {
-  // Kapazitätsprüfung:
-  const { data: stationen } = await supabase.from('station').select('id, kapazitaet').eq('id', req.body.station_id);
+  const { data: stationen } = await supabase.from('station').select('id, kapazitaet').eq('id', req.body.stationid);
   if (!stationen || stationen.length === 0) return res.status(400).json({ message: 'Station nicht gefunden' });
-  const { data: fahrzeuge } = await supabase.from('fahrzeuge').select('id').eq('station_id', req.body.station_id);
+  const { data: fahrzeuge } = await supabase.from('fahrzeuge').select('id').eq('stationid', req.body.stationid);
   if (fahrzeuge.length >= stationen[0].kapazitaet) {
     return res.status(400).json({ message: 'Kapazität dieser Station erreicht!' });
   }
@@ -88,42 +80,43 @@ app.get('/api/ueberfuehrungen', async (req, res) => {
   res.json(data);
 });
 app.post('/api/fahrzeuge/:id/ueberfuehrung', async (req, res) => {
-  // Kapazitäts- und Validierungslogik hier einbauen, wie in /api/fahrzeuge!
-  const fahrzeugId = parseInt(req.params.id);
-  const zielId = parseInt(req.body.nach_station_id);
-  const kommentar = req.body.kommentar || '';
-  // ...Kapazitätsprüfung für Zielstation...
-  const { data: stationen } = await supabase.from('station').select('kapazitaet').eq('id', zielId);
-  const { data: fahrzeuge } = await supabase.from('fahrzeuge').select('id').eq('station_id', zielId);
-  if (fahrzeuge.length >= stationen[0].kapazitaet) {
-    return res.status(400).json({ message: 'Kapazität der Zielstation erreicht!' });
+  try {
+    const fahrzeug_id = parseInt(req.params.id, 10);
+    const zielId = parseInt(req.body.nach_stationid, 10);
+    const kommentar = req.body.kommentar || '';
+    const vonId = parseInt(req.body.von_stationid, 10);
+
+    // Kapazitätsprüfung Zielstation
+    const { data: stationen, error: stationError } = await supabase.from('station').select('kapazitaet').eq('id', zielId);
+    if (stationError) throw stationError;
+    const { data: fahrzeuge, error: fahrzeugeError } = await supabase.from('fahrzeuge').select('id').eq('stationid', zielId);
+    if (fahrzeugeError) throw fahrzeugeError;
+    if (!stationen || stationen.length === 0) {
+      return res.status(400).json({ message: 'Zielstation nicht gefunden' });
+    }
+    if (fahrzeuge.length >= stationen[0].kapazitaet) {
+      return res.status(400).json({ message: 'Kapazität der Zielstation erreicht!' });
+    }
+
+    // Fahrzeug umziehen
+    const { error: updateError } = await supabase.from('fahrzeuge').update({ stationid: zielId }).eq('id', fahrzeug_id);
+    if (updateError) throw updateError;
+
+    // Überführung eintragen
+    const { data, error } = await supabase.from('ueberfuehrungen').insert([{
+      fahrzeug_id: fahrzeug_id,
+      von_stationid: vonId,
+      nach_stationid: zielId,
+      datum: new Date().toISOString(),
+      kommentar: kommentar
+    }]).select();
+
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Fahrzeug erfolgreich überführt!', ueberfuehrung: data[0] });
+  } catch (err) {
+    console.error('Überführung Fehler:', err);
+    res.status(400).json({ error: err.message || err.toString() });
   }
-  // Fahrzeug tatsächlich umziehen:
-  await supabase.from('fahrzeuge').update({ station_id: zielId }).eq('id', fahrzeugId);
-  // Überführung eintragen:
-  const { data, error } = await supabase.from('ueberfuehrungen').insert([{
-    fahrzeug_id: fahrzeugId,
-    von_station_id: req.body.von_station_id,
-    nach_station_id: zielId,
-    datum: new Date().toISOString(),
-    kommentar: kommentar
-  }]).select();
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: 'Fahrzeug erfolgreich überführt!', ueberfuehrung: data[0] });
-});
-
-// ────────────── Vermietungen ──────────────
-app.get('/api/vermietungen', async (req, res) => {
-  const { data, error } = await supabase.from('vermietungen').select('*');
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
-});
-
-// ────────────── Kosten ──────────────
-app.get('/api/kosten', async (req, res) => {
-  const { data, error } = await supabase.from('kosten').select('*');
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
 });
 
 // ────────────── Personal ──────────────
@@ -131,7 +124,7 @@ app.get('/api/personal', async (req, res) => {
   let query = supabase.from('personal').select('*');
   if (req.query.name) query = query.ilike('name', `%${req.query.name}%`);
   if (req.query.rolle) query = query.eq('rolle', req.query.rolle);
-  if (req.query.station_id) query = query.eq('station_id', req.query.station_id);
+  if (req.query.stationid) query = query.eq('stationid', req.query.stationid);
   const { data, error } = await query;
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);
@@ -150,6 +143,13 @@ app.delete('/api/personal/:id', async (req, res) => {
   const { error } = await supabase.from('personal').delete().eq('id', req.params.id);
   if (error) return res.status(400).json({ error: error.message });
   res.status(204).end();
+});
+
+// ────────────── Kosten ──────────────
+app.get('/api/kosten', async (req, res) => {
+  const { data, error } = await supabase.from('kosten').select('*');
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
 });
 
 // ────────────── Personaleinsaetze ──────────────
