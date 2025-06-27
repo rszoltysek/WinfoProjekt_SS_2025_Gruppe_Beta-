@@ -4,167 +4,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Performance-Bericht</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
-  <!-- jsPDF für die PDF-Generierung -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <!-- jsPDF AutoTable Plugin für Tabellen im PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-  <!-- SheetJS für die Excel-Generierung -->
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
- <Script src="E2.js"></Script>
- <style>
-    /* Allgemeine Styles */
-    * {
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #111;
+      color: #f5f5f5;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
     }
-
-    body {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('background.png') center/cover no-repeat;
-      color: #f5f5f5;
-      min-height: 100vh;
-    }
-
-    /* Header Styles */
     header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      padding: 2rem 3rem;
+      padding: 1rem 2rem;
+      background: #1a1a1a;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(8px);
-
     }
-
     .logo {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
-
     .logo img {
-      height: 50px;
+      height: 40px;
     }
-
-    .logo span {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #facc15;
-    }
-
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-
     nav a {
+      margin-left: 1.5rem;
       color: #f5f5f5;
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s, transform 0.3s;
     }
-
-    nav a:hover {
-      color: #facc15;
-      transform: scale(1.05);
-    }
-
-    /* Main Content Styles */
     main {
-      padding: 7rem 2rem 3rem;
       max-width: 1000px;
       margin: auto;
-    }
-
-    .card {
-      background: rgba(17, 17, 17, 0.6);
       padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      margin-bottom: 2rem;
-      animation: fadeIn 1s ease-out forwards;
     }
-
-    h2 {
-      color: #facc15;
-      margin-bottom: 1rem;
+    .chart-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
     }
-
-    canvas {
-      width: 100% !important;
-      height: auto !important;
+    .chart-wrapper {
+      background: #222;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      width: 400px;
     }
-
-    /* Button Container Styles */
+    .chart-wrapper canvas {
+      display: block;
+    }
     .button-container {
+      margin-top: 1rem;
       display: flex;
       gap: 1rem;
-      margin-top: 1rem;
-      justify-content: flex-end; /* Buttons rechtsbündig ausrichten */
+      justify-content: flex-end;
     }
-
     .button-container button {
-      background-color: #facc15;
-      color: #1a1a1a;
+      padding: 0.6rem 1.2rem;
+      background: #facc15;
       border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 0.5rem;
+      color: #000;
+      font-weight: bold;
+      border-radius: 0.3rem;
       cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s, transform 0.3s;
     }
-
-    .button-container button:hover {
-      background-color: #e0b000;
-      transform: scale(1.05);
-    }
-
-    /* Message Box Styles */
-    .message-box {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #222;
-        color: #f5f5f5;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        display: none; /* By default hidden */
-    }
-
-    .message-box button {
-        background-color: #facc15;
-        color: #1a1a1a;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 0.3rem;
-        cursor: pointer;
-        margin-top: 10px;
-        float: right;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    pre {
+      background: #333;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="logo.png" alt="Logo" onerror="this.onerror=null;this.src='https://placehold.co/50x50/facc15/1a1a1a?text=Logo';" />
+      <img src="logo.png" alt="Logo" onerror="this.src='https://placehold.co/50x50/facc15/1a1a1a?text=Logo';">
       <span>Autovermietung</span>
     </div>
     <nav>
@@ -174,12 +95,21 @@
       <a href="personal.html">Personaleinsatz</a>
     </nav>
   </header>
-
   <main>
-    <section class="card">
+    <section>
       <h2>Leistungskennziffern (KPIs)</h2>
-      <p>Visualisierung wichtiger KPIs der Mietstationen:</p>
-      <canvas id="kpiChart"></canvas>
+      <div class="chart-container">
+        <div class="chart-wrapper">
+          <h3>Auslastung</h3>
+          <canvas id="utilizationChartCanvas" width="400" height="300"></canvas>
+        </div>
+        <div class="chart-wrapper">
+          <h3>Umsatz</h3>
+          <canvas id="revenueChartCanvas" width="400" height="300"></canvas>
+        </div>
+      </div>
+      <h3>Rohdaten:</h3>
+      <pre id="kpi-json"></pre>
       <div class="button-container">
         <button id="refreshButton">Aktualisieren</button>
         <button id="downloadPdf">PDF Export</button>
@@ -187,217 +117,6 @@
       </div>
     </section>
   </main>
-
-  <!-- Message Box HTML -->
-  <div id="messageBox" class="message-box">
-      <p id="messageText"></p>
-      <button onclick="document.getElementById('messageBox').style.display='none'">OK</button>
-  </div>
-      <div id="chart-containers" style="position: absolute; left: -9999px;">
-        <canvas id="rentalsPerStationChart"></canvas>
-        <canvas id="revenuePerStationChart"></canvas>
-        <canvas id="revenueByMonth2025Chart"></canvas>
-        <canvas id="revenueByVehicleTypeChart"></canvas>
-        <canvas id="damageReportedRateChart"></canvas>
-    </div>
-
-  <script >
-    let kpiChart; // Globale Variable für das Chart-Objekt
-    let currentKpiData = {}; // Speichert die aktuellen Daten für den Export
-
-    /**
-     * Zeigt eine benutzerdefinierte Nachrichtenbox anstelle von alert().
-     * @param {string} message Die anzuzeigende Nachricht.
-     */
-    function showMessageBox(message) {
-        const messageBox = document.getElementById('messageBox');
-        const messageText = document.getElementById('messageText');
-        messageText.textContent = message;
-        messageBox.style.display = 'block';
-    }
-
-    /**
-     * Läd eine JSON-Datei.
-     * @param {string} url Der Pfad zur JSON-Datei.
-     * @returns {Promise<Object>} Eine Promise, die mit den JSON-Daten aufgelöst wird.
-     */
-    async function loadJson(url) {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP Fehler! Status: ${response.status} beim Laden von ${url}`);
-        }
-        return response.json();
-    }
-
-    /**
-     * Berechnet die KPIs (Auslastung und Umsatz) für jede Mietstation
-     * und wählt die Top 5 Stationen nach Umsatz aus.
-     * @returns {Promise<Object>} Eine Promise, die mit den berechneten KPI-Daten aufgelöst wird.
-     */
-    async function fetchKpiData() {
-      try {
-        // Daten von den JSON-Dateien laden
-        const mietstationenData = await loadJson('data/data.json');
-        const fahrzeugeData = await loadJson('data/fahrzeuge.json');
-        const vermietungenData = await loadJson('data/vermietungen.json');
-
-        const stationsMap = new Map();
-
-        // Mietstationen initialisieren
-        mietstationenData.mietstationen.forEach(station => {
-          stationsMap.set(station.id, {
-            name: station.name,
-            capacity: station.kapazitaet,
-            currentRentedVehicles: 0,
-            totalRevenue: 0
-          });
-        });
-
-        // Auslastung berechnen
-        fahrzeugeData.fahrzeuge.forEach(fahrzeug => {
-          const station = stationsMap.get(fahrzeug.stationId);
-          if (station) {
-            if (!fahrzeug.verfuegbar) { // Wenn das Fahrzeug nicht verfügbar ist (vermietet)
-              station.currentRentedVehicles++;
-            }
-          }
-        });
-
-        // Umsatz berechnen
-        vermietungenData.forEach(vermietung => {
-          const station = stationsMap.get(vermietung.stationId);
-          if (station) {
-            station.totalRevenue += vermietung.totalRevenue;
-          }
-        });
-
-        // Stationen in ein Array umwandeln und KPIs berechnen
-        const kpis = Array.from(stationsMap.values()).map(station => {
-          const utilization = (station.currentRentedVehicles / station.capacity) * 100;
-          return {
-            name: station.name,
-            utilization: isNaN(utilization) ? 0 : parseFloat(utilization.toFixed(2)), // Auslastung in %
-            revenue: parseFloat(station.totalRevenue.toFixed(2)) // Umsatz
-          };
-        });
-
-        // Sortieren nach Umsatz (absteigend), dann nach Auslastung (absteigend) und die Top 5 auswählen
-        kpis.sort((a, b) => {
-          if (b.revenue !== a.revenue) {
-            return b.revenue - a.revenue;
-          }
-          return b.utilization - a.utilization;
-        });
-
-        const top5Kpis = kpis.slice(0, 5);
-
-        // Daten für Chart.js vorbereiten
-        return {
-          labels: top5Kpis.map(kpi => kpi.name),
-          datasets: [
-            {
-              label: 'Aktuelle Auslastung (%)',
-              data: top5Kpis.map(kpi => kpi.utilization),
-              backgroundColor: '#facc15',
-              borderRadius: 8
-            },
-            {
-              label: 'Umsatz (€)',
-              data: top5Kpis.map(kpi => kpi.revenue),
-              backgroundColor: '#f5f5f5',
-              borderRadius: 8
-            }
-          ]
-        };
-
-      } catch (error) {
-        console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
-        showMessageBox("Fehler beim Laden der Daten für den Performance-Bericht. Bitte überprüfen Sie die Konsolenmeldung.");
-        return { labels: [], datasets: [] }; // Leere Daten bei Fehler zurückgeben
-      }
-    }
-
-    /**
-     * Aktualisiert das Chart mit den neuesten Daten vom Backend.
-     */
-    async function updateChart() {
-      try {
-        const data = await fetchKpiData();
-        currentKpiData = data; // Speichert die aktuellen Daten
-
-        const ctx = document.getElementById('kpiChart').getContext('2d');
-
-        if (kpiChart) {
-          // Chart existiert bereits, Daten aktualisieren
-          kpiChart.data.labels = data.labels;
-          kpiChart.data.datasets[0].data = data.datasets[0].data;
-          kpiChart.data.datasets[1].data = data.datasets[1].data;
-          kpiChart.update(); // Chart neu zeichnen
-        } else {
-          // Chart zum ersten Mal erstellen
-          kpiChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: data.labels,
-              datasets: [
-                {
-                  label: data.datasets[0].label,
-                  data: data.datasets[0].data,
-                  backgroundColor: data.datasets[0].backgroundColor,
-                  borderRadius: data.datasets[0].borderRadius
-                },
-                {
-                  label: data.datasets[1].label,
-                  data: data.datasets[1].data,
-                  backgroundColor: data.datasets[1].backgroundColor,
-                  borderRadius: data.datasets[1].borderRadius
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: {
-                  labels: {
-                    color: '#f5f5f5'
-                  }
-                }
-              },
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  ticks: { color: '#f5f5f5' },
-                  grid: { color: '#444' }
-                },
-                x: {
-                  ticks: { color: '#f5f5f5' },
-                  grid: { color: '#444' }
-                }
-              }
-            }
-          });
-        }
-      } catch (error) {
-        console.error("Fehler beim Aktualisieren des Charts:", error);
-        showMessageBox("Fehler beim Laden der Daten. Bitte versuchen Sie es später erneut.");
-      }
-    }
-
-  
-    document.addEventListener('DOMContentLoaded', () => {
-      updateChart(); 
-    
-      document.getElementById('refreshButton').addEventListener('click', updateChart);
-      
-    });
-
-
-  
-    
-  </script>
-    <script src="https://cdn.jsdelivr.net/npm/jspdf"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-<script src="E2.js"></script>
-
+  <script src="E2.js"></script>
 </body>
 </html>

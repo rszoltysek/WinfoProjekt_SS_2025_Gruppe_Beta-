@@ -1,234 +1,211 @@
-document.addEventListener('DOMContentLoaded', async () => {
-  const downloadPdfButton = document.getElementById('downloadPdf');
-  const downloadExcelButton = document.getElementById('downloadExcel');
-  const aktualisierenButton = document.getElementById('aktualisieren');
-  const kpiOutput = document.getElementById('kpi-json');
+// Initialisierung des Supabase Clients
+// ERSETZE DIESE PLATZHALTER mit deinen tatsächlichen Supabase-Informationen.
+// Du findest sie in deinem Supabase-Dashboard unter "Settings" -> "API".
+// Aus Sicherheitsgründen sollten diese Schlüssel in einer Produktivumgebung nicht direkt im Client-Code offengelegt,
+// sondern über Umgebungsvariablen oder einen Backend-Service bereitgestellt werden.
+const SUPABASE_URL = 'https://ztlyfswwfbwdmtsajvbe.supabase.co'; // Beispiel: 'https://abcdefghijk.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bHlmc3d3ZmJ3ZG10c2FqdmJlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MDY5MzU2MCwiZXhwIjoyMDY2MjY5NTYwfQ.ni7lxh_V0AQMxu-eb7zxXPF0FzlnOCJEYjrplWgjZzo'; // Beispiel: 'eyJhbGciOiJIUzI1Ni...'
 
-  let kostenData = [];
-  let fahrzeugeData = {};
-  let fahrzeugTypenData = {};
-  let vermietungenData = [];
-  let mietstationenData = {};
-  let mietstationenList = [];
+let utilizationChart, revenueChart;
+let currentKpiDataRaw = {};
+let currentStationKpiDataRaw = {};
 
-  // ========== Supabase-kompatibles fetchJson ==========
-  async function fetchJson(apiEndpoint) {
-    try {
-      const response = await fetch(apiEndpoint);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status} for ${apiEndpoint}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.error(`Error fetching ${apiEndpoint}:`, error);
-      return null;
-    }
-  }
+if (typeof supabase === 'undefined') {
+  alert("Supabase nicht geladen");
+} else {
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // ========== Daten laden über API ==========
+  let kostenData = [], fahrzeugeData = {}, vermietungenData = [], mietstationenList = [];
+
   async function loadAllData() {
-    // Kosten
-    kostenData = await fetchJson('/api/kosten') || [];
-
-    // Fahrzeuge
-    const fahrzeugeRaw = await fetchJson('/api/fahrzeuge');
-    if (Array.isArray(fahrzeugeRaw)) {
-      fahrzeugeData = fahrzeugeRaw.reduce((acc, vehicle) => {
-        acc[vehicle.id] = vehicle;
-        return acc;
-      }, {});
-    }
-
-    // Fahrzeugtypen
-    const fahrzeugTypenRaw = await fetchJson('/api/fahrzeugtypen');
-    if (Array.isArray(fahrzeugTypenRaw)) {
-      fahrzeugTypenData = fahrzeugTypenRaw.reduce((acc, type) => {
-        acc[type.id] = type;
-        return acc;
-      }, {});
-    }
-
-    // Vermietungen
-    vermietungenData = await fetchJson('/api/vermietungen') || [];
-
-    // Mietstationen
-    const mietstationenRaw = await fetchJson('/api/mietstationen');
-    if (Array.isArray(mietstationenRaw)) {
-      mietstationenData = mietstationenRaw.reduce((acc, station) => {
-        acc[station.id] = station;
-        return acc;
-      }, {});
-      mietstationenList = mietstationenRaw;
+    const tables = ['kosten', 'fahrzeuge', 'vermietungen', 'station'];
+    for (const table of tables) {
+      const { data } = await supabaseClient.from(table).select('*');
+      if (table === 'kosten') kostenData = data || [];
+      if (table === 'fahrzeuge') fahrzeugeData = (data || []).reduce((a, v) => { a[v.id] = v; return a; }, {});
+      if (table === 'vermietungen') vermietungenData = data || [];
+      if (table === 'station') mietstationenList = data || [];
     }
   }
 
-  // ========== KPI-Berechnung ==========
   function calculateKPIs() {
-    if (!vermietungenData.length || !Object.keys(fahrzeugeData).length || !Object.keys(mietstationenData).length || !kostenData.length) {
-      console.error("Daten nicht vollständig geladen.");
-      return {};
-    }
-    let totalRevenue = 0;
-    let totalVariableCosts = 0;
-    let totalFixedCosts = 0;
-    let totalProfit = 0;
-    let totalRentals = vermietungenData.length;
-    let vehiclesWithDamage = 0;
-    let totalRentalDays = 0;
-    let totalVehicles = Object.keys(fahrzeugeData).length;
-    let availableVehicles = 0;
-    let totalDamageReports = 0;
+    const stationMap = new Map();
+    mietstationenList.forEach(station => {
+      stationMap.set(station.id, {
+        name: station.name,
+        capacity: station.kapazitaet || 1,
+        currentRentedVehicles: 0,
+        totalRevenueStation: 0,
+        totalRentalsStation: 0,
+        totalVehiclesStation: 0,
+        rentalDaysStation: 0 // Neu: Zähler für Miettage pro Station
+      });
+    });
 
-    // Charts
-    const rentalCountsByStation = {};
-    const revenueByStation = {};
-    const revenueByMonth = {};
-    const revenueByVehicleType = {};
-    const damageReportedCounts = { true: 0, false: 0 };
+    let totalRevenue = 0, totalVarCosts = 0, totalFixCosts = 0, rentalDays = 0, damageReports = 0;
+    let availableVehicles = 0, totalVehicles = Object.keys(fahrzeugeData).length;
 
-    // Station-Init
-    for (const stationId in mietstationenData) {
-      rentalCountsByStation[mietstationenData[stationId].name] = 0;
-      revenueByStation[mietstationenData[stationId].name] = 0;
-    }
+    kostenData.forEach(k => {
+      if (k.period === 'yearly') {
+        if (k.type === 'fixed') totalFixCosts += k.amount || 0;
+        if (k.type === 'variable_general') totalVarCosts += k.amount || 0;
+      }
+    });
 
-    // Kosten (fix/variabel)
-    kostenData.forEach(cost => {
-      if (cost.period === 'yearly') {
-        if (cost.type === 'fixed') {
-          totalFixedCosts += cost.amount;
-        } else if (cost.type === 'variable_general') {
-          totalVariableCosts += cost.amount;
+    vermietungenData.forEach(v => {
+      totalRevenue += v.total_revenue || 0;
+      totalVarCosts += v.variable_costs || 0;
+      const d1 = new Date(v.start_date), d2 = new Date(v.end_date);
+      const rentalDuration = (!isNaN(d1) && !isNaN(d2)) ? (d2 - d1) / 86400000 : 0;
+      rentalDays += rentalDuration; // Gesamt-Miettage aktualisieren
+
+      if (v.is_damage_reported) damageReports++;
+      const s = stationMap.get(v.station_id);
+      if (s) {
+        s.totalRevenueStation += v.total_revenue || 0;
+        s.totalRentalsStation++;
+        s.rentalDaysStation += rentalDuration; // Miettage für diese Station erhöhen
+      }
+    });
+
+    Object.values(fahrzeugeData).forEach(v => {
+      if (v.verfuegbar) availableVehicles++;
+      const s = stationMap.get(v.station_id);
+      if (s) {
+        if (!v.verfuegbar) {
+          s.currentRentedVehicles++;
         }
+        s.totalVehiclesStation++;
       }
     });
 
-    // Vermietungen
-    vermietungenData.forEach(rental => {
-      totalRevenue += rental.totalRevenue || 0;
-      totalVariableCosts += rental.variableCosts || 0;
-      totalRentalDays += (new Date(rental.endDate) - new Date(rental.startDate)) / (1000 * 60 * 60 * 24);
-      if (rental.isDamageReported) {
-        totalDamageReports++;
-      }
+    const allStationKpis = Array.from(stationMap.values()).map(s => {
+      const util = (s.currentRentedVehicles / s.capacity) * 100;
+      const avgRentalDuration = s.totalRentalsStation > 0 ? (s.rentalDaysStation / s.totalRentalsStation) : 0; // Durchschnittliche Mietdauer pro Station
+      return {
+        name: s.name,
+        utilization: +(util.toFixed(2)) || 0,
+        revenue: +(s.totalRevenueStation.toFixed(2)),
+        totalRentals: s.totalRentalsStation,
+        totalVehicles: s.totalVehiclesStation,
+        averageRentalDuration: +(avgRentalDuration.toFixed(2)) // Hinzufügen der durchschnittlichen Mietdauer pro Station
+      };
     });
 
-    // Fahrzeuge
-    for (const vehicleId in fahrzeugeData) {
-      if (fahrzeugeData[vehicleId].verfuegbar) {
-        availableVehicles++;
-      }
-    }
+    const chartKpis = [...allStationKpis].sort((a, b) => b.revenue - a.revenue || b.utilization - a.utilization).slice(0, 5);
 
-    // KPIs
+    const averageRentalDurationOverall = vermietungenData.length > 0 ? (rentalDays / vermietungenData.length) : 0; // Globale durchschnittliche Mietdauer
+
     const kpis = {
       "Gesamter Umsatz": `${totalRevenue.toFixed(2)} €`,
-      "Gesamte variable Kosten": `${totalVariableCosts.toFixed(2)} €`,
-      "Gesamte Fixkosten (jährlich)": `${totalFixedCosts.toFixed(2)} €`,
-      "Gesamtkosten": `${(totalVariableCosts + totalFixedCosts).toFixed(2)} €`,
-      "Gewinn (Umsatz - Gesamtkosten)": `${(totalRevenue - (totalVariableCosts + totalFixedCosts)).toFixed(2)} €`,
-      "Anzahl der Vermietungen": vermietungenData.length,
-      "Gesamtzahl der Miettage": Math.round(totalRentalDays),
-        "Durchschnittlicher Umsatz pro Miettag": totalRentalDays > 0 ? `${(totalRevenue / totalRentalDays).toFixed(2)} €` : "0.00 €",
-      "Anzahl Fahrzeuge im Fuhrpark": totalVehicles,
+      "Variable Kosten": `${totalVarCosts.toFixed(2)} €`,
+      "Fixkosten": `${totalFixCosts.toFixed(2)} €`,
+      "Gesamtkosten": `${(totalVarCosts + totalFixCosts).toFixed(2)} €`,
+      "Gewinn": `${(totalRevenue - totalVarCosts - totalFixCosts).toFixed(2)} €`,
+      "Vermietungen": vermietungenData.length,
+      "Miettage gesamt": Math.round(rentalDays),
+      "Durchschnittliche Mietdauer": `${averageRentalDurationOverall.toFixed(2)} Tage`, // Hinzufügen der globalen durchschnittlichen Mietdauer
+      "Fahrzeuge gesamt": totalVehicles,
       "Verfügbare Fahrzeuge": availableVehicles,
-      "Auslastungsrate der Flotte": totalVehicles > 0 ? `${((totalVehicles - availableVehicles) / totalVehicles * 100).toFixed(2)} %` : "0.00 %",
-      "Anzahl gemeldeter Schäden": totalDamageReports,
-      "Schadensrate (pro Vermietung)": vermietungenData.length > 0 ? `${(totalDamageReports / vermietungenData.length * 100).toFixed(2)} %` : "0.00 %",
-      "Durchschnittliche Mieteinnahmen pro Fahrzeug": totalVehicles > 0 ? `${(totalRevenue / totalVehicles).toFixed(2)} €` : "0.00 €",
-      "Fahrzeug mit den höchsten Einnahmen (ID)": getTopPerformingVehicleId(),
-      "Station mit den meisten Vermietungen (ID)": getTopStationByRentalsId(),
-      "Durchschnittliche Vermietungsdauer (Tage)": vermietungenData.length > 0 ? `${(totalRentalDays / vermietungenData.length).toFixed(2)} Tage` : "0.00 Tage",
+      "Flottenauslastung": totalVehicles > 0 ? `${(((totalVehicles - availableVehicles) / totalVehicles) * 100).toFixed(2)} %` : "0 %",
+      "Schäden": damageReports
     };
-    return kpis;
+
+    return { overallKpis: kpis, top5KpisForChart: chartKpis, allStationKpis: allStationKpis };
   }
 
-  function getTopPerformingVehicleId() {
-    const vehicleRevenue = {};
-    vermietungenData.forEach(rental => {
-      if (vehicleRevenue[rental.fahrzeugId]) {
-        vehicleRevenue[rental.fahrzeugId] += rental.totalRevenue;
+  async function updateChartsAndKpis() {
+    await loadAllData();
+    const { overallKpis, top5KpisForChart, allStationKpis } = calculateKPIs();
+    currentKpiDataRaw = overallKpis;
+    currentStationKpiDataRaw = allStationKpis;
+
+    const labels = top5KpisForChart.map(k => k.name);
+    const util = top5KpisForChart.map(k => k.utilization);
+    const rev = top5KpisForChart.map(k => k.revenue);
+
+    const utilCanvas = document.getElementById('utilizationChartCanvas');
+    const revCanvas = document.getElementById('revenueChartCanvas');
+    const utilCtx = utilCanvas?.getContext('2d');
+    const revCtx = revCanvas?.getContext('2d');
+
+    if (utilCtx) {
+      if (utilizationChart) {
+        utilizationChart.data.labels = labels;
+        utilizationChart.data.datasets[0].data = util;
+        utilizationChart.update();
       } else {
-        vehicleRevenue[rental.fahrzeugId] = rental.totalRevenue;
-      }
-    });
-    let topVehicleId = null;
-    let maxRevenue = 0;
-    for (const id in vehicleRevenue) {
-      if (vehicleRevenue[id] > maxRevenue) {
-        maxRevenue = vehicleRevenue[id];
-        topVehicleId = id;
+        utilizationChart = new Chart(utilCtx, {
+          type: 'bar',
+          data: { labels, datasets: [{ label: 'Auslastung (%)', data: util, backgroundColor: '#60a5fa' }] },
+          options: { responsive: true, scales: { y: { max: 100, beginAtZero: true } } }
+        });
       }
     }
-    return topVehicleId || "N/A";
-  }
 
-  function getTopStationByRentalsId() {
-    const stationRentalCounts = {};
-    vermietungenData.forEach(rental => {
-      if (stationRentalCounts[rental.stationId]) {
-        stationRentalCounts[rental.stationId]++;
+    if (revCtx) {
+      if (revenueChart) {
+        revenueChart.data.labels = labels;
+        revenueChart.data.datasets[0].data = rev;
+        revenueChart.update();
       } else {
-        stationRentalCounts[rental.stationId] = 1;
-      }
-    });
-    let topStationId = null;
-    let maxRentals = 0;
-    for (const id in stationRentalCounts) {
-      if (stationRentalCounts[id] > maxRentals) {
-        maxRentals = stationRentalCounts[id];
-        topStationId = id;
+        revenueChart = new Chart(revCtx, {
+          type: 'bar',
+          data: { labels, datasets: [{ label: 'Umsatz (€)', data: rev, backgroundColor: '#34d399' }] },
+          options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
       }
     }
-    return topStationId || "N/A";
+
+    const output = document.getElementById('kpi-json');
+    if (output) output.textContent = JSON.stringify(overallKpis, null, 2);
   }
 
-  // ========== PDF Generation ==========
-  async function generatePdf(kpis) {
+  async function generatePdf(kpisToExport) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.setFontSize(22);
-    doc.text("KPI Auswertung der Fahrzeugflotte", 10, 20);
-    doc.setFontSize(12);
-    let y = 40;
-    for (const key in kpis) {
-      doc.text(`${key}: ${kpis[key]}`, 10, y);
-      y += 10;
-    }
+    doc.setFontSize(14);
+    doc.text("KPI Übersicht", 10, 20);
+    const rows = Object.entries(kpisToExport).map(([k, v]) => [k, v]);
+    doc.autoTable({ head: [["KPI", "Wert"]], body: rows, startY: 30 });
     doc.save("KPI_Auswertung.pdf");
   }
 
-  // ========== Excel Generation ==========
-  function generateExcel(kpis) {
-    const ws_data = [
-      ["KPI", "Wert"]
-    ];
-    for (const key in kpis) {
-      ws_data.push([key, kpis[key]]);
-    }
-    const ws = XLSX.utils.aoa_to_sheet(ws_data);
+  function generateExcel(overallKpisToExport, stationKpisToExport) {
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "KPIs");
+
+    // Sheet for overall KPIs
+    const wsOverall = XLSX.utils.aoa_to_sheet([["KPI", "Wert"], ...Object.entries(overallKpisToExport)]);
+    XLSX.utils.book_append_sheet(wb, wsOverall, "Gesamt-KPIs");
+
+    // Sheet for station-wise KPIs
+    if (stationKpisToExport && stationKpisToExport.length > 0) {
+      const stationNames = stationKpisToExport.map(s => s.name);
+      const utilizationData = stationKpisToExport.map(s => s.utilization);
+      const revenueData = stationKpisToExport.map(s => s.revenue);
+      const totalRentalsData = stationKpisToExport.map(s => s.totalRentals);
+      const totalVehiclesData = stationKpisToExport.map(s => s.totalVehicles);
+      const averageRentalDurationData = stationKpisToExport.map(s => s.averageRentalDuration); // Neu: Daten für durchschnittliche Mietdauer pro Station
+
+      const wsStationsData = [
+        ['', ...stationNames],
+        ['Auslastung (%)', ...utilizationData],
+        ['Umsatz (€)', ...revenueData],
+        ['Vermietungen gesamt', ...totalRentalsData],
+        ['Fahrzeuge gesamt', ...totalVehiclesData],
+        ['Durchschnittliche Mietdauer (Tage)', ...averageRentalDurationData] // Hinzufügen der neuen Zeile
+      ];
+      const wsStations = XLSX.utils.aoa_to_sheet(wsStationsData);
+      XLSX.utils.book_append_sheet(wb, wsStations, "Stations-KPIs");
+    }
+
     XLSX.writeFile(wb, "KPI_Auswertung.xlsx");
   }
 
-  // ========== Events ==========
-  if (downloadPdfButton) downloadPdfButton.addEventListener('click', async () => {
-    const kpis = calculateKPIs();
-    await generatePdf(kpis);
+  document.addEventListener("DOMContentLoaded", () => {
+    updateChartsAndKpis();
+    document.getElementById("refreshButton")?.addEventListener("click", updateChartsAndKpis);
+    document.getElementById("downloadPdf")?.addEventListener("click", () => generatePdf(currentKpiDataRaw));
+    document.getElementById("downloadExcel")?.addEventListener("click", () => generateExcel(currentKpiDataRaw, currentStationKpiDataRaw));
   });
-  if (downloadExcelButton) downloadExcelButton.addEventListener('click', () => {
-    const kpis = calculateKPIs();
-    generateExcel(kpis);
-  });
-  if (aktualisierenButton) aktualisierenButton.addEventListener('click', async () => {
-    await loadAllData();
-    const kpis = calculateKPIs();
-    kpiOutput.textContent = JSON.stringify(kpis, null, 2);
-  });
-
-  // ========== Initialisierung ==========
-  await loadAllData();
-  const initialKpis = calculateKPIs();
-  kpiOutput.textContent = JSON.stringify(initialKpis, null, 2);
-});
+}
