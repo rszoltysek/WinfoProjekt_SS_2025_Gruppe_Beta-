@@ -125,6 +125,24 @@ app.post('/api/fahrzeuge', async (req, res) => {
       return res.status(400).json({ error: 'Ungültige Datentypen im Payload.' });
     }
 
+    // ==== 2a. Zusatz: Ist Fahrzeugtyp gültig? ====
+    // Stelle sicher, dass NUR existierende Fahrzeugtypen benutzt werden!
+    const { data: typCheck, error: typCheckError } = await supabase
+      .from('fahrzeugtypen')
+      .select('id')
+      .eq('marke', req.body.marke)
+      .eq('typ', req.body.typ)
+      .eq('kraftstoff', req.body.kraftstoff)
+      .eq('bild', req.body.bild);
+
+    if (typCheckError) {
+      console.error('[POST /api/fahrzeuge] Typ-Check Fehler:', typCheckError.message);
+      return res.status(500).json({ error: typCheckError.message });
+    }
+    if (!typCheck || typCheck.length === 0) {
+      return res.status(400).json({ error: 'Der Fahrzeugtyp existiert nicht!' });
+    }
+
     // ==== 3. Station prüfen ====
     const stationId = req.body.stationid;
     const { data: stationen, error: stationError } = await supabase

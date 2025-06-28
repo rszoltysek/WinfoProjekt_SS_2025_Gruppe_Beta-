@@ -2,7 +2,7 @@
 html, body {
   height: 100%;
   width: 100%;
-  overflow: hidden; /* verhindert horizontales & vertikales Scrollen auf window */
+  overflow: hidden;
 }
 body {
   margin: 0;
@@ -20,7 +20,7 @@ body {
   pointer-events: none;
   width: 100vw;
   height: 100vh;
-  background: 
+  background:
     linear-gradient(rgba(32,39,48,0.75), rgba(32,39,48,0.78)),
     url('background.png') center center / cover no-repeat;
 }
@@ -38,7 +38,6 @@ header {
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
   z-index: 1000;
-  animation: fadeIn 1s ease-out forwards;
   box-sizing: border-box;
 }
 header::after {
@@ -58,13 +57,11 @@ header::after {
 .logo img {
   height: 50px;
 }
-
 .logo span {
   font-size: 1.8rem;
   font-weight: 700;
   color: #facc15;
 }
-
 nav {
   display: flex;
   gap: 2rem;
@@ -84,11 +81,11 @@ nav a:hover {
 .container {
   display: flex;
   height: 100vh;
-  padding-top: 110px; /* Platz für fixed header! */
+  padding-top: 110px;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
-  overflow: hidden; /* kein Scrollen im Container selbst */
+  overflow: hidden;
 }
 
 /* ---------- SIDEBAR ---------- */
@@ -98,24 +95,22 @@ nav a:hover {
   padding: 2rem 1.2rem 1rem 1.2rem;
   width: 210px;
   min-width: 200px;
-  height: calc(100vh - 110px); /* abzüglich Header! */
+  height: calc(100vh - 110px);
   position: sticky;
-  top: 110px; /* genau unter dem Header fixieren! */
+  top: 110px;
   left: 0;
   z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
-  overflow-y: auto; /* falls viele Menüpunkte! */
+  overflow-y: auto;
 }
-
 .sidebar nav {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
-
 .sidebar-btn {
   background: none;
   border: none;
@@ -138,16 +133,15 @@ nav a:hover {
 /* ---------- MAIN CONTENT ---------- */
 .main-content {
   flex: 1;
-  height: calc(100vh - 110px); /* wie Sidebar */
+  height: calc(100vh - 110px);
   padding: 2.5rem 2rem;
   background: transparent;
   z-index: 1;
-  overflow-y: auto;   /* NUR main-content kann gescrollt werden! */
-  overflow-x: hidden; /* kein horizontal scrollen */
+  overflow-y: auto;
+  overflow-x: hidden;
   box-sizing: border-box;
-  scrollbar-width: none;  /* Firefox: Scrollbalken ausblenden */
+  scrollbar-width: none;
 }
-/* Scrollbalken in Webkit-Browsern ausblenden */
 .main-content::-webkit-scrollbar {
   display: none;
 }
@@ -164,7 +158,6 @@ nav a:hover {
   margin-left: auto;
   margin-right: auto;
 }
-
 h2 {
   font-size: 1.7rem;
   color: #ffd600;
@@ -203,7 +196,6 @@ h2 {
   margin-top: 1rem;
   font-size: 1.05rem;
 }
-/* Accordion */
 .station-card:not(.open) .station-details {
   display: none;
 }
@@ -220,19 +212,40 @@ h2 {
   gap: 1.5rem;
   padding: 0.5rem 0;
 }
-.fahrzeug-card {
-  background: #28364cee;
+/* === Fahrzeugtypen Galerie === */
+.fahrzeugtypen-card {
+  width: 160px;
+  padding: 12px 8px;
   border-radius: 10px;
-  box-shadow: 0 2px 16px #161b24bb;
-  padding: 1.1rem;
-  min-width: 170px;
-  max-width: 190px;
-  text-align: center;
+  border: 2px solid #283649;
   cursor: pointer;
-  transition: box-shadow 0.18s;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+  text-align: center;
+  background: #222b36;
+  transition: all 0.18s;
+  color: #111;
+  color: #1b2535;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  user-select: none;
+  box-shadow: 0 2px 14px #0018;
+}
+.fahrzeugtypen-card img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+}
+.fahrzeugtypen-card.selected {
+  border: 2.5px solid #298cff !important;
+  background: #eef5ff !important;
+  color: #2b2b42;
+  box-shadow: 0 0 6px #298cff99;
+  filter: brightness(1.07);
+}
+.fahrzeugtypen-card:hover {
+  background: #dde7fa;
+  border-color: #ffd600;
 }
 .fahrzeug-card img {
   width: 100%;
@@ -345,6 +358,18 @@ button {
 }
 .edit-btn:hover { background: #ffd600; color: #222; }
 .delete-btn:hover { background: #ff8080; color: #fff; }
+.add-fahrzeug-btn {
+  background: #3373d1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1.3rem;
+  font-weight: 700;
+  margin-left: 0.8rem;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.add-fahrzeug-btn:hover { background: #205ec3; }
 
 /* Table */
 #stationTable {
@@ -453,4 +478,9 @@ button {
     font-size: 1.2rem;
     margin-bottom: 1.2rem;
   }
+}
+/* Kleine Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px);}
+  to { opacity: 1; transform: none;}
 }

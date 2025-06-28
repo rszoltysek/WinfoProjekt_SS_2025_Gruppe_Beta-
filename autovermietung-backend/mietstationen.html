@@ -209,42 +209,15 @@
     </div>
   </div>
 
- <!-- Fahrzeug hinzufügen Modal -->
-<div id="fahrzeugAddModal" class="modal">
-  <div class="modal-content">
-    <button id="closeAddFahrzeugModal" class="modal-close">&times;</button>
-    <h2>Fahrzeug hinzufügen</h2>
-    <form id="fahrzeugAddForm">
-      <label for="fahrzeugtypSelect">Fahrzeugtyp</label>
-      <select id="fahrzeugtypSelect" required></select>
-      
-      <label for="fahrzeugMarke">Marke</label>
-      <input id="fahrzeugMarke" type="text" readonly>
-      
-      <label for="fahrzeugTyp">Typ</label>
-      <input id="fahrzeugTyp" type="text" readonly>
-      
-      <label for="fahrzeugKraftstoff">Kraftstoff</label>
-      <input id="fahrzeugKraftstoff" type="text" readonly>
-      
-      <label for="fahrzeugBild">Bild</label>
-      <input id="fahrzeugBild" type="hidden">
-
-      <!-- Bildvorschau -->
-      <img id="fahrzeugBildPreview" style="max-width:200px; margin:1rem 0; display:none">
-      
-      <!-- Kilometerstand -->
-      <label for="fahrzeugKilometer">Kilometerstand</label>
-      <input id="fahrzeugKilometer" type="number" value="0" min="0" required>
-      
-      <label for="fahrzeugPreis">Preis pro Tag (€)</label>
-      <input id="fahrzeugPreis" type="number" step="0.01" required>
-      
-      <button type="submit" style="margin-top:1rem;">Fahrzeug speichern</button>
-    </form>
+  <!-- Fahrzeug hinzufügen Modal – NUR Galerie-Auswahl -->
+  <div id="fahrzeugAddModal" class="modal">
+    <div class="modal-content">
+      <button id="closeAddFahrzeugModal" class="modal-close">&times;</button>
+      <h2>Fahrzeug(e) auswählen</h2>
+      <div id="fahrzeugtypenGallery" style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0;"></div>
+      <button id="saveSelectedFahrzeuge" style="margin-top:1rem;">Fahrzeuge speichern</button>
+    </div>
   </div>
-</div>
-
   <!-- ========== ENDE MODAL ========== -->
 
   <script src="mietstationen.js" defer></script>
@@ -261,10 +234,12 @@
         });
         if (target === 'existing-stations') loadStations();
         if (target === 'overview-map') ladeStationenUebersicht();
+        if (target === 'ueberfuehrung-historie') ladeUeberfuehrungen && ladeUeberfuehrungen();
       });
     });
     document.addEventListener('DOMContentLoaded', () => {
       ladeStationenUebersicht();
+      loadStations && loadStations();
     });
   </script>
 </body>

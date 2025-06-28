@@ -11,10 +11,11 @@ const cancelButton = document.getElementById('cancelEdit');
 const editModal = document.getElementById('editStationModal');
 const editForm = document.getElementById('editStationForm');
 
-// Modal für Fahrzeug einfügen
+// Modal für Fahrzeug einfügen (Galerie)
 const fahrzeugAddModal = document.getElementById('fahrzeugAddModal');
-const fahrzeugAddForm = document.getElementById('fahrzeugAddForm');
 const closeAddFahrzeugModalBtn = document.getElementById('closeAddFahrzeugModal');
+const fahrzeugtypenGallery = document.getElementById('fahrzeugtypenGallery');
+const saveSelectedFahrzeugeBtn = document.getElementById('saveSelectedFahrzeuge');
 
 // Basis-URL je nach Umgebung
 const API_BASE = window.location.hostname === 'localhost'
@@ -67,231 +68,207 @@ form.addEventListener('submit', async e => {
       alert('✅ Mietstation gespeichert!');
     }
     form.reset();
-    loadStations();
+    await loadStations();
   } catch (err) {
     alert('❌ ' + err.message);
   }
 });
 
 let fahrzeugtypen = [];
+let selectedTypen = new Set();
+
+// Holt Fahrzeugtypen von Backend
 async function ladeFahrzeugtypen() {
-  if (fahrzeugtypen.length > 0) return fahrzeugtypen;
   const res = await fetch(`${API_BASE}/fahrzeugtypen`);
   fahrzeugtypen = await res.json();
   return fahrzeugtypen;
 }
 
+// Stationen und zugehörige Fahrzeuge laden & anzeigen
 async function loadStations() {
-  try {
-    const stationsRes = await fetch(`${API_BASE}/mietstationen`);
-    const stationen = await stationsRes.json();
-    stationList.innerHTML = '';
+  const stationsRes = await fetch(`${API_BASE}/mietstationen`);
+  const stationen = await stationsRes.json();
+  stationList.innerHTML = '';
 
-   
-    const fahrzeugeRes = await fetch(`${API_BASE}/fahrzeuge`);
-    const fahrzeuge = await fahrzeugeRes.json();
-    window.fahrzeuge = fahrzeuge; // <-- Hier einfügen!
+  const fahrzeugeRes = await fetch(`${API_BASE}/fahrzeuge`);
+  const fahrzeuge = await fahrzeugeRes.json();
 
-console.log("Stationen aus DB:", stationen);
-console.log("Fahrzeuge aus DB:", fahrzeuge);
-
-
-
-    stationen.forEach(s => {
-      const div = document.createElement('div');
-      div.className = 'station-card';
-
+  stationen.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'station-card';
     const fahrzeugeThis = fahrzeuge.filter(f => Number(f.stationid) === Number(s.id));
 
-
-
-      console.log("Filter: station.id=", s.id, "Gefunden:", fahrzeugeThis);
-
-
-      let sliderHtml = '';
-      if (fahrzeugeThis.length > 0) {
-        sliderHtml = `
-          <div class="fahrzeug-slider-wrap">
-            <div class="fahrzeug-slider-container">
-              ${fahrzeugeThis.map(f => {
-                const status = f.verfuegbar
-                  ? '<div style="color:#7fff7f; font-size:0.9rem;">✔️ Verfügbar</div>'
-                  : '<div style="color:#ff8080; font-size:0.9rem;">❌ Nicht verfügbar</div>';
-                const transferButton = f.verfuegbar
-                  ? `<button class="ueberfuehrung-btn" data-id="${f.id}" data-name="${f.marke} ${f.typ}">Überführen</button>`
-                  : '';
-                return `
-                  <div class="fahrzeug-card" data-fahrzeug='${JSON.stringify(f)}'>
-                    <img src="autos/${f.bild}" alt="${f.marke} ${f.typ}">
-                    <div class="fahrzeug-name">${f.marke} ${f.typ}</div>
-                    ${status}
-                    ${transferButton}
-                  </div>`;
-              }).join('')}
-            </div>
-          </div>`;
-      } else {
-        sliderHtml = '<div style="color:#aaa; margin:1rem 0;">Keine Fahrzeuge in dieser Station.</div>';
-      }
-
-      div.innerHTML = `
-        <div class="station-summary" onclick="toggleAccordion(this)">
-          <strong>${s.name}</strong> – Kapazität: ${s.kapazitaet}
-          <span class="chevron">▼</span>
-        </div>
-        <div class="station-details">
-          ${s.adresse}<br/>
-          Telefon: ${s.telefon}<br/>
-          E-Mail: ${s.email}<br/>
-          <div style="margin: 1rem 0;">
-            <button class="edit-btn" data-id="${s.id}">Bearbeiten</button>
-            <button class="delete-btn" data-id="${s.id}">Löschen</button>
-            <button class="add-fahrzeug-btn" data-id="${s.id}" style="margin-left:1rem;background:#3373d1;color:#fff;padding:0.4rem 1rem;border-radius:8px;">🚗 Fahrzeug einfügen</button>
+    let sliderHtml = '';
+    if (fahrzeugeThis.length > 0) {
+      sliderHtml = `
+        <div class="fahrzeug-slider-wrap">
+          <div class="fahrzeug-slider-container">
+            ${fahrzeugeThis.map(f => {
+              const status = f.verfuegbar
+                ? '<div style="color:#7fff7f; font-size:0.9rem;">✔️ Verfügbar</div>'
+                : '<div style="color:#ff8080; font-size:0.9rem;">❌ Nicht verfügbar</div>';
+              const transferButton = f.verfuegbar
+                ? `<button class="ueberfuehrung-btn" data-id="${f.id}" data-name="${f.marke} ${f.typ}">Überführen</button>`
+                : '';
+              return `
+                <div class="fahrzeug-card" data-fahrzeug='${JSON.stringify(f)}'>
+                  <img src="autos/${f.bild}" alt="${f.marke} ${f.typ}" style="width:120px;height:80px;object-fit:cover;border-radius:10px;margin-bottom:0.5rem;">
+                  <div class="fahrzeug-name">${f.marke} ${f.typ}</div>
+                  ${status}
+                  ${transferButton}
+                </div>`;
+            }).join('')}
           </div>
-          ${sliderHtml}
+        </div>`;
+    } else {
+      sliderHtml = '<div style="color:#aaa; margin:1rem 0;">Keine Fahrzeuge in dieser Station.</div>';
+    }
+
+    div.innerHTML = `
+      <div class="station-summary" onclick="toggleAccordion(this)">
+        <strong>${s.name}</strong> – Kapazität: ${s.kapazitaet}
+        <span class="chevron">▼</span>
+      </div>
+      <div class="station-details">
+        ${s.adresse}<br/>
+        Telefon: ${s.telefon}<br/>
+        E-Mail: ${s.email}<br/>
+        <div style="margin: 1rem 0;">
+          <button class="edit-btn" data-id="${s.id}">Bearbeiten</button>
+          <button class="delete-btn" data-id="${s.id}">Löschen</button>
+          <button class="add-fahrzeug-btn" data-id="${s.id}" style="margin-left:1rem;background:#3373d1;color:#fff;padding:0.4rem 1rem;border-radius:8px;">🚗 Fahrzeug einfügen</button>
         </div>
-      `;
+        ${sliderHtml}
+      </div>
+    `;
+    stationList.appendChild(div);
+  });
 
-      stationList.appendChild(div);
-    });
+  // Bearbeiten
+  document.querySelectorAll('.edit-btn').forEach(btn => {
+    btn.onclick = async function() {
+      const id = this.dataset.id;
+      const station = stationen.find(s => s.id == id);
+      if (!station) return alert("Station nicht gefunden");
+      editModal.style.display = 'flex';
+      document.getElementById('editId').value = station.id;
+      document.getElementById('editName').value = station.name;
+      document.getElementById('editAddress').value = station.adresse;
+      document.getElementById('editPhone').value = station.telefon;
+      document.getElementById('editEmail').value = station.email;
+      document.getElementById('editCapacity').value = station.kapazitaet;
+      document.getElementById('editAufbereitung').value = station.aufbereitung;
+      document.getElementById('editSchadensregulierung').value = station.schadensregulierung === true ? 'Ja' : 'Nein';
+      document.getElementById('editLage').value = station.lage;
+    };
+  });
 
-    // Bearbeiten
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-      btn.onclick = async function() {
-        const id = this.dataset.id;
-        const station = stationen.find(s => s.id == id);
-        if (!station) return alert("Station nicht gefunden");
-        editModal.style.display = 'flex';
-        document.getElementById('editId').value = station.id;
-        document.getElementById('editName').value = station.name;
-        document.getElementById('editAddress').value = station.adresse;
-        document.getElementById('editPhone').value = station.telefon;
-        document.getElementById('editEmail').value = station.email;
-        document.getElementById('editCapacity').value = station.kapazitaet;
-        document.getElementById('editAufbereitung').value = station.aufbereitung;
-        document.getElementById('editSchadensregulierung').value = station.schadensregulierung === true ? 'Ja' : 'Nein';
-        document.getElementById('editLage').value = station.lage;
-      };
-    });
-
-    // Löschen
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.onclick = async function() {
-        const id = this.dataset.id;
-        if (!confirm('Diese Station wirklich löschen? Alle zugeordneten Fahrzeuge müssen zuvor entfernt werden!')) return;
-
-        const res = await fetch(`${API_BASE}/mietstationen/${id}`, { method: 'DELETE' });
-        if (res.ok) {
-          alert('Station gelöscht!');
-          loadStations();
-        } else {
-          const err = await res.json();
-          alert('❌ ' + (err.error || err.message || 'Fehler beim Löschen!'));
-        }
-      };
-    });
-
-    // Fahrzeug einfügen Button (pro Station)
-    document.querySelectorAll('.add-fahrzeug-btn').forEach(btn => {
-      btn.onclick = async function() {
-        fahrzeugAddModal.style.display = 'flex';
-        fahrzeugAddForm.dataset.stationid = btn.dataset.id;
-        // Lade Fahrzeugtypen nur einmal
-        await ladeFahrzeugtypen();
-        // Dropdown befüllen
-        const select = document.getElementById('fahrzeugtypSelect');
-        select.innerHTML = fahrzeugtypen.map(t =>
-          `<option value="${t.id}">${t.marke} ${t.typ}</option>`
-        ).join('');
-        select.dispatchEvent(new Event('change'));
-      };
-    });
-
-  } catch (err) {
-    console.error('LadeStations-Fehler:', err);
-  }
+  // Löschen
+  document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.onclick = async function() {
+      const id = this.dataset.id;
+      if (!confirm('Diese Station wirklich löschen? Alle zugeordneten Fahrzeuge müssen zuvor entfernt werden!')) return;
+      const res = await fetch(`${API_BASE}/mietstationen/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        alert('Station gelöscht!');
+        await loadStations();
+      } else {
+        const err = await res.json();
+        alert('❌ ' + (err.error || err.message || 'Fehler beim Löschen!'));
+      }
+    };
+  });
 }
 
-// --- MODAL für Fahrzeug hinzufügen ---
-  
-document.getElementById('fahrzeugtypSelect').onchange = function() {
-  const typ = fahrzeugtypen.find(t => t.id == this.value);
-  document.getElementById('fahrzeugMarke').value = typ ? typ.marke : '';
-  document.getElementById('fahrzeugTyp').value = typ ? typ.typ : '';
-  document.getElementById('fahrzeugKraftstoff').value = typ ? typ.kraftstoff : '';
-  document.getElementById('fahrzeugPreis').value = typ ? parseFloat(typ.preisprotag) : '';
-  
-  // ---- Bildvorschau anzeigen
-  const imgPreview = document.getElementById('fahrzeugBildPreview');
-  if (typ && typ.bild) {
-    imgPreview.src = "autos/" + typ.bild;
-    imgPreview.alt = typ.marke + " " + typ.typ;
-    imgPreview.style.display = "block";
-  } else {
-    imgPreview.src = "";
-    imgPreview.style.display = "none";
+// =======================
+// Fahrzeug Gallerie-Modal
+// =======================
+
+document.addEventListener('click', async function(e) {
+  const btn = e.target.closest('.add-fahrzeug-btn');
+  if (btn) {
+    fahrzeugAddModal.style.display = 'flex';
+    fahrzeugAddModal.dataset.stationid = btn.dataset.id;
+
+    await ladeFahrzeugtypen();
+    fahrzeugtypenGallery.innerHTML = '';
+    selectedTypen.clear();
+
+    fahrzeugtypen.forEach(typ => {
+      const card = document.createElement('div');
+      card.className = 'fahrzeugtypen-card';
+      card.innerHTML = `
+        <img src="autos/${typ.bild}" alt="${typ.marke} ${typ.typ}" style="width:120px;height:80px;object-fit:cover;border-radius:8px;"><br>
+        <b>${typ.marke} ${typ.typ}</b><br>
+        <span>${typ.kraftstoff} • ${typ.preisprotag} €/Tag</span>
+      `;
+      card.onclick = function() {
+        if (card.classList.toggle('selected')) {
+          selectedTypen.add(typ.id);
+        } else {
+          selectedTypen.delete(typ.id);
+        }
+      };
+      fahrzeugtypenGallery.appendChild(card);
+    });
   }
-};
+});
 
-fahrzeugAddForm.onsubmit = async function(e) {
-  e.preventDefault();
-  const stationid = fahrzeugAddForm.dataset.stationid;
-  const typid = document.getElementById('fahrzeugtypSelect').value;
-  const typ = fahrzeugtypen.find(t => t.id == typid);
-
-  // Kilometerstand validieren
-  const kilometerValue = parseInt(document.getElementById('fahrzeugKilometer').value, 10);
-  if (isNaN(kilometerValue) || kilometerValue < 0) {
-    alert('Bitte einen gültigen Kilometerstand angeben!');
+saveSelectedFahrzeugeBtn.onclick = async function() {
+  const stationid = Number(fahrzeugAddModal.dataset.stationid);
+  if (!stationid) {
+    alert('Station-ID fehlt!');
     return;
   }
-
-  const payload = {
-    stationid: Number(stationid),
-    marke: typ.marke,
-    typ: typ.typ,
-    kraftstoff: typ.kraftstoff,
-    bild: typ.bild,
-    kilometer: kilometerValue,
-    preisprotag: parseFloat(document.getElementById('fahrzeugPreis').value),
-    verfuegbar: true
-  };
-
-  // ==== GENAU HIER: Debug-Ausgabe einbauen! ====
-  console.log("🚗 Insert Payload:", payload);
-
-  const res = await fetch(`${API_BASE}/fahrzeuge`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-  if (res.ok) {
-    alert('🚗 Fahrzeug eingefügt!');
-    fahrzeugAddModal.style.display = 'none';
-    fahrzeugAddForm.reset();
-    loadStations();
-  } else {
-    const err = await res.json();
-    alert("❌ Fehler: " + (err.error || err.message));
+  if (selectedTypen.size === 0) {
+    alert('Bitte mindestens ein Fahrzeug auswählen!');
+    return;
   }
+  for (const typid of selectedTypen) {
+    const typ = fahrzeugtypen.find(t => t.id == typid);
+    const payload = {
+      stationid,
+      marke: typ.marke,
+      typ: typ.typ,
+      kraftstoff: typ.kraftstoff,
+      bild: typ.bild,
+      kilometer: 0,
+      preisprotag: parseFloat(typ.preisprotag),
+      verfuegbar: true
+    };
+    const res = await fetch(`${API_BASE}/fahrzeuge`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      alert('❌ Fehler beim Einfügen: ' + (err.message || err.error || 'Unbekannter Fehler'));
+      return;
+    }
+  }
+  selectedTypen.clear();
+  fahrzeugAddModal.style.display = 'none';
+  await loadStations();
 };
 
+closeAddFahrzeugModalBtn.onclick = () => {
+  fahrzeugAddModal.style.display = 'none';
+  selectedTypen.clear();
+};
 
-
-closeAddFahrzeugModalBtn.onclick = () => fahrzeugAddModal.style.display = 'none';
-
-// -----------------------
+// =======================
 // Überführungs-Modal & weitere Interaktionen (wie gehabt)
-// -----------------------
+// =======================
 
 document.addEventListener('click', async function(e) {
   // --- Überführungs-Button ---
   const btn = e.target.closest('.ueberfuehrung-btn');
   if (btn) {
     const fahrzeug_id = btn.dataset.id;
-   const fahrzeugeRes = await fetch(`${API_BASE}/fahrzeuge`);
-const fahrzeuge = await fahrzeugeRes.json();
-window.fahrzeuge = fahrzeuge; // <--- GENAU HIER!
+    const fahrzeugeRes = await fetch(`${API_BASE}/fahrzeuge`);
+    const fahrzeuge = await fahrzeugeRes.json();
+    window.fahrzeuge = fahrzeuge;
 
     const fahrzeug = fahrzeuge.find(f => f.id == fahrzeug_id);
     if (!fahrzeug) return alert("Fahrzeug nicht gefunden");
@@ -353,7 +330,7 @@ document.getElementById('confirmTransfer').onclick = async function() {
   if (res.ok) {
     alert("✅ Fahrzeug wurde erfolgreich überführt.");
     document.getElementById('ueberfuehrungModal').style.display = 'none';
-    loadStations();
+    await loadStations();
   } else {
     const err = await res.json();
     alert("❌ Fehler: " + err.message);
@@ -394,13 +371,11 @@ async function ladeStationenUebersicht() {
         </tr>`;
     }).join('');
   } catch (err) {
-    console.error('Übersicht-Fehler:', err);
+    // ignore
   }
 }
 
-// ==========================
-// Überführungs Historie Tab (wie gehabt)
-// ==========================
+// Überführungs-Historie Tab
 async function ladeUeberfuehrungen() {
   const ueberfuehrungDiv = document.getElementById('ueberfuehrungen-list');
   ueberfuehrungDiv.innerHTML = "<p>Lade Überführungen...</p>";
@@ -460,11 +435,10 @@ async function ladeUeberfuehrungen() {
     ueberfuehrungDiv.innerHTML = html;
   } catch (err) {
     ueberfuehrungDiv.innerHTML = "<p style='color:red;'>Fehler beim Laden der Überführungen.</p>";
-    console.error(err);
   }
 }
 
-// ---- Tab-Handler erweitern ----
+// Tab-Handler
 document.querySelectorAll('.sidebar-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = btn.getAttribute('data-target');
