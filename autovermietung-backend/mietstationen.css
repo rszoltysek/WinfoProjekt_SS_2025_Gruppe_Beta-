@@ -1,118 +1,251 @@
-/* ---------- Layout und Grundfarben ---------- */
+/* ---------- BODY & BACKGROUND ---------- */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* verhindert horizontales & vertikales Scrollen auf window */
+}
 body {
-  font-family: 'Inter', Arial, sans-serif;
-  background: #202832 url('background.jpg') center center / cover no-repeat fixed;
-  color: #fff;
   margin: 0;
-  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #202730;
+  color: #eee;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+.background-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  background: 
+    linear-gradient(rgba(32,39,48,0.75), rgba(32,39,48,0.78)),
+    url('background.png') center center / cover no-repeat;
 }
 
+/* ---------- HEADER ---------- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  animation: fadeIn 1s ease-out forwards;
+  box-sizing: border-box;
+}
+header::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.logo span {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #facc15;
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+nav a {
+  color: #f5f5f5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s, transform 0.3s;
+}
+nav a:hover {
+  color: #facc15;
+  transform: scale(1.05);
+}
+
+/* ---------- LAYOUT ---------- */
 .container {
   display: flex;
+  height: 100vh;
+  padding-top: 110px; /* Platz für fixed header! */
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  overflow: hidden; /* kein Scrollen im Container selbst */
 }
 
+/* ---------- SIDEBAR ---------- */
 .sidebar {
-  background: #1e2a38;
-  color: #fff;
+  background: rgba(17, 17, 17, 0.6);
+  box-shadow: 2px 0 32px #0003, 0 10px 25px rgba(0,0,0,0.5);
+  padding: 2rem 1.2rem 1rem 1.2rem;
+  width: 210px;
   min-width: 200px;
-  padding: 2rem 1rem 0 1rem;
-  height: 100vh;
+  height: calc(100vh - 110px); /* abzüglich Header! */
+  position: sticky;
+  top: 110px; /* genau unter dem Header fixieren! */
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow-y: auto; /* falls viele Menüpunkte! */
 }
 
 .sidebar nav {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .sidebar-btn {
   background: none;
   border: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
+  color: #eee;
+  font-size: 1.1rem;
+  padding: 1rem 0.8rem;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 1rem 0.7rem;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  transition: background 0.2s;
+  gap: 1.1rem;
+  cursor: pointer;
+  transition: background 0.14s;
 }
-
 .sidebar-btn.active,
 .sidebar-btn:hover {
-  background: #283649;
+  background: #232b56b;
+  color: #ffd600;
 }
 
+/* ---------- MAIN CONTENT ---------- */
 .main-content {
   flex: 1;
-  padding: 2.5rem 2rem 2rem 2rem;
-  min-width: 0;
+  height: calc(100vh - 110px); /* wie Sidebar */
+  padding: 2.5rem 2rem;
+  background: transparent;
+  z-index: 1;
+  overflow-y: auto;   /* NUR main-content kann gescrollt werden! */
+  overflow-x: hidden; /* kein horizontal scrollen */
+  box-sizing: border-box;
+  scrollbar-width: none;  /* Firefox: Scrollbalken ausblenden */
+}
+/* Scrollbalken in Webkit-Browsern ausblenden */
+.main-content::-webkit-scrollbar {
+  display: none;
 }
 
+/* ---------- CARD ---------- */
 .card {
-  background: #232b35;
-  border-radius: 12px;
-  color: #fff;
-  box-shadow: 0 4px 16px #22335a33;
-  padding: 2rem 2.2rem;
+  background: rgba(17, 17, 17, 0.6);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   margin-bottom: 2rem;
+  animation: fadeIn 1s ease-out forwards;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h2 {
-  margin-top: 0;
-  margin-bottom: 1.2rem;
+  font-size: 1.7rem;
   color: #ffd600;
-  font-weight: 700;
+  margin-top: 0;
 }
 
-label {
-  font-weight: 600;
-  margin-top: 0.8rem;
-  display: block;
-}
+/* Tab Sections */
+.tab-section { display: none; }
+.tab-section.active { display: block; }
 
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="tel"],
-select {
-  width: 100%;
-  padding: 0.7rem;
+/* Mietstationen Cards */
+#stationList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.station-card {
+  background: #232b36ee;
+  border-radius: 10px;
+  box-shadow: 0 2px 18px #0005;
+  padding: 1.2rem 1.5rem;
   margin-bottom: 1.2rem;
-  border-radius: 7px;
-  border: 1px solid #38425b;
-  font-size: 1rem;
-  background: #273143;
-  color: #fff;
 }
-
-input:focus, select:focus {
-  outline: 2px solid #ffd600;
-}
-
-button {
-  background: #3856f6;
-  color: #fff;
-  border: none;
-  border-radius: 7px;
-  padding: 0.7rem 1.3rem;
-  font-size: 1rem;
+.station-summary {
+  font-size: 1.15rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #2e3d49;
+}
+.chevron { margin-left: auto; }
+.station-details {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+}
+/* Accordion */
+.station-card:not(.open) .station-details {
+  display: none;
 }
 
-button:hover {
-  background: #2233a8;
+/* Fahrzeug-Slider & Cards */
+.fahrzeug-slider-wrap {
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+.fahrzeug-slider-wrap::-webkit-scrollbar { display: none; }
+.fahrzeug-slider-wrap { -ms-overflow-style: none; scrollbar-width: none; }
+.fahrzeug-slider-container {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+.fahrzeug-card {
+  background: #28364cee;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px #161b24bb;
+  padding: 1.1rem;
+  min-width: 170px;
+  max-width: 190px;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.18s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.fahrzeug-card img {
+  width: 100%;
+  max-height: 84px;
+  object-fit: contain;
+  margin-bottom: 0.6rem;
+}
+.fahrzeug-card:hover {
+  box-shadow: 0 6px 24px #ffd60055;
+  border: 1.5px solid #ffd600;
 }
 
-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-/* ---------- Modal Styles ---------- */
+/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
@@ -122,12 +255,11 @@ button:disabled {
   width: 100vw;
   height: 100vh;
   overflow: auto;
-  background: rgba(20,30,45,0.55);
+  background: rgba(20,30,45,0.70);
   align-items: center;
   justify-content: center;
   transition: opacity 0.2s;
 }
-
 .modal-content {
   background: #232b35;
   color: #fff;
@@ -142,7 +274,6 @@ button:disabled {
   flex-direction: column;
   gap: 1rem;
 }
-
 .modal-close {
   position: absolute;
   top: 1rem;
@@ -154,190 +285,172 @@ button:disabled {
   cursor: pointer;
   z-index: 1;
 }
+.modal-close:hover { color: #ffd600; }
+.modal-action { margin-top: 1rem; background: #42aa6f; }
+.modal-action:hover { background: #2d995e; }
 
-.modal-close:hover {
-  color: #ffd600;
-}
-
-.modal-action {
-  margin-top: 1rem;
-  background: #42aa6f;
-}
-.modal-action:hover {
-  background: #2d995e;
-}
-
-/* ---------- Fahrzeugspezifische Styles ---------- */
-.fahrzeug-slider-wrap {
-  overflow-x: auto;
-  padding-bottom: 1rem;
-}
-
-.fahrzeug-slider-container {
-  display: flex;
-  gap: 1.3rem;
-  padding: 0.5rem 0;
-}
-
-.fahrzeug-card {
-  background: #232b35;
-  color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px #22335a50;
-  min-width: 180px;
-  max-width: 180px;
-  padding: 1.2rem 1rem 1.1rem 1rem;
-  text-align: center;
-  transition: box-shadow 0.18s, background 0.2s;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.fahrzeug-card:hover {
-  box-shadow: 0 6px 20px #22449955;
-  background: #283043;
-}
-
-.fahrzeug-card img {
-  width: 95%;
-  max-width: 120px;
-  margin: 0 auto 0.5rem auto;
-  border-radius: 9px;
-  background: #333e5a;
-}
-
-.fahrzeug-name {
-  font-weight: 600;
-  font-size: 1.09rem;
-  margin-bottom: 0.35rem;
-}
-
-.ueberfuehrung-btn {
-  background: #ffe866;
-  color: #232424;
-  font-weight: 600;
-  border-radius: 6px;
-  margin-top: 0.5rem;
-  padding: 0.55rem 1.2rem;
-  font-size: 0.96rem;
-  border: none;
-  transition: background 0.18s, color 0.18s;
-}
-.ueberfuehrung-btn:hover {
-  background: #ffd600;
-  color: #283649;
-}
-
-/* ---------- Bearbeiten & Löschen ---------- */
-.edit-btn {
-  background: #f0a353;
-  color: #fff;
-  border-radius: 6px;
-  margin-right: 0.7rem;
-  font-weight: 600;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.97rem;
-}
-
-.edit-btn:hover {
-  background: #e08030;
-}
-
-.delete-btn {
-  background: #ec5d55;
-  color: #fff;
-  border-radius: 6px;
-  font-weight: 600;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.97rem;
-}
-
-.delete-btn:hover {
-  background: #c53b35;
-}
-
-/* ---------- Accordion (Station Cards) ---------- */
-.station-card {
-  margin-bottom: 1.4rem;
-  border-radius: 10px;
-  background: #232b35;
-  color: #fff;
-  box-shadow: 0 2px 10px #22448833;
-}
-
-.station-summary {
-  padding: 1.2rem 1.2rem 0.9rem 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-bottom: 1px solid #37405b;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #222933;
-  color: #fff;
-}
-
-.station-details {
-  padding: 1.1rem 1.2rem 0.2rem 1.2rem;
-  display: none;
-  background: #232b35;
-  border-radius: 0 0 10px 10px;
-  transition: max-height 0.2s;
-  color: #fff;
-}
-.station-card.open .station-details {
+/* Formular-Styles */
+form label {
   display: block;
-}
-
-.chevron {
-  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
   color: #ffd600;
-  margin-left: 1rem;
-  transition: transform 0.18s;
+  font-size: 1.04rem;
 }
-.station-card.open .chevron {
-  transform: rotate(180deg);
+form input,
+form select {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #2e3d49;
+  margin-bottom: 0.8rem;
+  background: #202a36;
+  color: #fff;
+  font-size: 1rem;
+}
+form button[type="submit"] {
+  margin-top: 1.3rem;
+  background: #ffd600;
+  color: #222;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 0.85rem 1.7rem;
+  cursor: pointer;
+  font-size: 1.08rem;
+  transition: background 0.16s, color 0.16s;
+}
+form button[type="submit"]:hover {
+  background: #fff54a;
+  color: #161b24;
 }
 
-/* ---------- Tabellenübersicht ---------- */
+/* Button-Styles allgemein */
+button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+.edit-btn,
+.delete-btn {
+  background: #363d4c;
+  color: #ffd600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  margin-right: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.16s, color 0.14s;
+}
+.edit-btn:hover { background: #ffd600; color: #222; }
+.delete-btn:hover { background: #ff8080; color: #fff; }
+
+/* Table */
 #stationTable {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1.2rem;
-  font-size: 1.07rem;
-  background: #232b35;
-  color: #fff;
+  margin-bottom: 1.5rem;
 }
-
-#stationTable th, #stationTable td {
-  border: 1px solid #37405b;
-  padding: 0.8rem;
+#stationTable th,
+#stationTable td {
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid #29313c;
   text-align: left;
 }
-
 #stationTable th {
-  background: #283649;
-  font-weight: 600;
+  background: #232b35;
   color: #ffd600;
+  font-size: 1.08rem;
 }
+#stationTable tr:last-child td { border-bottom: none; }
 
-/* ---------- Statusfarben ---------- */
-.status-verfuegbar {
-  color: #7fff7f;
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 950px) {
+  header { padding: 1.1rem 1.2rem; }
+  .container { padding-top: 80px; }
+  .sidebar { height: calc(100vh - 80px); top: 80px; }
+  .main-content { height: calc(100vh - 80px); }
 }
-.status-nichtverfuegbar {
-  color: #ff8080;
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+    padding-top: 110px;
+  }
+  .sidebar {
+    width: 100vw;
+    min-width: 0;
+    padding: 0.7rem 0.4rem;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 0 0 18px 18px;
+    position: static;
+    height: auto;
+  }
+  .main-content {
+    padding: 0.7rem 0.4rem;
+    height: calc(100vh - 180px);
+  }
+  .card {
+    margin: 0.5rem 0;
+    max-width: 100vw;
+  }
 }
-
-/* ---------- Modal nicht ausblenden ---------- */
-#fahrzeugModal,
-#historieModal,
-#bearbeitenModal {
-  display: none !important;
+/* ===== Überführungs-Historie Card-Schönheit ===== */
+#ueberfuehrungen-section .card {
+  max-width: 980px;
+  margin: 3rem auto 0 auto;
+  padding: 2.7rem 3.5rem 2.3rem 3.5rem;
+  background: rgba(22,22,22,0.83);
+  border-radius: 1.2rem;
+  box-shadow: 0 12px 40px #0008;
+  min-width: 320px;
 }
-/* #ueberfuehrungModal NICHT ausblenden! */
-
+#ueberfuehrungen-section h2 {
+  color: #ffd600;
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  margin-top: 0;
+  letter-spacing: 0.01em;
+}
+#ueberfuehrungen-list table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
+}
+#ueberfuehrungen-list th, #ueberfuehrungen-list td {
+  padding: 0.56rem 1.15rem 0.56rem 0;
+  text-align: left;
+  font-size: 1.13rem;
+  white-space: nowrap;
+}
+#ueberfuehrungen-list th {
+  color: #ffd600;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-bottom: 2px solid #333;
+  background: none;
+  letter-spacing: 0.01em;
+}
+#ueberfuehrungen-list tr {
+  border-bottom: 1px solid #232b35;
+}
+#ueberfuehrungen-list tr:last-child {
+  border-bottom: none;
+}
+@media (max-width: 700px) {
+  #ueberfuehrungen-section .card {
+    padding: 1.1rem 0.6rem 1.2rem 0.6rem;
+    max-width: 98vw;
+  }
+  #ueberfuehrungen-list th, #ueberfuehrungen-list td {
+    padding: 0.33rem 0.4rem 0.33rem 0;
+    font-size: 0.96rem;
+  }
+  #ueberfuehrungen-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+}

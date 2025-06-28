@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mietstationen verwalten</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="personal.css" />
   <link rel="stylesheet" href="mietstationen.css" />
 </head>
 <body>
@@ -23,6 +22,8 @@
     </nav>
   </header>
 
+  <div class="background-overlay"></div>
+
   <div class="container">
     <aside class="sidebar">
       <nav>
@@ -37,6 +38,10 @@
         <button class="sidebar-btn" data-target="new-station">
           <i class="fa-solid fa-plus-circle"></i>
           <span>Neue Mietstation</span>
+        </button>
+        <button class="sidebar-btn" data-target="ueberfuehrung-historie">
+          <i class="fa-solid fa-history"></i>
+          <span>Überführungs Historie</span>
         </button>
       </nav>
     </aside>
@@ -116,11 +121,21 @@
           </form>
         </div>
       </section>
+
+      <!-- Überführungs Historie Section -->
+      <section id="ueberfuehrung-historie" class="tab-section">
+        <div class="card">
+          <h2>Überführungs Historie</h2>
+          <div id="ueberfuehrungen-list">
+            <p>Lade Überführungen...</p>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
   <!-- Fahrzeug-Modal -->
-  <div id="fahrzeugModal" class="modal" style="display:none;">
+  <div id="fahrzeugModal" class="modal">
     <div class="modal-content">
       <button id="closeModal" class="modal-close">&times;</button>
       <img id="modalBild" src="" style="max-width:300px; margin-bottom:1rem;">
@@ -129,22 +144,16 @@
   </div>
 
   <!-- Überführung Modal -->
-  <div id="ueberfuehrungModal" class="modal" style="display:none;">
+  <div id="ueberfuehrungModal" class="modal">
     <div class="modal-content">
-      <!-- Schließen-Button -->
       <button id="closeTransferModal" class="modal-close" title="Schließen">&times;</button>
-      <!-- Titel -->
       <h2 style="margin-bottom: 0.5rem;">Fahrzeug überführen</h2>
-      <!-- Fahrzeugname + Info -->
       <p><strong id="ueberfuehrungFahrzeugName">Fahrzeugname</strong></p>
       <p id="ueberfuehrungFahrzeugInfo" style="margin-bottom: 1rem; font-size: 0.95rem; color: #ccc;"></p>
-      <!-- Zielstation Auswahl -->
       <label for="zielStation"><strong>Zielstation wählen:</strong></label>
       <select id="zielStation" style="margin-bottom: 1rem;"></select>
-      <!-- Optionaler Kommentar -->
       <label for="ueberfuehrungKommentar"><strong>Kommentar (optional):</strong></label>
       <input type="text" id="ueberfuehrungKommentar" placeholder="Optionaler Kommentar zur Überführung..." />
-      <!-- Button -->
       <button id="confirmTransfer" class="modal-action" style="margin-top: 1.5rem;">
         🚚 Überführung starten
       </button>
@@ -152,7 +161,7 @@
   </div>
 
   <!-- Bearbeiten-Modal -->
-  <div id="editStationModal" class="modal" style="display:none;">
+  <div id="editStationModal" class="modal">
     <div class="modal-content">
       <button id="closeEditModal" class="modal-close">&times;</button>
       <h2>Mietstation bearbeiten</h2>
@@ -199,6 +208,44 @@
       </form>
     </div>
   </div>
+
+ <!-- Fahrzeug hinzufügen Modal -->
+<div id="fahrzeugAddModal" class="modal">
+  <div class="modal-content">
+    <button id="closeAddFahrzeugModal" class="modal-close">&times;</button>
+    <h2>Fahrzeug hinzufügen</h2>
+    <form id="fahrzeugAddForm">
+      <label for="fahrzeugtypSelect">Fahrzeugtyp</label>
+      <select id="fahrzeugtypSelect" required></select>
+      
+      <label for="fahrzeugMarke">Marke</label>
+      <input id="fahrzeugMarke" type="text" readonly>
+      
+      <label for="fahrzeugTyp">Typ</label>
+      <input id="fahrzeugTyp" type="text" readonly>
+      
+      <label for="fahrzeugKraftstoff">Kraftstoff</label>
+      <input id="fahrzeugKraftstoff" type="text" readonly>
+      
+      <label for="fahrzeugBild">Bild</label>
+      <input id="fahrzeugBild" type="hidden">
+
+      <!-- Bildvorschau -->
+      <img id="fahrzeugBildPreview" style="max-width:200px; margin:1rem 0; display:none">
+      
+      <!-- Kilometerstand -->
+      <label for="fahrzeugKilometer">Kilometerstand</label>
+      <input id="fahrzeugKilometer" type="number" value="0" min="0" required>
+      
+      <label for="fahrzeugPreis">Preis pro Tag (€)</label>
+      <input id="fahrzeugPreis" type="number" step="0.01" required>
+      
+      <button type="submit" style="margin-top:1rem;">Fahrzeug speichern</button>
+    </form>
+  </div>
+</div>
+
+  <!-- ========== ENDE MODAL ========== -->
 
   <script src="mietstationen.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
