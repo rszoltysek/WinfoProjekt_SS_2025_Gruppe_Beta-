@@ -57,7 +57,7 @@ Der Gesamtzeitplan für das Projekt ist in Sprints unterteilt. Jeder Sprint hat 
 ### 1.4 Ressourcenplanung
 
 * **Entwicklungsteam:**
-    * [Namen der Teammitglieder]
+    * Ensar, Luca, Ideal, Ricardo
     * Rollen:
         * Projektleiter
         * Entwickler (Frontend, Backend)
@@ -67,10 +67,10 @@ Der Gesamtzeitplan für das Projekt ist in Sprints unterteilt. Jeder Sprint hat 
     * Entwicklungsrechner
     * Testserver
 * **Software:**
-    * Entwicklungsumgebung (z.B. Visual Studio)
+    * Visual Studio Code (z.B. Visual Studio)
     * Versionskontrollsystem (Git)
-    * Projektmanagement-Tool (z.B. Jira, Trello)
-    * Kommunikationstools (z.B. Slack, Microsoft Teams)
+    * Projektmanagement-Tool Trello, Whatsapp
+    * Kommunikationstools Zoom, WhatsApp
 
 ## 2. Sprintplanung
 
