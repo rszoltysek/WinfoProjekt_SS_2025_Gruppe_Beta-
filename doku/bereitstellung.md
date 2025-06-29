@@ -1,51 +1,97 @@
-# Bereitstellungsanleitung: Allgemeine Verwaltung
+# Bereitstellungs‑Guide 📦
 
-Dieses Dokument beschreibt die Schritte zur Bereitstellung des Moduls "Allgemeine Verwaltung" für das Autovermietungssystem.
+**Modul „Allgemeine Verwaltung“ – Autovermietungssystem**
 
-## 1. Voraussetzungen
+Dieses Dokument zeigt, wie du das Projekt **lokal in VS Code** startest. Wir nutzen einen modernen **Node + Vite‑Stack** mit **Supabase** als Back‑End‑Service (PostgreSQL + Auth). Es gibt **keine** PHP‑ oder XAMPP‑Abhängigkeiten und **kein** Vercel‑Deployment in dieser Variante.
 
-Stellen Sie sicher, dass die folgenden Komponenten installiert und konfiguriert sind:
+---
 
-* **Webserver:** XAMPP (mit Apache) [cite: 8, 9, 10]
-* **Datenbank:** MySQL [cite: 8, 9, 10]
-* **PHP:** Version 7.4.29 oder höher (falls PHP verwendet wird) [cite: 30, 31]
-* **Entwicklungsumgebung:** Visual Studio (oder eine andere bevorzugte IDE) [cite: 8, 9, 10]
-* **Git:** Zur Versionskontrolle und zum Klonen des Repositorys
-* **Betriebssystem:** Windows (oder ein anderes geeignetes System für den Server)
+## 1 · Voraussetzungen
 
-## 2. Repository klonen
+| Tool                     | Zweck                                  | Download                                                         |
+| ------------------------ | -------------------------------------- | ---------------------------------------------------------------- |
+| **Node.js ≥ 18**         | Runtime für JavaScript / TypeScript    | [https://nodejs.org/](https://nodejs.org/)                       |
+| **npm** (kommt mit Node) | Paket‑Management                       | –                                                                |
+| **Git**                  | Repository klonen / Versions­kontrolle | [https://git-scm.com/](https://git-scm.com/)                     |
+| **VS Code**              | Code‑Editor + Terminal                 | [https://code.visualstudio.com/](https://code.visualstudio.com/) |
+| **Supabase‑Konto**       | gehostete Datenbank mit Auth           | [https://app.supabase.com/](https://app.supabase.com/)           |
+| *optional* Supabase CLI  | lokale Supabase‑Instanz starten        | `npm i -g supabase`                                              |
 
-1.  Öffnen Sie die Eingabeaufforderung oder ein Terminal.
-2.  Navigieren Sie zu dem Verzeichnis, in dem Sie das Repository klonen möchten (z. B. `xampp/htdocs` für XAMPP).
-3.  Führen Sie den folgenden Befehl aus, um das Repository zu klonen:
+---
 
-    ```bash
-    git clone <URL_DES_REPOSITORYS>
-    ```
+## 2 · Repository klonen
 
-    Ersetzen Sie `<URL_DES_REPOSITORYS>` durch die tatsächliche URL des GitHub-Repositorys für das Modul "Allgemeine Verwaltung".
+```bash
+# beliebiges Arbeits­verzeichnis öffnen
+$ git clone https://github.com/rszoltysek/WinfoProjekt_SS_2025_Gruppe_Beta-.git
+$ cd WinfoProjekt_SS_2025_Gruppe_Beta-
+```
 
-## 3. Datenbank einrichten
+---
 
-1.  Starten Sie den MySQL-Dienst über XAMPP Control Panel oder einen anderen Dienstmanager.
-2.  Öffnen Sie ein MySQL-Client-Tool (z. B. phpMyAdmin).
-3.  Erstellen Sie eine neue Datenbank (z. B. `autovermietung`).
-4.  Führen Sie das SQL-Skript zum Erstellen der Datenbankstruktur aus. Das Skript befindet sich im Verzeichnis `daten/` des Repositorys (z. B. `daten/initialdaten.sql`).
-5.  Stellen Sie sicher, dass die Datenbankverbindungseinstellungen in der Konfigurationsdatei korrekt sind (z. B. `config/db_config.php` oder ähnliches).
+## 3 · Umgebungs­variablen setzen
 
-## 4. Webserver konfigurieren
+1. Kopiere die Beispiel‑Datei:
 
-1.  Stellen Sie sicher, dass der Apache-Webserver gestartet ist (über XAMPP oder einen anderen Dienstmanager).
-2.  Wenn sich der Code nicht im Root-Verzeichnis des Webservers befindet, konfigurieren Sie einen Virtual Host oder passen Sie die Document Root entsprechend an.
+   ```bash
+   cp .env.example .env.local
+   ```
+2. Öffne `.env.local` und trage deine **Supabase URL** und den **anon‑Key** ein:
 
-## 5. Aufgabenplanung (falls zutreffend)
+   ```bash
+   VITE_SUPABASE_URL=https://<proj>.supabase.co
+   VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI...
+   ```
 
-Falls Aufgabenplanung für bestimmte Funktionen erforderlich ist (z.B. für das Erstellen von Performance-Berichten oder andere Hintergrundprozesse):
+---
 
-1.  Öffnen Sie die Aufgabenplanung des Betriebssystems (z. B. "Aufgabenplanung" unter Windows)[cite: 30, 31].
-2.  Importieren Sie die bereitgestellten Aufgabenplanungsdateien (falls vorhanden). Die Dateien könnten im Verzeichnis `config/` oder einem anderen geeigneten Ordner liegen.
-3.  Stellen Sie sicher, dass die Pfade und Einstellungen in den Aufgaben richtig konfiguriert sind.
+## 4 · Abhängigkeiten installieren
 
-## 6. Zugriff auf die Anwendung
+```bash
+npm install
+```
 
-Öffnen Sie einen Webbrowser und navigieren Sie zur URL der Anwendung, um auf das Modul "Allgemeine Verwaltung" zuzugreifen. Zum Beispiel:
+---
+
+## 5 · Entwicklungs­server starten
+
+```bash
+npm run dev
+```
+
+* Der Vite‑Server öffnet sich automatisch unter [http://localhost:5173](http://localhost:5173).
+* Bei **Supabase CLI**‑Nutzung kannst du lokal eine DB starten:
+
+  ```bash
+  supabase start
+  # (optional) Schema anwenden, falls nötig
+  supabase db push
+  ```
+
+---
+
+## 6 · Testdaten laden (optional)
+
+Wenn du Beispiel­daten brauchst, führe das SQL‑Script `docs/sql/seed.sql` in deiner Supabase‑Instanz aus (online oder CLI).
+
+---
+
+## 7 · Nützliche Befehle
+
+| Befehl          | Beschreibung                  |
+| --------------- | ----------------------------- |
+| `npm run lint`  | Code‑Qualität prüfen (ESLint) |
+| `npm run test`  | Unit‑Tests starten (Vitest)   |
+| `npm run build` | Production‑Build erzeugen     |
+
+---
+
+## 8 · Troubleshooting
+
+* **Fehler „Supabase URL not defined“** → `.env.local` nicht ausgefüllt oder falscher Pfad.
+* **Port 5173 belegt** → in `vite.config.ts` Port anpassen (`server.port`).
+* **Auth schlägt fehl** → Prüfe anon‑Key und RLS‑Policies in Supabase.
+
+---
+
+🎉 Viel Spaß beim Entwickeln! Sollte etwas fehlen, melde dich im Team‑Channel.
