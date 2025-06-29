@@ -29,8 +29,7 @@
     <aside class="sidebar">
       <nav>
         <button class="sidebar-btn active" data-target="kpi"><i class="fa-solid fa-chart-simple"></i> <span>Kennzahlen</span></button>
-        <button class="sidebar-btn" data-target="einsatz-uebersicht"><i class="fa-solid fa-users-viewfinder"></i> <span>Personaleinsatz</span></button>
-        <button class="sidebar-btn" data-target="einsatz"><i class="fa-solid fa-calendar-days"></i> <span>Geplante Einsätze</span></button>
+         <button class="sidebar-btn" data-target="einsatz-uebersicht"><i class="fa-solid fa-users-viewfinder"></i> <span>Personaleinsatz</span></button>
         <button class="sidebar-btn" data-target="abwesenheiten"><i class="fa-solid fa-user-clock"></i> <span>Abwesenheiten</span></button>
         <button class="sidebar-btn" data-target="saisonalitaet"><i class="fa-solid fa-snowflake"></i> <span>Saisonalität & Events</span></button>
         <button class="sidebar-btn" data-target="ereignisse"><i class="fa-solid fa-bolt"></i> <span>Kurzfristige Ereignisse</span></button>
@@ -51,55 +50,32 @@
         </div>
       </section>
 
-      <!-- Personalübersicht mit Suche -->
+      <!-- Personaleinsatz (Personalübersicht) -->
       <section id="einsatz-uebersicht" class="tab-section">
         <div class="card">
-          <h2>Alle Mitarbeitenden</h2>
+          <h2>Personaleinsatz</h2>
 
-          <!-- Suchformular -->
-          <div style="margin-bottom:1rem;">
-            <label for="searchInput">Mitarbeiter suchen:</label>
-            <input type="text" id="searchInput" placeholder="Name eingeben…" style="margin:0 0.5rem;"/>
+          <!-- Suchbereich -->
+          <div id="personalSearch" style="margin-bottom: 1rem;">
+            <input type="text" id="searchInput" placeholder="Mitarbeiter suchen..." />
             <button id="searchBtn">Suchen</button>
             <button id="clearBtn">Zurücksetzen</button>
           </div>
 
-          <!-- Tabelle -->
           <table id="personalTable">
             <thead>
               <tr>
+                
                 <th>Name</th>
                 <th>Rolle</th>
                 <th>Arbeitszeitmodell</th>
-                <th>Station-ID</th>
+                <th>Station</th>
                 <th>Telefon</th>
                 <th>Email</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Dynamisch mit JS -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- Geplante Einsätze -->
-      <section id="einsatz" class="tab-section">
-        <div class="card">
-          <h2>Geplante Personaleinsätze</h2>
-          <table id="einsatzTable">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Rolle</th>
-                <th>Station-ID</th>
-                <th>Von</th>
-                <th>Bis</th>
-                <th>Warnung</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Dynamisch mit JS -->
+              <!-- Dynamisch mit JavaScript -->
             </tbody>
           </table>
         </div>
@@ -109,19 +85,46 @@
       <section id="abwesenheiten" class="tab-section">
         <div class="card">
           <h2>Abwesenheiten</h2>
+          <button id="abwesenheitNeuBtn" style="margin-bottom:1rem;">Neue Abwesenheit eintragen</button>
+          <form id="abwesenheitForm" style="display:none; margin-bottom:1rem;">
+            <select id="abwesenheitMitarbeiter" required></select>
+            <select id="abwesenheitTyp" required>
+              <option value="">Typ wählen</option>
+              <option value="Urlaub">Urlaub</option>
+              <option value="Krankheit">Krankheit</option>
+              <option value="Fortbildung">Fortbildung</option>
+              <option value="Sonstiges">Sonstiges</option>
+            
+            </select>
+            <input type="date" id="abwesenheitVon" required />
+            <input type="date" id="abwesenheitBis" required />
+            <select id="abwesenheitStatus" required>
+              <option value="">Status wählen</option>
+              <option value="Geplant">Geplant</option>
+              <option value="Bestätigt">Bestätigt</option>
+            </select>
+            <button type="submit">Speichern</button>
+            <button type="button" id="abwesenheitAbbrechenBtn">Abbrechen</button>
+          </form>
           <table id="abwesenheitenTable">
             <thead>
               <tr>
+                <th>ArbeitID</th>
                 <th>Name</th>
-                <th>Rolle</th>
-                <th>Typ</th>
+                 <th>Telefon</th>
+                <th>Rolle</th>  
+                  <th>Typ</th>
                 <th>Von</th>
                 <th>Bis</th>
                 <th>Status</th>
+                <th>Station</th>
+                <th>Station ID</th>
+                <th>Aktion</th>
+
               </tr>
             </thead>
             <tbody>
-              <!-- Dynamisch mit JS -->
+              <!-- Dynamisch per JS -->
             </tbody>
           </table>
         </div>
@@ -132,16 +135,17 @@
         <div class="card">
           <h2>Saisonalität & Events</h2>
           <div id="saisonalitaetContent"></div>
+          <div id="feiertageContent"></div>
         </div>
       </section>
 
       <!-- Kurzfristige Ereignisse -->
       <section id="ereignisse" class="tab-section">
-        <div class="card">
-          <h2>Kurzfristige Ereignisse</h2>
-          <div id="ereignisseContent"></div>
-        </div>
-      </section>
+  <div class="card">
+    <h2>Kurzfristige Ereignisse</h2>
+    <div id="ereignisseContent">Lade Ereignisse...</div>
+  </div>
+</section>
 
       <!-- Skill-Matrix -->
       <section id="skills" class="tab-section">
@@ -195,24 +199,66 @@
       <section id="bedarf" class="tab-section">
         <div class="card">
           <h2>Personal-Bedarfsanalyse</h2>
+
+          <p style="font-size:0.9rem; color:#555; margin-bottom:1rem;">
+            Die folgende Übersicht zeigt den geplanten Personalbedarf pro Wochentag, Rolle und Station –
+            sowie den aktuellen Ist-Wert (basierend auf geplanten Einsätzen und berücksichtigten Abwesenheiten).
+          </p>
+
+          <!-- Button & Formular zum Anlegen -->
+          <button id="bedarfNeuBtn" style="margin-bottom:1rem;">Neuen Bedarf anlegen</button>
+          <form id="bedarfForm" style="display:none; margin-bottom:1rem;">
+            <select id="bedarfStation" required></select>
+            <select id="bedarfRolle" required>
+              <option value="">Rolle wählen</option>
+              <option value="Stationsleiter">Stationsleiter</option>
+              <option value="Sachbearbeiter">Sachbearbeiter</option>
+              <option value="Fahrzeugaufbereiter">Fahrzeugaufbereiter</option>
+            </select>
+            <select id="bedarfSchicht" required>
+              <option value="">Schicht wählen</option>
+              <option value="Früh">Früh</option>
+              <option value="Spät">Spät</option>
+              <option value="Standard">Standard</option>
+            </select>
+            <select id="bedarfWochentag" required>
+              <option value="">Wochentag wählen</option>
+              <option value="Montag">Montag</option>
+              <option value="Dienstag">Dienstag</option>
+              <option value="Mittwoch">Mittwoch</option>
+              <option value="Donnerstag">Donnerstag</option>
+              <option value="Freitag">Freitag</option>
+              <option value="Samstag">Samstag</option>
+              <option value="Sonntag">Sonntag</option>
+            </select>
+            <input type="number" id="bedarfSoll" min="0" placeholder="Soll-Anzahl" required style="width:90px;" />
+            <button type="submit">Speichern</button>
+            <button type="button" id="bedarfAbbrechenBtn">Abbrechen</button>
+          </form>
+
+          <!-- Tabelle -->
           <table id="bedarfTable">
             <thead>
               <tr>
                 <th>Station</th>
+                <th>Rolle</th>
                 <th>Schicht</th>
                 <th>Wochentag</th>
                 <th>Soll</th>
                 <th>Ist</th>
-                <th>Abweichung</th>
+                <th title="Differenz: Ist - Soll">Abw.</th>
+                <th>Aktionen</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Dynamisch mit JS -->
+              <!-- Dynamisch mit JavaScript -->
             </tbody>
           </table>
+
+          <!-- Hinweis bei leerer Tabelle -->
+          <div id="bedarfInfo" style="margin-top:1rem; font-size:0.85rem; color:#777;"></div>
         </div>
       </section>
-
     </main>
   </div>
 

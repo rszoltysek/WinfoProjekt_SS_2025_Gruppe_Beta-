@@ -1,15 +1,23 @@
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  padding: 2rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+header::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  pointer-events: none;
 }
 
 .logo {
@@ -21,35 +29,29 @@ header {
 .logo img {
   height: 50px;
 }
-
 .logo span {
   font-size: 1.8rem;
   font-weight: 700;
   color: #facc15;
 }
-
 nav {
   display: flex;
   gap: 2rem;
 }
-
 nav a {
   color: #f5f5f5;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s, transform 0.3s;
 }
-
 nav a:hover {
   color: #facc15;
   transform: scale(1.05);
 }
 
-
-
 /* ==== GLOBAL RESET ==== */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-html, body { height: 100%; min-height: 100vh; overflow-x: hidden; }
+html, body { height: 100%; min-height: 100vh; overflow-x: hidden; margin: 0; padding: 0; }
 
 /* ==== BG ==== */
 body {
@@ -68,38 +70,50 @@ body {
   padding-top: 82px; /* Platz für Header */
 }
 
-
+/* ==== SIDEBAR ==== */
 .sidebar {
-  width: 250px;
-  min-width: 220px;
-  background: linear-gradient(180deg, #191919 90%, #232323 100%);
-  color: #fff;
-  padding: 2.1rem 1.1rem 1.3rem 1.1rem;
+  background: rgba(17, 17, 17, 0.6);
+  box-shadow: 2px 0 32px #0003, 0 10px 25px rgba(0,0,0,0.5);
+  padding: 2rem 1.2rem 1rem 1.2rem;
+  width: 310px;
+  min-width: 200px;
+  height: calc(100vh - 110px);
+  position: sticky;
+  top: 110px;
+  left: 0;
+  z-index: 100;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  box-shadow: 2px 0 20px rgba(0,0,0,0.14);
-  z-index: 50;
-  gap: 2rem;
-  border-right: 1.5px solid rgba(255,255,255,0.07);
-  position: fixed;
-  top: 82px;
-  left: 0;
-  bottom: 0;
-  height: calc(100vh - 82px);
+  justify-content: flex-start;
+  box-sizing: border-box;
   overflow-y: auto;
 }
 
+/* Sidebar-Navigation bündig */
+.sidebar nav {
+  margin-top: 0;
+  padding-top: 0;
+  width: 100%;
+  display: flex; flex-direction: column; gap: 1rem;
+}
 
-
-/* SIDEBAR NAV & BUTTONS */
-.sidebar nav { display: flex; flex-direction: column; gap: 1rem; }
+/* SIDEBAR BUTTONS - jetzt mit Abstand nach innen */
 .sidebar-btn {
-  display: flex; align-items: center; gap: 0.82rem;
-  background: none; border: none; color: #fff;
-  font-size: 1.03rem; font-weight: 500; text-align: left;
-  padding: 0.58rem 0.98rem; border-radius: 0.8rem; cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.82rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.03rem;
+  font-weight: 500;
+  text-align: left;
+  padding: 0.58rem 0.98rem;    /* <-- Abstand NUR innerhalb des Buttons */
+  border-radius: 0.8rem;
+  cursor: pointer;
   transition: background 0.16s, color 0.16s;
+  width: 100%;                /* <-- nimmt volle Breite */
+  box-sizing: border-box;
 }
 .sidebar-btn.active, .sidebar-btn:hover {
   background: #232323;
@@ -118,6 +132,8 @@ body {
   color: #f5f5f5; text-decoration: none; font-size: 1rem;
   border-radius: 0.7rem; padding: 0.38rem 0.7rem;
   transition: background 0.2s, color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 .sidebar-links a:hover {
   color: #facc15;
@@ -127,32 +143,53 @@ body {
 
 /* ==== MAIN CONTENT (mit Platz für Sidebar) ==== */
 .main-content {
-  flex: 1 1 0%;
-  margin-left: 250px;
-  padding: 3.2rem 2.2rem 2.1rem 2.2rem;
-  max-width: 1400px;
-  min-height: calc(100vh - 82px);
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  overflow: visible;
+  flex: 1;
+  height: calc(100vh - 110px);
+  padding: 2.5rem 2rem;
+  background: transparent;
+  z-index: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+.main-content::-webkit-scrollbar {
+  display: none;
 }
 
-/* ==== CARD/SECTIONS ==== */
-.card, .tab-section {
-  background: rgba(24, 24, 24, 0.59);
-  padding: 2.2rem 2rem 2rem 2rem;
-  border-radius: 1.15rem;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-  margin-bottom: 2.5rem;
+/* ---------- CARD ---------- */
+.card {
+  background: rgba(17, 17, 17, 0.6);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  margin-bottom: 2rem;
   animation: fadeIn 1s ease-out forwards;
-  width: 100%;
-  max-width: 1150px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  max-height: 70vh; 
+  overflow-y: auto;
+  }
+
+.card::-webkit-scrollbar {
+  width: 8px;
+  background: #1e1e1e;
+}
+.card::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
 }
 
+h2 {
+  font-size: 1.7rem;
+  color: #ffd600;
+  margin-top: 0;
+}
+
+/* Tab Sections */
+.tab-section { display: none; }
+.tab-section.active { display: block; }
 h2 { color: #facc15; margin-bottom: 1.2rem; font-size: 2.1rem; font-weight: 700; }
 
 /* === TAB-Sektionen (nur aktive sichtbar) === */
@@ -211,4 +248,3 @@ canvas { width: 100% !important; height: 380px !important; }
   .top-header { padding: 0 0.7rem; }
   .top-header .logo span { font-size: 1.3rem; }
 }
-
