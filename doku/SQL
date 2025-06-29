@@ -1,0 +1,153 @@
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
+
+CREATE TABLE public.abwesenheiten (
+  id bigint NOT NULL DEFAULT nextval('abwesenheiten_id_seq'::regclass),
+  von timestamp without time zone,
+  bis timestamp without time zone,
+  personal_id integer,
+  status text,
+  typ text,
+  name text,
+  rolle text,
+  stationid bigint,
+  CONSTRAINT abwesenheiten_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_personal FOREIGN KEY (personal_id) REFERENCES public.personal(id),
+  CONSTRAINT abwesenheiten_stationid_fkey FOREIGN KEY (stationid) REFERENCES public.station(id)
+);
+CREATE TABLE public.ereignisse (
+  id integer NOT NULL DEFAULT nextval('ereignisse_id_seq'::regclass),
+  station_id bigint,
+  datum date,
+  beschreibung text,
+  typ character varying,
+  start date,
+  ende date,
+  betroffene_stationen character varying,
+  CONSTRAINT ereignisse_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_station FOREIGN KEY (station_id) REFERENCES public.station(id)
+);
+CREATE TABLE public.fahrzeuge (
+  id bigint NOT NULL DEFAULT nextval('fahrzeuge_id_seq'::regclass),
+  stationid bigint,
+  marke character varying,
+  typ character varying,
+  kraftstoff character varying,
+  kilometer integer,
+  preisprotag numeric,
+  bild character varying,
+  verfuegbar boolean,
+  kennzeichen text,
+  CONSTRAINT fahrzeuge_pkey PRIMARY KEY (id),
+  CONSTRAINT fahrzeuge_stationid_fkey FOREIGN KEY (stationid) REFERENCES public.station(id)
+);
+CREATE TABLE public.fahrzeugtypen (
+  id integer NOT NULL DEFAULT nextval('fahrzeugtypen_id_seq'::regclass),
+  bezeichnung character varying,
+  marke character varying NOT NULL,
+  typ character varying NOT NULL,
+  kraftstoff character varying NOT NULL,
+  bild character varying,
+  preisprotag numeric NOT NULL,
+  CONSTRAINT fahrzeugtypen_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.kosten (
+  id character varying NOT NULL,
+  type character varying NOT NULL,
+  description character varying NOT NULL,
+  amount numeric NOT NULL,
+  period character varying NOT NULL,
+  CONSTRAINT kosten_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.personal (
+  id bigint NOT NULL DEFAULT nextval('personal_id_seq'::regclass),
+  name text NOT NULL,
+  rolle text NOT NULL,
+  arbeitszeitmodell text CHECK (arbeitszeitmodell = ANY (ARRAY['Vollzeit'::text, 'Teilzeit'::text, 'Minijob'::text])),
+  station_id bigint NOT NULL,
+  schicht text CHECK (schicht = ANY (ARRAY['Früh'::text, 'Spät'::text])),
+  skills ARRAY NOT NULL,
+  wochenstunden_soll integer,
+  ruhezeit_min_stunden integer,
+  email text,
+  telefon text,
+  stationid bigint,
+  wochenstundensoll integer,
+  ruhezeitminstunden integer,
+  CONSTRAINT personal_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_station FOREIGN KEY (station_id) REFERENCES public.station(id)
+);
+CREATE TABLE public.personalbedarf (
+  id integer NOT NULL DEFAULT nextval('personalbedarf_id_seq'::regclass),
+  station_id integer,
+  rolle character varying NOT NULL,
+  schicht character varying NOT NULL,
+  wochentag character varying NOT NULL,
+  soll integer NOT NULL DEFAULT 0,
+  erstellt_am timestamp without time zone DEFAULT now(),
+  personal_id integer,
+  mietstation_id integer,
+  CONSTRAINT personalbedarf_pkey PRIMARY KEY (id),
+  CONSTRAINT personalbedarf_station_id_fkey FOREIGN KEY (station_id) REFERENCES public.station(id)
+);
+CREATE TABLE public.personaleinsaetze (
+  id bigint NOT NULL DEFAULT nextval('personaleinsaetze_id_seq'::regclass),
+  stationid bigint NOT NULL,
+  rolle text NOT NULL,
+  start timestamp without time zone NOT NULL,
+  ende timestamp without time zone NOT NULL,
+  created_at timestamp without time zone DEFAULT now(),
+  name text,
+  CONSTRAINT personaleinsaetze_pkey PRIMARY KEY (id),
+  CONSTRAINT personaleinsaetze_stationid_fkey FOREIGN KEY (stationid) REFERENCES public.station(id)
+);
+CREATE TABLE public.saisonalitaet (
+  id integer NOT NULL DEFAULT nextval('saisonalitaet_id_seq'::regclass),
+  typ text,
+  von date,
+  bis date,
+  beschreibung text,
+  start date NOT NULL,
+  ende date NOT NULL,
+  betroffene_stationen character varying,
+  CONSTRAINT saisonalitaet_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.station (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  name text,
+  adresse text,
+  plz text,
+  ort text,
+  email text,
+  telefon text,
+  kapazitaet integer,
+  aufbereitung text,
+  schadensregulierung boolean,
+  lage text,
+  stadt text,
+  CONSTRAINT station_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.ueberfuehrungen (
+  id bigint NOT NULL DEFAULT nextval('ueberfuehrungen_id_seq'::regclass),
+  fahrzeug_id bigint NOT NULL,
+  von_stationid bigint NOT NULL,
+  nach_stationid bigint NOT NULL,
+  datum timestamp without time zone NOT NULL DEFAULT now(),
+  kommentar text,
+  CONSTRAINT ueberfuehrungen_pkey PRIMARY KEY (id),
+  CONSTRAINT ueberfuehrungen_von_stationid_fkey FOREIGN KEY (von_stationid) REFERENCES public.station(id),
+  CONSTRAINT ueberfuehrungen_nach_stationid_fkey FOREIGN KEY (nach_stationid) REFERENCES public.station(id),
+  CONSTRAINT ueberfuehrungen_fahrzeug_id_fkey FOREIGN KEY (fahrzeug_id) REFERENCES public.fahrzeuge(id)
+);
+CREATE TABLE public.vermietungen (
+  id text NOT NULL,
+  fahrzeug_id bigint NOT NULL,
+  station_id bigint,
+  start_date date,
+  end_date date,
+  total_revenue numeric,
+  variable_costs numeric,
+  is_damage_reported boolean,
+  CONSTRAINT vermietungen_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_station FOREIGN KEY (station_id) REFERENCES public.station(id)
+);
