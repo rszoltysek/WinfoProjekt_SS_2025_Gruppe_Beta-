@@ -161,16 +161,89 @@ if (typeof supabase === 'undefined') {
     if (output) output.textContent = JSON.stringify(overallKpis, null, 2);
   }
 
-  async function generatePdf(kpisToExport) {
+async function generatePdf(overallKpisToExport, stationKpisToExport) {
+    // jsPDF korrekt initialisieren
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.setFontSize(14);
-    doc.text("KPI Übersicht", 10, 20);
-    const rows = Object.entries(kpisToExport).map(([k, v]) => [k, v]);
-    doc.autoTable({ head: [["KPI", "Wert"]], body: rows, startY: 30 });
-    doc.save("KPI_Auswertung.pdf");
-  }
+    
+    // AutoTable manuell registrieren (neue Methode)
+    if (typeof doc.autoTable !== 'function') {
+        // Alternative Initialisierung für Autotable
+        window.jspdf_autotable_default(doc);
+    }
 
+    // Titel
+    doc.setFontSize(18);
+    doc.text("KPI Übersicht", 10, 20);
+
+    let yOffset = 30;
+
+    // Overall KPIs
+    doc.setFontSize(14);
+    doc.text("Gesamt-KPIs", 10, yOffset);
+    yOffset += 10;
+
+    const overallKpiHeaders = [["KPI", "Wert"]];
+    const overallKpiBody = Object.entries(overallKpisToExport);
+
+    doc.autoTable({
+        startY: yOffset,
+        head: overallKpiHeaders,
+        body: overallKpiBody,
+        theme: 'grid',
+        styles: { fontSize: 10, cellPadding: 3 },
+        headStyles: { 
+            fillColor: [60, 157, 255], 
+            textColor: [255, 255, 255] 
+        },
+        didDrawPage: (data) => {
+            const pageCount = doc.internal.getNumberOfPages();
+            doc.setFontSize(10);
+            doc.text(`Seite ${pageCount}`, data.settings.margin.left, doc.internal.pageSize.height - 10);
+        }
+    });
+
+    yOffset = doc.lastAutoTable.finalY + 15;
+
+    // Station-wise KPIs
+    if (stationKpisToExport?.length > 0) {
+        doc.setFontSize(14);
+        doc.text("Stations-KPIs", 10, yOffset);
+        yOffset += 10;
+
+        const stationKpiHeaders = [
+            ['Station', 'Auslastung (%)', 'Umsatz (€)', 'Vermietungen', 'Fahrzeuge', 'Ø Mietdauer']
+        ];
+        
+        const stationKpiBody = stationKpisToExport.map(s => [
+            s.name,
+            s.utilization,
+            s.revenue,
+            s.totalRentals,
+            s.totalVehicles,
+            s.averageRentalDuration
+        ]);
+
+        doc.autoTable({
+            startY: yOffset,
+            head: stationKpiHeaders,
+            body: stationKpiBody,
+            theme: 'grid',
+            styles: { fontSize: 8, cellPadding: 2 },
+            headStyles: { 
+                fillColor: [52, 211, 153], 
+                textColor: [255, 255, 255] 
+            },
+            didDrawPage: (data) => {
+                const pageCount = doc.internal.getNumberOfPages();
+                doc.setFontSize(10);
+                doc.text(`Seite ${pageCount}`, data.settings.margin.left, doc.internal.pageSize.height - 10);
+            }
+        });
+    }
+
+    doc.save("KPI_Auswertung.pdf");
+}
   function generateExcel(overallKpisToExport, stationKpisToExport) {
     const wb = XLSX.utils.book_new();
 
