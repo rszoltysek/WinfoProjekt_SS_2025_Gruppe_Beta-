@@ -24,10 +24,10 @@ git clone https://github.com/rszoltysek/WinfoProjekt_SS_2025_Gruppe_Beta-.git
 cd WinfoProjekt_SS_2025_Gruppe_Beta-
 
 # 2. Umgebungsvariablen (Supabase) einrichten
-cp .env.local.example .env.local        # Keys einfügen
+cp .env.local.example .env.local     # Supabase-Keys eintragen
 
 # 3. Abhängigkeiten installieren
 npm install
 
-# 4. Entwicklungsserver starten
-npm run dev          # läuft standardmäßig auf http://localhost:5173
+# 4. Server starten
+node server.js        # läuft per default auf http://localhost:5173
